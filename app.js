@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize App
 function initializeApp() {
-    console.log('Trader AI PWA Initialized');
+    console.log('Initializing Trader AI PWA...');
     
     // Get install buttons
     installButton = document.getElementById('installBtn');
@@ -25,8 +25,23 @@ function initializeApp() {
         handleAppInstalled();
     }
     
+    // Register service worker
+    registerServiceWorker();
+    
+    // Setup install handlers
+    setupInstallHandlers();
+    
     // Setup click handlers
     setupClickHandlers();
+    
+    // Setup animations
+    setupInteractionAnimations();
+    setupScrollAnimations();
+    
+    // Enhance mobile experience
+    enhanceMobileExperience();
+    
+    console.log('App initialized successfully');
 }
 
 // Setup Click Handlers
@@ -150,18 +165,374 @@ function handleAddToHomeClick() {
 function showInstallInstructions() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isAndroid = /Android/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     
-    let instructions = '';
-    
-    if (isIOS) {
-        instructions = 'To install Trader AI:\n\n1. Tap the Share button at the bottom of the screen\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add" in the top right corner';
-    } else if (isAndroid) {
-        instructions = 'To install Trader AI:\n\n1. Tap the menu button (⋮) in your browser\n2. Tap "Add to Home screen" or "Install app"\n3. Tap "Add" or "Install"';
-    } else {
-        instructions = 'To install Trader AI:\n\n1. Look for the install icon in your browser\'s address bar\n2. Click it and select "Install"\n3. Or use your browser\'s menu to "Install app"';
+    // Create and show mobile install modal
+    showMobileInstallModal(isIOS, isAndroid, isSafari);
+}
+
+// Show Mobile Install Modal
+function showMobileInstallModal(isIOS, isAndroid, isSafari) {
+    // Remove existing modal if present
+    const existingModal = document.getElementById('mobileInstallModal');
+    if (existingModal) {
+        existingModal.remove();
     }
     
-    alert(instructions);
+    // Create modal
+    const modal = document.createElement('div');
+    modal.id = 'mobileInstallModal';
+    modal.innerHTML = createMobileInstallContent(isIOS, isAndroid, isSafari);
+    
+    // Add modal styles
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+        box-sizing: border-box;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Handle close button
+    const closeBtn = modal.querySelector('.modal-close');
+    closeBtn.onclick = () => {
+        modal.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => modal.remove(), 300);
+    };
+    
+    // Handle backdrop click
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            modal.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => modal.remove(), 300);
+        }
+    };
+    
+    // Handle "Got It" button
+    const gotItBtn = modal.querySelector('.got-it-btn');
+    if (gotItBtn) {
+        gotItBtn.onclick = () => {
+            modal.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => modal.remove(), 300);
+            
+            // Show success message
+            showNotification('Great! Follow those steps to install Trader AI', 'success');
+        };
+    }
+}
+
+// Create Mobile Install Content
+function createMobileInstallContent(isIOS, isAndroid, isSafari) {
+    let steps, browserIcon, shareIcon;
+    
+    if (isIOS) {
+        steps = [
+            { icon: '👆', text: 'Tap the Share button', detail: 'Look for the share icon at the bottom of Safari' },
+            { icon: '📱', text: 'Find "Add to Home Screen"', detail: 'Scroll through the options and tap it' },
+            { icon: '✅', text: 'Tap "Add"', detail: 'Confirm to install Trader AI on your home screen' }
+        ];
+        browserIcon = '🧭';
+        shareIcon = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .9 2 2z"/>
+            </svg>
+        `;
+    } else if (isAndroid) {
+        steps = [
+            { icon: '⋮', text: 'Tap the menu button', detail: 'Look for three dots in your browser' },
+            { icon: '📲', text: 'Select "Add to Home screen"', detail: 'Or "Install app" depending on your browser' },
+            { icon: '🚀', text: 'Tap "Add" or "Install"', detail: 'Trader AI will be added to your home screen' }
+        ];
+        browserIcon = '🤖';
+        shareIcon = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        `;
+    } else {
+        steps = [
+            { icon: '🔍', text: 'Look for the install icon', detail: 'Check your browser\'s address bar' },
+            { icon: '📱', text: 'Click "Install"', detail: 'Or use your browser menu to install' },
+            { icon: '✨', text: 'Enjoy Trader AI', detail: 'The app will open like a native app' }
+        ];
+        browserIcon = '🌐';
+        shareIcon = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        `;
+    }
+    
+    const stepsHtml = steps.map((step, index) => `
+        <div class="install-step">
+            <div class="step-number">${index + 1}</div>
+            <div class="step-icon">${step.icon}</div>
+            <div class="step-content">
+                <div class="step-title">${step.text}</div>
+                <div class="step-detail">${step.detail}</div>
+            </div>
+        </div>
+    `).join('');
+    
+    return `
+        <div class="mobile-install-content">
+            <button class="modal-close">&times;</button>
+            
+            <div class="modal-header">
+                <div class="app-icon">
+                    <div class="icon-gradient">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2>Install Trader AI</h2>
+                <p>Add Trader AI to your home screen for the best experience</p>
+            </div>
+            
+            <div class="install-steps">
+                ${stepsHtml}
+            </div>
+            
+            <div class="modal-footer">
+                <button class="got-it-btn">
+                    ${shareIcon}
+                    Got it! Let's install
+                </button>
+            </div>
+            
+            <div class="install-benefits">
+                <div class="benefit">
+                    <span class="benefit-icon">⚡</span>
+                    <span>Faster loading</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">📱</span>
+                    <span>Native app feel</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🔔</span>
+                    <span>Push notifications</span>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            
+            .mobile-install-content {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                border-radius: 20px;
+                padding: 30px 25px;
+                max-width: 400px;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                color: white;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+            
+            .modal-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: white;
+                font-size: 24px;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s ease;
+            }
+            
+            .modal-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+            
+            .modal-header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            
+            .app-icon {
+                margin-bottom: 15px;
+            }
+            
+            .icon-gradient {
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+                box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+                margin: 0 0 10px 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            .modal-header p {
+                color: rgba(255, 255, 255, 0.7);
+                margin: 0;
+                font-size: 14px;
+            }
+            
+            .install-steps {
+                margin-bottom: 25px;
+            }
+            
+            .install-step {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .step-number {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+            
+            .step-icon {
+                font-size: 20px;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+            
+            .step-content {
+                flex: 1;
+            }
+            
+            .step-title {
+                font-weight: 600;
+                margin-bottom: 4px;
+                font-size: 15px;
+            }
+            
+            .step-detail {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 13px;
+                line-height: 1.4;
+            }
+            
+            .modal-footer {
+                margin-bottom: 20px;
+            }
+            
+            .got-it-btn {
+                width: 100%;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                padding: 15px 20px;
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transition: transform 0.2s ease;
+            }
+            
+            .got-it-btn:hover {
+                transform: translateY(-2px);
+            }
+            
+            .install-benefits {
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .benefit {
+                text-align: center;
+                flex: 1;
+            }
+            
+            .benefit-icon {
+                display: block;
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+            
+            .benefit span:last-child {
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+            
+            @media (max-width: 480px) {
+                .mobile-install-content {
+                    padding: 25px 20px;
+                    margin: 10px;
+                }
+                
+                .install-benefits {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .benefit {
+                    display: flex;
+                    align-items: center;
+                    text-align: left;
+                    gap: 10px;
+                }
+                
+                .benefit-icon {
+                    margin-bottom: 0;
+                }
+            }
+        </style>
+    `;
 }
 
 // Show Install Prompt
@@ -391,4 +762,146 @@ if (typeof module !== 'undefined' && module.exports) {
         showInstallPrompt,
         trackEvent
     };
-} 
+}
+
+// Enhance Mobile Experience
+function enhanceMobileExperience() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Update CTA button text for mobile
+        const ctaButtons = document.querySelectorAll('.cta-primary');
+        ctaButtons.forEach(button => {
+            if (button.textContent.includes('Install App')) {
+                const mobileText = isIOS ? 
+                    'Add to Home Screen - Get Trader AI' : 
+                    'Install App - Get Trader AI';
+                
+                button.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 15.577L8.46 12.038L9.874 10.624L11 11.75V4H13V11.75L14.126 10.624L15.54 12.038L12 15.577Z" fill="currentColor"/>
+                        <path d="M12 20C16.4183 20 20 16.4183 20 12H18C18 15.3137 15.3137 18 12 18S6 15.3137 6 12H4C4 16.4183 7.58172 20 12 20Z" fill="currentColor"/>
+                    </svg>
+                    ${mobileText}
+                `;
+                
+                // Add mobile-specific styling
+                button.style.position = 'relative';
+                button.style.overflow = 'visible';
+                
+                // Add pulsing indicator for mobile
+                if (!button.querySelector('.mobile-indicator')) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'mobile-indicator';
+                    indicator.innerHTML = isIOS ? '📱' : '🤖';
+                    indicator.style.cssText = `
+                        position: absolute;
+                        top: -8px;
+                        right: -8px;
+                        background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+                        color: white;
+                        border-radius: 50%;
+                        width: 28px;
+                        height: 28px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 14px;
+                        animation: mobilePulse 2s infinite;
+                        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+                    `;
+                    button.appendChild(indicator);
+                }
+            }
+        });
+        
+        // Add mobile-specific CSS
+        if (!document.getElementById('mobileEnhancementStyles')) {
+            const style = document.createElement('style');
+            style.id = 'mobileEnhancementStyles';
+            style.textContent = `
+                @keyframes mobilePulse {
+                    0%, 100% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.1); opacity: 0.8; }
+                }
+                
+                .mobile-install-hint {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    z-index: 1000;
+                    animation: slideUpFade 0.5s ease;
+                    backdrop-filter: blur(10px);
+                }
+                
+                @keyframes slideUpFade {
+                    from { 
+                        opacity: 0; 
+                        transform: translateX(-50%) translateY(20px); 
+                    }
+                    to { 
+                        opacity: 1; 
+                        transform: translateX(-50%) translateY(0); 
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .cta-primary {
+                        font-size: 16px;
+                        padding: 18px 24px;
+                        min-height: 56px;
+                    }
+                    
+                    .mobile-indicator {
+                        animation: mobilePulse 1.5s infinite !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Show mobile hint after 3 seconds if not installed
+        setTimeout(() => {
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                showMobileHint(isIOS, isAndroid);
+            }
+        }, 3000);
+    }
+}
+
+// Show Mobile Hint
+function showMobileHint(isIOS, isAndroid) {
+    // Don't show if already shown
+    if (document.getElementById('mobileHint')) return;
+    
+    const hint = document.createElement('div');
+    hint.id = 'mobileHint';
+    hint.className = 'mobile-install-hint';
+    hint.innerHTML = isIOS ? 
+        '💡 Tap "Add to Home Screen" for the best experience!' :
+        '💡 Tap "Install" for the full app experience!';
+    
+    document.body.appendChild(hint);
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        if (hint.parentNode) {
+            hint.style.animation = 'slideUpFade 0.5s ease reverse';
+            setTimeout(() => hint.remove(), 500);
+        }
+    }, 5000);
+    
+    // Hide on click
+    hint.onclick = () => {
+        hint.style.animation = 'slideUpFade 0.5s ease reverse';
+        setTimeout(() => hint.remove(), 500);
+    };
+}
