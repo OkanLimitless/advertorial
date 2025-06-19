@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader AI - Trading Platform</title>
+    <meta name="description" content="Trader AI - Your automated trading platform for 2025.">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Trader AI">
+    
+    <!-- Icons -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Configuration -->
+    <script src="config.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .app-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        
+        .app-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .app-title {
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .app-status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-text {
+            font-size: 12px;
+            color: #00ff88;
+            font-weight: 500;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .app-frame {
+            flex: 1;
+            position: relative;
+            background: #0f0f23;
+        }
+        
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 245, 255, 0.3);
+            border-top: 3px solid #00f5ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 30px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: #00f5ff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .loading-subtext {
+            font-size: 14px;
+            color: #b0b0b0;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .trading-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #0f0f23;
+        }
+        
+        .error-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .error-title {
+            font-size: 24px;
+            color: #ff4444;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .retry-btn {
+            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+        
+        .retry-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 12px 15px;
+            }
+            
+            .app-title {
+                font-size: 16px;
+            }
+            
+            .status-text {
+                display: none;
+            }
+        }
+        
+        /* Fullscreen mode */
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #b0b0b0;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="app-logo">AI</div>
+            <div class="app-title">Trader AI</div>
+            <div class="app-status">
+                <div class="status-dot"></div>
+                <span class="status-text">Live</span>
+            </div>
+            <button class="fullscreen-btn" id="fullscreenBtn" title="Toggle Fullscreen">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- App Frame -->
+        <div class="app-frame">
+            <!-- Loading Screen -->
+            <div class="loading-screen" id="loadingScreen">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Initializing Trader AI</div>
+                <div class="loading-subtext">Connecting to trading servers and loading your dashboard...</div>
+            </div>
+            
+            <!-- Error Screen -->
+            <div class="error-screen" id="errorScreen">
+                <div class="error-icon">⚠️</div>
+                <div class="error-title">Connection Error</div>
+                <div class="error-message">
+                    Unable to connect to trading servers. Please check your internet connection and try again.
+                </div>
+                <button class="retry-btn" onclick="loadTradingPlatform()">Retry Connection</button>
+            </div>
+            
+            <!-- Trading Platform iframe -->
+            <iframe 
+                id="tradingIframe" 
+                class="trading-iframe" 
+                src="about:blank"
+                title="Trader AI Trading Platform"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+    
+    <script>
+        // Use configuration from config.js
+        let currentUrlIndex = 0;
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Trader AI App initialized');
+            
+            // Start loading the trading platform
+            setTimeout(() => {
+                loadTradingPlatform();
+            }, 2000); // 2 second loading screen
+            
+            // Setup fullscreen toggle
+            setupFullscreenToggle();
+            
+            // Setup iframe error handling
+            setupIframeErrorHandling();
+        });
+        
+        function loadTradingPlatform() {
+            const iframe = document.getElementById('tradingIframe');
+            const loadingScreen = document.getElementById('loadingScreen');
+            const errorScreen = document.getElementById('errorScreen');
+            
+            console.log('Loading trading platform...');
+            
+            // Hide error screen if visible
+            errorScreen.style.display = 'none';
+            
+            // Show loading screen
+            loadingScreen.classList.remove('hidden');
+            
+            // Load the affiliate URL from config
+            iframe.src = getAffiliateURL();
+            
+            // Handle iframe load
+            iframe.onload = function() {
+                console.log('Trading platform loaded successfully');
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 1000);
+            };
+            
+            // Handle iframe error
+            iframe.onerror = function() {
+                console.error('Failed to load trading platform');
+                showErrorScreen();
+            };
+            
+            // Timeout fallback
+            setTimeout(() => {
+                if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+                    console.log('Loading timeout, hiding loading screen');
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 10000); // 10 second timeout
+        }
+        
+        function showErrorScreen() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const errorScreen = document.getElementById('errorScreen');
+            
+            loadingScreen.classList.add('hidden');
+            errorScreen.style.display = 'flex';
+        }
+        
+        function setupFullscreenToggle() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log('Error attempting to enable fullscreen:', err);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+        }
+        
+        function setupIframeErrorHandling() {
+            const iframe = document.getElementById('tradingIframe');
+            
+            // Monitor iframe for navigation errors
+            iframe.addEventListener('error', function() {
+                console.error('Iframe error detected');
+                showErrorScreen();
+            });
+            
+            // Check if iframe is still loading after timeout
+            setTimeout(() => {
+                try {
+                    if (iframe.contentDocument === null) {
+                        console.log('Iframe may have failed to load, but continuing...');
+                        document.getElementById('loadingScreen').classList.add('hidden');
+                    }
+                } catch (e) {
+                    // Cross-origin iframe, this is expected
+                    console.log('Cross-origin iframe detected (normal)');
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                }
+            }, 5000);
+        }
+        
+        // Handle visibility change (app switching)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                console.log('App hidden');
+            } else {
+                console.log('App visible');
+            }
+        });
+        
+        // Handle app installation detection
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            console.log('App is running in standalone mode');
+            document.body.classList.add('standalone-mode');
+        }
+        
+        // Service worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => console.log('SW registered'))
+                .catch(error => console.log('SW registration failed'));
+        }
+    </script>
+</body>
+</html> 
