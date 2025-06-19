@@ -94,69 +94,137 @@ async function registerServiceWorker() {
 
 // Setup Install Handlers
 function setupInstallHandlers() {
-    // Listen for beforeinstallprompt event
-    window.addEventListener('beforeinstallprompt', (event) => {
+    // Listen for the beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
         console.log('beforeinstallprompt event fired');
-        event.preventDefault();
-        deferredPrompt = event;
         
-        // Show install prompt after a delay
-        setTimeout(showInstallPrompt, 3000);
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        
+        // Stash the event so it can be triggered later
+        deferredPrompt = e;
+        
+        // Update install button to show it's ready
+        updateInstallButtonState('ready');
+        
+        // Show install prompt after a delay if user hasn't interacted
+        setTimeout(() => {
+            if (deferredPrompt && !window.matchMedia('(display-mode: standalone)').matches) {
+                showInstallPrompt();
+            }
+        }, 5000);
     });
     
-    // Listen for app installed event
-    window.addEventListener('appinstalled', (event) => {
-        console.log('App was installed');
+    // Listen for the app being installed
+    window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
         deferredPrompt = null;
         handleAppInstalled();
+        showNotification('Trader AI installed successfully! 🎉', 'success');
     });
-}
-
-// Handle Install Button Click
-async function handleInstallClick() {
-    console.log('Install button clicked');
     
-    // Show immediate feedback
-    showNotification('Preparing app installation...', 'info');
-    
-    if (deferredPrompt) {
-        // Show the install prompt
-        deferredPrompt.prompt();
-        
-        // Wait for the user's response
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to install prompt: ${outcome}`);
-        
-        if (outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-            showNotification('App installed successfully! Opening Trader AI...', 'success');
-            // Redirect to app after short delay
-            setTimeout(() => {
-                window.location.href = '/app.html';
-            }, 2000);
-        } else {
-            console.log('User dismissed the install prompt');
-            showNotification('Installation cancelled. You can install later from the browser menu.', 'info');
-        }
-        
-        deferredPrompt = null;
-    } else {
-        // Fallback for browsers that don't support install prompt
-        console.log('Browser does not support install prompt, showing instructions');
-        showNotification('Install instructions will appear shortly...', 'info');
-        setTimeout(() => {
-            showInstallInstructions();
-        }, 500);
+    // Check if app is already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+        handleAppInstalled();
     }
 }
 
-// Handle Add to Home Screen Click
+// Update Install Button State
+function updateInstallButtonState(state) {
+    const buttons = document.querySelectorAll('.cta-primary');
+    
+    buttons.forEach(button => {
+        if (button.textContent.includes('Install') || button.textContent.includes('Add to Home')) {
+            switch(state) {
+                case 'ready':
+                    button.style.background = 'linear-gradient(135deg, #00f5ff 0%, #667eea 100%)';
+                    button.style.boxShadow = '0 8px 32px rgba(0, 245, 255, 0.3)';
+                    button.style.transform = 'translateY(-2px)';
+                    break;
+                case 'installing':
+                    button.innerHTML = `
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Installing...
+                    `;
+                    button.disabled = true;
+                    break;
+                case 'installed':
+                    button.innerHTML = `
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        App Installed - Open Trader AI
+                    `;
+                    button.onclick = () => window.location.href = '/app';
+                    break;
+            }
+        }
+    });
+}
+
+// Handle Install Click
+async function handleInstallClick() {
+    console.log('Install button clicked');
+    trackInstallAttempt();
+    
+    // If we have a deferred prompt, use it directly
+    if (deferredPrompt) {
+        try {
+            // Update button to show installing state
+            updateInstallButtonState('installing');
+            
+            // Show the install prompt immediately
+            const result = await deferredPrompt.prompt();
+            console.log('Install prompt result:', result);
+            
+            // Wait for the user to respond
+            const choiceResult = await deferredPrompt.userChoice;
+            console.log('User choice:', choiceResult.outcome);
+            
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                showNotification('Trader AI is being installed! 🚀', 'success');
+                
+                // Clear the deferred prompt
+                deferredPrompt = null;
+                
+                // The 'appinstalled' event will handle the final button state
+            } else {
+                console.log('User dismissed the install prompt');
+                showNotification('Installation cancelled. You can try again anytime!', 'info');
+                
+                // Reset button state
+                updateInstallButtonState('ready');
+            }
+        } catch (error) {
+            console.error('Error showing install prompt:', error);
+            
+            // Reset button state and show fallback
+            updateInstallButtonState('ready');
+            showNotification('Having trouble installing? Follow the manual steps.', 'info');
+            setTimeout(() => showInstallInstructions(), 1000);
+        }
+    } else {
+        console.log('No deferred prompt available, showing instructions');
+        // Fallback to instructions for browsers that don't support direct install
+        showNotification('Follow these steps to install Trader AI', 'info');
+        showInstallInstructions();
+    }
+}
+
+// Handle Add to Home Click (for secondary button)
 function handleAddToHomeClick() {
     console.log('Add to Home button clicked');
     
+    // Try direct install first
     if (deferredPrompt) {
         handleInstallClick();
     } else {
+        // Show instructions as fallback
         showInstallInstructions();
     }
 }
@@ -574,20 +642,14 @@ function dismissInstallPrompt() {
 function handleAppInstalled() {
     console.log('App is installed - updating UI');
     
-    // Update button text
-    if (installButton) {
-        installButton.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-            </svg>
-            App Installed - Open Trader AI
-        `;
-        installButton.onclick = () => window.location.href = '/';
-    }
+    // Update button state to installed
+    updateInstallButtonState('installed');
     
     // Hide install prompt
     dismissInstallPrompt();
+    
+    // Show success message
+    showNotification('🎉 Trader AI is now installed on your device!', 'success');
 }
 
 // Setup Interaction Animations
