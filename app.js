@@ -265,27 +265,24 @@ class ElonBitcoinAI {
     }
 
     handleJoin() {
-        this.showLoadingModal();
-        
-        // Professional loading sequence
-        setTimeout(() => {
-            this.redirectToAffiliate();
-        }, 2500);
+        // Simple direct redirect - no loading modal to avoid infinite loading
+        this.redirectToAffiliate();
     }
 
-    showLoadingModal() {
-        const modal = document.getElementById('loadingModal');
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    redirectToAffiliate() {
-        const affiliateUrl = this.config.affiliateUrls?.[this.currentLanguage] || this.config.affiliateUrls?.en;
-        if (affiliateUrl) {
+    async redirectToAffiliate() {
+        try {
+            // Try to get affiliate URL from API endpoint first
+            const response = await fetch('/api/affiliate');
+            const data = await response.json();
+            const affiliateUrl = data.url;
+            
+            console.log('Redirecting to:', affiliateUrl);
             window.location.href = affiliateUrl;
-        } else {
-            console.error('No affiliate URL configured');
+        } catch (error) {
+            // Fallback to hardcoded URL if API fails
+            console.log('API failed, using fallback URL');
+            const fallbackUrl = 'https://exl-redircd.com/?a=25528&c=395863';
+            window.location.href = fallbackUrl;
         }
     }
 
