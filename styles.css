@@ -1234,4 +1234,214 @@ body {
     .ios-install-header p {
         font-size: 14px;
     }
+}
+
+/* Unsupported Browser Modal */
+.unsupported-browser-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.unsupported-browser-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.unsupported-browser-modal .modal-content {
+    position: relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;
+    padding: 0;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    animation: modalSlideIn 0.3s ease;
+    overflow: hidden;
+}
+
+.unsupported-browser-modal .modal-header {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+}
+
+.unsupported-browser-modal .modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.unsupported-browser-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.unsupported-browser-modal .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.unsupported-browser-modal .modal-body {
+    padding: 25px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.unsupported-browser-modal .modal-body p {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+}
+
+.unsupported-browser-modal .browser-recommendations {
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 4px solid #00ffff;
+}
+
+.unsupported-browser-modal .browser-recommendations p {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    color: #00ffff;
+}
+
+.unsupported-browser-modal .browser-recommendations ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.unsupported-browser-modal .browser-recommendations li {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.unsupported-browser-modal .browser-instructions {
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 4px solid #ffc107;
+}
+
+.unsupported-browser-modal .browser-instructions p {
+    margin: 0 0 15px 0;
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.unsupported-browser-modal .url-copy {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.unsupported-browser-modal .url-copy input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.unsupported-browser-modal .url-copy button {
+    padding: 8px 16px;
+    background: #ffc107;
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.unsupported-browser-modal .url-copy button:hover {
+    background: #ffb300;
+}
+
+.unsupported-browser-modal .modal-footer {
+    padding: 20px 25px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.unsupported-browser-modal .btn-primary {
+    background: linear-gradient(135deg, #00ffff 0%, #0099cc 100%);
+    border: none;
+    color: #000;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.unsupported-browser-modal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Mobile responsiveness for unsupported browser modal */
+@media (max-width: 480px) {
+    .unsupported-browser-modal .modal-content {
+        margin: 20px;
+        max-width: none;
+    }
+    
+    .unsupported-browser-modal .url-copy {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .unsupported-browser-modal .url-copy input,
+    .unsupported-browser-modal .url-copy button {
+        width: 100%;
+    }
 } 

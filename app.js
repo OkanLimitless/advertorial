@@ -177,18 +177,24 @@ async function handleInstallClick() {
     console.log('Install button clicked');
     trackInstallAttempt();
     
-    // Check if this is Safari iOS
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+    // Use enhanced device detection
+    const device = detectDevice();
+    console.log('Enhanced device detection:', device);
     
-    if (isIOS && isSafari) {
+    // Handle unsupported browsers first
+    if (!device.supportsPWA) {
+        showUnsupportedBrowser(device);
+        return;
+    }
+    
+    if (device.isIOS && device.isSafari) {
         // iOS Safari - show fake App Store installation experience
         console.log('Safari iOS detected - showing fake installation experience');
         showIOSInstallation();
         return;
     }
     
-    // For other browsers, try the beforeinstallprompt approach
+    // For Android Chrome/Edge, try the beforeinstallprompt approach
     if (deferredPrompt) {
         try {
             // Update button to show installing state
@@ -1676,4 +1682,109 @@ function createFakeIOSInstallation() {
             }, 2000);
         }, 3000);
     }, 500);
+}
+
+// Enhanced device and browser detection
+function detectDevice() {
+    const userAgent = navigator.userAgent;
+    const isAndroid = /Android/i.test(userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    const isChrome = /Chrome/i.test(userAgent) && !/Edg/i.test(userAgent);
+    const isEdge = /Edg/i.test(userAgent);
+    const isSafari = /Safari/i.test(userAgent) && !/Chrome/i.test(userAgent);
+    const isFirefox = /Firefox/i.test(userAgent);
+    const isSamsungBrowser = /SamsungBrowser/i.test(userAgent);
+    const isWebView = /wv|WebView/i.test(userAgent);
+    
+    // More specific Chrome detection for Android
+    const isChromeAndroid = isAndroid && isChrome && !isWebView && !isSamsungBrowser;
+    const isEdgeAndroid = isAndroid && isEdge && !isWebView;
+    
+    return {
+        isAndroid,
+        isIOS,
+        isChrome: isChromeAndroid,
+        isEdge: isEdgeAndroid,
+        isSafari,
+        isFirefox,
+        isSamsungBrowser,
+        isWebView,
+        supportsPWA: isChromeAndroid || isEdgeAndroid || (isIOS && isSafari)
+    };
+}
+
+// Handle unsupported browsers
+function showUnsupportedBrowser(device) {
+    let message = '';
+    let recommendations = [];
+    
+    if (device.isAndroid) {
+        if (device.isSamsungBrowser) {
+            message = 'Samsung Browser doesn\'t support app installation.';
+            recommendations = ['Chrome', 'Microsoft Edge'];
+        } else if (device.isFirefox) {
+            message = 'Firefox mobile doesn\'t support app installation.';
+            recommendations = ['Chrome', 'Microsoft Edge'];
+        } else if (device.isWebView) {
+            message = 'WebView doesn\'t support app installation.';
+            recommendations = ['Chrome', 'Microsoft Edge'];
+        } else {
+            message = 'This browser doesn\'t support app installation.';
+            recommendations = ['Chrome', 'Microsoft Edge'];
+        }
+    } else if (device.isIOS) {
+        if (!device.isSafari) {
+            message = 'Only Safari supports app installation on iOS.';
+            recommendations = ['Safari'];
+        }
+    } else {
+        // Desktop or other platforms
+        message = 'App installation is optimized for mobile devices.';
+        recommendations = ['Chrome on Android', 'Safari on iOS'];
+    }
+    
+    // Create unsupported browser modal
+    const modal = document.createElement('div');
+    modal.className = 'unsupported-browser-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🚫 Installation Not Available</h3>
+                    <button class="close-btn" onclick="this.closest('.unsupported-browser-modal').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <p>${message}</p>
+                    <div class="browser-recommendations">
+                        <p><strong>Try these browsers instead:</strong></p>
+                        <ul>
+                            ${recommendations.map(browser => `<li>📱 ${browser}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="browser-instructions">
+                        <p>💡 <strong>Quick tip:</strong> Copy this URL and open it in ${recommendations[0] || 'a supported browser'}!</p>
+                        <div class="url-copy">
+                            <input type="text" value="${window.location.href}" readonly>
+                            <button onclick="navigator.clipboard.writeText('${window.location.href}'); this.textContent='Copied!'">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary" onclick="this.closest('.unsupported-browser-modal').remove()">
+                        Got it!
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Track unsupported browser
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'unsupported_browser', {
+            'browser': device.isSamsungBrowser ? 'samsung' : device.isFirefox ? 'firefox' : 'other',
+            'platform': device.isAndroid ? 'android' : device.isIOS ? 'ios' : 'desktop'
+        });
+    }
 }
