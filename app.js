@@ -2993,13 +2993,25 @@ class AutoWealthApp {
         const browserLang = navigator.language || navigator.userLanguage;
         const langCode = browserLang.split('-')[0].toLowerCase();
         
-        // Supported languages
-        const supportedLangs = ['en', 'nl', 'de'];
+        console.log('Browser language detected:', browserLang);
+        console.log('Language code:', langCode);
         
-        if (supportedLangs.includes(langCode)) {
-            this.currentLanguage = langCode;
+        // Check URL parameters for manual language override (for testing)
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        
+        if (urlLang && ['en', 'nl', 'de'].includes(urlLang)) {
+            this.currentLanguage = urlLang;
+            console.log('Language set from URL parameter:', urlLang);
         } else {
-            this.currentLanguage = 'en'; // Default to English
+            // Supported languages
+            const supportedLangs = ['en', 'nl', 'de'];
+            
+            if (supportedLangs.includes(langCode)) {
+                this.currentLanguage = langCode;
+            } else {
+                this.currentLanguage = 'en'; // Default to English
+            }
         }
         
         // Set currency based on language
@@ -3009,7 +3021,10 @@ class AutoWealthApp {
             this.currentCurrency = 'USD';
         }
         
-        console.log(`Language detected: ${this.currentLanguage}, Currency: ${this.currentCurrency}`);
+        console.log(`Final language: ${this.currentLanguage}, Currency: ${this.currentCurrency}`);
+        
+        // Update HTML lang attribute
+        document.documentElement.lang = this.currentLanguage;
     }
 
     // Translation data
@@ -3036,7 +3051,7 @@ class AutoWealthApp {
                 dashboard_title: "Your AutoWealth Dashboard",
                 ai_active: "AI Active",
                 today_profit: "Today's Profit",
-                since_morning: "since morning",
+                since_morning: "+$127.45 since morning",
                 recent_trades: "Recent Trades",
                 live: "LIVE",
                 how_it_works_title: "How It Works - Simple as 1, 2, 3",
@@ -3091,7 +3106,7 @@ class AutoWealthApp {
                 dashboard_title: "Jouw AutoWealth Dashboard",
                 ai_active: "AI Actief",
                 today_profit: "Winst Vandaag",
-                since_morning: "sinds vanmorgen",
+                since_morning: "+€108,33 sinds vanmorgen",
                 recent_trades: "Recente Trades",
                 live: "LIVE",
                 how_it_works_title: "Hoe Het Werkt - Simpel als 1, 2, 3",
@@ -3146,7 +3161,7 @@ class AutoWealthApp {
                 dashboard_title: "Ihr AutoWealth Dashboard",
                 ai_active: "KI Aktiv",
                 today_profit: "Heutiger Gewinn",
-                since_morning: "seit dem Morgen",
+                since_morning: "+€108,33 seit dem Morgen",
                 recent_trades: "Aktuelle Trades",
                 live: "LIVE",
                 how_it_works_title: "Wie Es Funktioniert - Einfach wie 1, 2, 3",
@@ -3188,11 +3203,16 @@ class AutoWealthApp {
         const translations = this.getTranslations();
         const currentTranslations = translations[this.currentLanguage];
         
+        console.log('Translating page to:', this.currentLanguage);
+        
         // Translate all elements with data-i18n attribute
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (currentTranslations[key]) {
                 element.textContent = currentTranslations[key];
+                console.log(`Translated ${key}:`, currentTranslations[key]);
+            } else {
+                console.warn(`Translation missing for key: ${key}`);
             }
         });
         
@@ -3202,15 +3222,15 @@ class AutoWealthApp {
 
     // Convert and format currency amounts
     updateCurrencyAmounts() {
+        console.log('Updating currency amounts to:', this.currentCurrency);
+        
         document.querySelectorAll('.currency-amount').forEach(element => {
             const amount = parseFloat(element.getAttribute('data-amount'));
             if (!isNaN(amount)) {
                 let convertedAmount = amount;
-                let symbol = '$';
                 
                 if (this.currentCurrency === 'EUR') {
                     convertedAmount = amount * this.exchangeRate;
-                    symbol = '€';
                 }
                 
                 // Format number with proper locale
@@ -3225,6 +3245,7 @@ class AutoWealthApp {
                 }).format(convertedAmount);
                 
                 element.textContent = formatted;
+                console.log(`Currency converted: ${amount} -> ${formatted}`);
             }
         });
     }
@@ -3260,6 +3281,53 @@ class AutoWealthApp {
             console.log('AutoWealth AI was installed');
             this.deferredPrompt = null;
         });
+
+        // Add language testing buttons (for development)
+        this.addLanguageTestButtons();
+    }
+
+    // Add language test buttons for development
+    addLanguageTestButtons() {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            const testButtons = document.createElement('div');
+            testButtons.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 10000;
+                background: rgba(0,0,0,0.8);
+                padding: 10px;
+                border-radius: 5px;
+                display: flex;
+                gap: 5px;
+            `;
+            
+            ['en', 'nl', 'de'].forEach(lang => {
+                const btn = document.createElement('button');
+                btn.textContent = lang.toUpperCase();
+                btn.style.cssText = `
+                    padding: 5px 10px;
+                    background: ${this.currentLanguage === lang ? '#4299e1' : '#666'};
+                    color: white;
+                    border: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+                `;
+                btn.onclick = () => {
+                    this.currentLanguage = lang;
+                    this.currentCurrency = (lang === 'nl' || lang === 'de') ? 'EUR' : 'USD';
+                    this.translatePage();
+                    // Update button colors
+                    testButtons.querySelectorAll('button').forEach(b => {
+                        b.style.background = '#666';
+                    });
+                    btn.style.background = '#4299e1';
+                };
+                testButtons.appendChild(btn);
+            });
+            
+            document.body.appendChild(testButtons);
+        }
     }
 
     handleCTAClick() {
