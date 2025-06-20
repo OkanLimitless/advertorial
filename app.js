@@ -110,7 +110,7 @@ const quizQuestions = {
 const translations = {
     en: {
         // Welcome Screen
-        welcome_title: "AutoWealth AI",
+        welcome_title: "TRADER AI",
         welcome_subtitle: "Your Personal Money Assistant",
         feature1_title: "AI Does Everything",
         feature1_desc: "No trading knowledge needed. Our AI handles all the complex stuff.",
@@ -148,7 +148,8 @@ const translations = {
         email: "Email Address",
         phone: "Phone Number",
         get_started: "Get Started Now",
-        disclaimer: "By continuing, you agree to receive a call from our team to verify your account and guide you through the setup process. 100% secure and confidential.",
+        get_started_now: "Get Started Now - Free Access",
+        disclaimer: "Click to access your exclusive trading platform. 100% secure and confidential.",
 
         // Loading Modal
         setting_up: "Setting Up Your Account...",
@@ -159,7 +160,7 @@ const translations = {
     },
     nl: {
         // Welcome Screen
-        welcome_title: "AutoWealth AI",
+        welcome_title: "TRADER AI",
         welcome_subtitle: "Uw Persoonlijke Geld Assistent",
         feature1_title: "AI Doet Alles",
         feature1_desc: "Geen handelskennis nodig. Onze AI regelt alle complexe zaken.",
@@ -197,7 +198,8 @@ const translations = {
         email: "E-mailadres",
         phone: "Telefoonnummer",
         get_started: "Nu Beginnen",
-        disclaimer: "Door door te gaan, gaat u akkoord met het ontvangen van een telefoontje van ons team om uw account te verifiëren en u door het installatieproces te begeleiden. 100% veilig en vertrouwelijk.",
+        get_started_now: "Nu Beginnen - Gratis Toegang",
+        disclaimer: "Klik om toegang te krijgen tot uw exclusieve handelsplatform. 100% veilig en vertrouwelijk.",
 
         // Loading Modal
         setting_up: "Uw Account Instellen...",
@@ -208,7 +210,7 @@ const translations = {
     },
     de: {
         // Welcome Screen
-        welcome_title: "AutoWealth AI",
+        welcome_title: "TRADER AI",
         welcome_subtitle: "Ihr Persönlicher Geld-Assistent",
         feature1_title: "KI Macht Alles",
         feature1_desc: "Keine Handelskenntnisse erforderlich. Unsere KI kümmert sich um alle komplexen Sachen.",
@@ -246,7 +248,8 @@ const translations = {
         email: "E-Mail-Adresse",
         phone: "Telefonnummer",
         get_started: "Jetzt Loslegen",
-        disclaimer: "Durch Fortfahren stimmen Sie zu, einen Anruf von unserem Team zu erhalten, um Ihr Konto zu verifizieren und Sie durch den Einrichtungsprozess zu führen. 100% sicher und vertraulich.",
+        get_started_now: "Jetzt Loslegen - Kostenloser Zugang",
+        disclaimer: "Klicken Sie, um Zugang zu Ihrer exklusiven Handelsplattform zu erhalten. 100% sicher und vertraulich.",
 
         // Loading Modal
         setting_up: "Ihr Konto Einrichten...",
@@ -571,26 +574,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('pauseDemo').addEventListener('click', pauseDemo);
     document.getElementById('startQuiz').addEventListener('click', startQuiz);
     
-    // Signup button
-    document.getElementById('finalSignup').addEventListener('click', function(e) {
+    // CTA button
+    document.getElementById('finalCTA').addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Basic form validation
-        const inputs = document.querySelectorAll('.signup-form input');
-        let valid = true;
-        
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.style.borderColor = '#e53e3e';
-                valid = false;
-            } else {
-                input.style.borderColor = '#e2e8f0';
-            }
-        });
-        
-        if (valid) {
-            showLoadingModal();
-        }
+        showLoadingModal();
     });
     
     // Auto-select country based on detected location
