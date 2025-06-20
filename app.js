@@ -30,7 +30,7 @@ let systemData = {
 // Configuration
 const config = {
     affiliateUrl: 'https://your-affiliate-link.com',
-    appName: 'Trader AI',
+    appName: 'Elon\'s Trader AI',
     installationDelay: 3000
 };
 
@@ -57,20 +57,35 @@ function initializeElements() {
     liveCount = document.getElementById('live-count');
     countdown = document.getElementById('countdown');
     spotsLeft = document.getElementById('spotsLeft');
+    
+    // Also get additional elements
+    const countdown2 = document.getElementById('countdown2');
+    const spotsLeft2 = document.getElementById('spotsLeft2');
+    const liveUsers = document.getElementById('live-users');
+    
+    // Set initial values
+    if (liveUsers) liveUsers.textContent = '2,847,293';
+    if (spotsLeft2) spotsLeft2.textContent = '73';
 }
 
 // Live user counter animation
 function startLiveCounter() {
     if (!liveCount) return;
     
-    const baseCount = 47293;
+    const baseCount = 2847293;
     let currentCount = baseCount;
     
     setInterval(() => {
-        // Random fluctuation between -5 and +10
-        const change = Math.floor(Math.random() * 16) - 5;
-        currentCount = Math.max(45000, Math.min(50000, currentCount + change));
+        // Random fluctuation between -50 and +150 (bigger numbers for Elon's scale)
+        const change = Math.floor(Math.random() * 201) - 50;
+        currentCount = Math.max(2800000, Math.min(2900000, currentCount + change));
         liveCount.textContent = currentCount.toLocaleString();
+        
+        // Update other live counters if they exist
+        const liveUsers = document.getElementById('live-users');
+        if (liveUsers) {
+            liveUsers.textContent = currentCount.toLocaleString();
+        }
     }, 3000);
 }
 
@@ -100,6 +115,12 @@ function startCountdown() {
         
         const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         countdown.textContent = timeString;
+        
+        // Update other countdown timers if they exist
+        const countdown2 = document.getElementById('countdown2');
+        if (countdown2) {
+            countdown2.textContent = timeString;
+        }
     }, 1000);
 }
 
@@ -107,12 +128,18 @@ function startCountdown() {
 function startSpotsCounter() {
     if (!spotsLeft) return;
     
-    let spots = 127;
+    let spots = 73;
     
     setInterval(() => {
-        if (Math.random() < 0.3 && spots > 50) { // 30% chance to decrease
+        if (Math.random() < 0.3 && spots > 25) { // 30% chance to decrease
             spots--;
             spotsLeft.textContent = spots;
+            
+            // Update other spots counters if they exist
+            const spotsLeft2 = document.getElementById('spotsLeft2');
+            if (spotsLeft2) {
+                spotsLeft2.textContent = spots;
+            }
         }
     }, 8000);
 }
@@ -217,9 +244,9 @@ function showInstallationModal() {
         <div class="installation-modal">
             <div class="modal-header">
                 <div class="app-icon">
-                    <img src="icons/icon-152x152.png" alt="Trader AI">
+                    <img src="icons/icon-152x152.png" alt="Elon's Trader AI">
                 </div>
-                <h3>Installing Trader AI</h3>
+                <h3>Installing Elon's Trader AI</h3>
                 <p>Setting up your trading account...</p>
             </div>
             
