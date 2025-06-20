@@ -1,7 +1,13 @@
-// PWA Installation and Service Worker Registration
+// Global variables
 let deferredPrompt;
 let installButton;
 let addToHomeButton;
+
+// Global function declarations for onclick handlers
+window.performIOSInstall = performIOSInstall;
+window.dismissIOSBanner = dismissIOSBanner;
+window.dismissNativePrompt = dismissNativePrompt;
+window.completeIOSInstall = completeIOSInstall;
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -283,8 +289,8 @@ function showIOSInstallBanner() {
                 <div class="ios-banner-subtitle">Add to Home Screen</div>
             </div>
             <div class="ios-banner-actions">
-                <button class="ios-banner-add" onclick="performIOSInstall()">Add</button>
-                <button class="ios-banner-cancel" onclick="dismissIOSBanner()">Cancel</button>
+                <button class="ios-banner-add" id="iosBannerAdd">Add</button>
+                <button class="ios-banner-cancel" id="iosBannerCancel">Cancel</button>
             </div>
         </div>
     `;
@@ -305,6 +311,10 @@ function showIOSInstallBanner() {
     `;
     
     document.body.appendChild(banner);
+    
+    // Add event listeners
+    document.getElementById('iosBannerAdd').addEventListener('click', performIOSInstall);
+    document.getElementById('iosBannerCancel').addEventListener('click', dismissIOSBanner);
     
     // Auto-dismiss after 10 seconds
     setTimeout(() => {
@@ -376,8 +386,8 @@ function showNativeIOSPrompt() {
                     <p>This website has app functionality. Add it to your home screen to use it like an app.</p>
                 </div>
                 <div class="ios-modal-actions">
-                    <button class="ios-modal-cancel" onclick="dismissNativePrompt()">Cancel</button>
-                    <button class="ios-modal-add" onclick="completeIOSInstall()">Add</button>
+                    <button class="ios-modal-cancel" id="iosModalCancel">Cancel</button>
+                    <button class="ios-modal-add" id="iosModalAdd">Add</button>
                 </div>
             </div>
         </div>
@@ -395,6 +405,10 @@ function showNativeIOSPrompt() {
     `;
     
     document.body.appendChild(modal);
+    
+    // Add event listeners
+    document.getElementById('iosModalCancel').addEventListener('click', dismissNativePrompt);
+    document.getElementById('iosModalAdd').addEventListener('click', completeIOSInstall);
 }
 
 // Dismiss iOS Banner
@@ -439,13 +453,8 @@ function completeIOSInstall() {
 function handleAddToHomeClick() {
     console.log('Add to Home button clicked');
     
-    // Try direct install first
-    if (deferredPrompt) {
-        handleInstallClick();
-    } else {
-        // Show instructions as fallback
-        showInstallInstructions();
-    }
+    // Use the same logic as the main install button
+    handleInstallClick();
 }
 
 // Show Install Instructions
