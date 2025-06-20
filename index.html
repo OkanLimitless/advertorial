@@ -22,8 +22,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- CSS with cache busting -->
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    
+    <!-- Prevent flash of unstyled content -->
+    <style>
+        body { visibility: hidden; }
+        .elon-page { visibility: visible; }
+    </style>
 </head>
 <body>
     <!-- Elon Musk Bitcoin 360 AI -->
@@ -271,8 +277,15 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="config.js"></script>
-    <script src="app.js"></script>
+    <!-- Scripts with cache busting -->
+    <script src="config.js?v=1.0.1"></script>
+    <script src="app.js?v=1.0.1"></script>
+    
+    <!-- Ensure body is visible after styles load -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.visibility = 'visible';
+        });
+    </script>
 </body>
 </html> 
