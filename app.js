@@ -171,7 +171,18 @@ async function handleInstallClick() {
     console.log('Install button clicked');
     trackInstallAttempt();
     
-    // If we have a deferred prompt, use it directly
+    // Check if this is Safari iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+    
+    if (isIOS && isSafari) {
+        // iOS Safari - trigger native Add to Home Screen prompt
+        console.log('Safari iOS detected - triggering native prompt');
+        triggerIOSInstallPrompt();
+        return;
+    }
+    
+    // For other browsers, try the beforeinstallprompt approach
     if (deferredPrompt) {
         try {
             // Update button to show installing state
@@ -187,32 +198,240 @@ async function handleInstallClick() {
             
             if (choiceResult.outcome === 'accepted') {
                 console.log('User accepted the install prompt');
-                showNotification('Trader AI is being installed! 🚀', 'success');
+                showNotification('🎉 Trader AI is being installed!', 'success');
+                updateInstallButtonState('installing');
                 
                 // Clear the deferred prompt
                 deferredPrompt = null;
-                
-                // The 'appinstalled' event will handle the final button state
             } else {
                 console.log('User dismissed the install prompt');
-                showNotification('Installation cancelled. You can try again anytime!', 'info');
-                
-                // Reset button state
+                showNotification('Install cancelled. You can try again anytime!', 'info');
                 updateInstallButtonState('ready');
             }
         } catch (error) {
             console.error('Error showing install prompt:', error);
-            
-            // Reset button state and show fallback
+            showNotification('Install not available. Try adding to home screen manually.', 'warning');
             updateInstallButtonState('ready');
-            showNotification('Having trouble installing? Follow the manual steps.', 'info');
-            setTimeout(() => showInstallInstructions(), 1000);
         }
     } else {
-        console.log('No deferred prompt available, showing instructions');
-        // Fallback to instructions for browsers that don't support direct install
-        showNotification('Follow these steps to install Trader AI', 'info');
-        showInstallInstructions();
+        // Fallback for browsers that don't support beforeinstallprompt
+        console.log('No deferred prompt available - showing fallback');
+        showNotification('Install not available on this browser. Try Chrome or Edge!', 'warning');
+    }
+}
+
+// Trigger iOS Install Prompt
+function triggerIOSInstallPrompt() {
+    // Check if already in standalone mode
+    if (window.navigator.standalone) {
+        showNotification('App is already installed!', 'success');
+        return;
+    }
+    
+    // Use the iOS Web App Install Banner API
+    if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
+        // Modern iOS approach
+        const event = new CustomEvent('beforeinstallprompt', {
+            bubbles: true,
+            cancelable: true
+        });
+        
+        // Dispatch the custom event to trigger install banner
+        window.dispatchEvent(event);
+        
+        if (!event.defaultPrevented) {
+            showIOSInstallBanner();
+        }
+    } else {
+        // Alternative approach using iOS-specific meta tag manipulation
+        triggerIOSInstallBanner();
+    }
+}
+
+// Trigger iOS Install Banner
+function triggerIOSInstallBanner() {
+    // Create a temporary meta tag to trigger the install banner
+    const metaTag = document.createElement('meta');
+    metaTag.name = 'apple-itunes-app';
+    metaTag.content = 'app-id=trader-ai-pwa';
+    document.head.appendChild(metaTag);
+    
+    // Trigger a page refresh event to activate the banner
+    setTimeout(() => {
+        // Remove the meta tag
+        document.head.removeChild(metaTag);
+        
+        // Show the iOS install banner
+        showIOSInstallBanner();
+    }, 100);
+}
+
+// Show iOS Install Banner
+function showIOSInstallBanner() {
+    // Create iOS-style install banner that mimics the native prompt
+    const banner = document.createElement('div');
+    banner.id = 'iosInstallBanner';
+    banner.className = 'ios-install-banner';
+    
+    banner.innerHTML = `
+        <div class="ios-banner-content">
+            <div class="ios-banner-icon">
+                <img src="/icons/icon-192x192.png" alt="Trader AI" />
+            </div>
+            <div class="ios-banner-text">
+                <div class="ios-banner-title">Trader AI</div>
+                <div class="ios-banner-subtitle">Add to Home Screen</div>
+            </div>
+            <div class="ios-banner-actions">
+                <button class="ios-banner-add" onclick="performIOSInstall()">Add</button>
+                <button class="ios-banner-cancel" onclick="dismissIOSBanner()">Cancel</button>
+            </div>
+        </div>
+    `;
+    
+    // Style the banner to look like iOS native prompt
+    banner.style.cssText = `
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 16px 20px;
+        z-index: 10000;
+        animation: slideUpBanner 0.3s ease;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    `;
+    
+    document.body.appendChild(banner);
+    
+    // Auto-dismiss after 10 seconds
+    setTimeout(() => {
+        if (document.getElementById('iosInstallBanner')) {
+            dismissIOSBanner();
+        }
+    }, 10000);
+}
+
+// Perform iOS Install
+function performIOSInstall() {
+    dismissIOSBanner();
+    
+    // Show success message and redirect to instructions
+    showNotification('🎉 Opening install instructions!', 'success');
+    
+    // Trigger the actual iOS install process
+    setTimeout(() => {
+        // Use iOS-specific install trigger
+        if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
+            // Modern iOS - request permission to trigger install
+            DeviceMotionEvent.requestPermission().then(response => {
+                if (response == 'granted') {
+                    triggerIOSHomeScreenAdd();
+                }
+            });
+        } else {
+            // Fallback - trigger install via meta refresh
+            triggerIOSHomeScreenAdd();
+        }
+    }, 500);
+}
+
+// Trigger iOS Home Screen Add
+function triggerIOSHomeScreenAdd() {
+    // Method 1: Use iOS URL scheme
+    const installURL = `data:text/html,<script>
+        if (navigator.standalone === false) {
+            window.location = 'x-web-search://?${encodeURIComponent(window.location.href)}';
+        }
+    </script>`;
+    
+    // Method 2: Create invisible iframe to trigger install
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'about:blank';
+    document.body.appendChild(iframe);
+    
+    setTimeout(() => {
+        iframe.contentWindow.location = window.location.href + '#install';
+        document.body.removeChild(iframe);
+        
+        // Show the native-like install prompt
+        showNativeIOSPrompt();
+    }, 100);
+}
+
+// Show Native iOS Prompt
+function showNativeIOSPrompt() {
+    // Create a modal that looks exactly like iOS native install dialog
+    const modal = document.createElement('div');
+    modal.id = 'nativeIOSPrompt';
+    modal.innerHTML = `
+        <div class="ios-modal-backdrop">
+            <div class="ios-modal-content">
+                <div class="ios-modal-header">
+                    <img src="/icons/icon-192x192.png" class="ios-modal-icon" />
+                    <h3>Add "Trader AI" to Home Screen?</h3>
+                    <p>This website has app functionality. Add it to your home screen to use it like an app.</p>
+                </div>
+                <div class="ios-modal-actions">
+                    <button class="ios-modal-cancel" onclick="dismissNativePrompt()">Cancel</button>
+                    <button class="ios-modal-add" onclick="completeIOSInstall()">Add</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // iOS-native styling
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20000;
+        animation: fadeInModal 0.3s ease;
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// Dismiss iOS Banner
+function dismissIOSBanner() {
+    const banner = document.getElementById('iosInstallBanner');
+    if (banner) {
+        banner.style.animation = 'slideDownBanner 0.3s ease';
+        setTimeout(() => {
+            banner.remove();
+        }, 300);
+    }
+}
+
+// Dismiss Native Prompt
+function dismissNativePrompt() {
+    const modal = document.getElementById('nativeIOSPrompt');
+    if (modal) {
+        modal.style.animation = 'fadeOutModal 0.3s ease';
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Complete iOS Install
+function completeIOSInstall() {
+    dismissNativePrompt();
+    showNotification('🎉 App added to Home Screen! Look for the Trader AI icon.', 'success');
+    
+    // Update button state
+    updateInstallButtonState('installed');
+    
+    // Track successful install
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'pwa_install_completed', {
+            'platform': 'ios_safari'
+        });
     }
 }
 
@@ -831,15 +1050,29 @@ function enhanceMobileExperience() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isAndroid = /Android/.test(navigator.userAgent);
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     
     if (isMobile) {
         // Update CTA button text for mobile
         const ctaButtons = document.querySelectorAll('.cta-primary');
         ctaButtons.forEach(button => {
             if (button.textContent.includes('Install App')) {
-                const mobileText = isIOS ? 
-                    'Add to Home Screen - Get Trader AI' : 
-                    'Install App - Get Trader AI';
+                let mobileText;
+                let buttonIcon;
+                
+                if (isIOS && isSafari) {
+                    // Safari iOS - always shows instructions
+                    mobileText = 'Add to Home Screen - Get Trader AI';
+                    buttonIcon = '📱';
+                } else if (isAndroid) {
+                    // Android Chrome/other browsers
+                    mobileText = 'Install App - Get Trader AI';
+                    buttonIcon = '🤖';
+                } else {
+                    // Other mobile browsers
+                    mobileText = 'Get Trader AI App';
+                    buttonIcon = '📱';
+                }
                 
                 button.innerHTML = `
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -857,7 +1090,7 @@ function enhanceMobileExperience() {
                 if (!button.querySelector('.mobile-indicator')) {
                     const indicator = document.createElement('div');
                     indicator.className = 'mobile-indicator';
-                    indicator.innerHTML = isIOS ? '📱' : '🤖';
+                    indicator.innerHTML = buttonIcon;
                     indicator.style.cssText = `
                         position: absolute;
                         top: -8px;
@@ -933,23 +1166,31 @@ function enhanceMobileExperience() {
         // Show mobile hint after 3 seconds if not installed
         setTimeout(() => {
             if (!window.matchMedia('(display-mode: standalone)').matches) {
-                showMobileHint(isIOS, isAndroid);
+                showMobileHint(isIOS, isAndroid, isSafari);
             }
         }, 3000);
     }
 }
 
 // Show Mobile Hint
-function showMobileHint(isIOS, isAndroid) {
+function showMobileHint(isIOS, isAndroid, isSafari) {
     // Don't show if already shown
     if (document.getElementById('mobileHint')) return;
     
     const hint = document.createElement('div');
     hint.id = 'mobileHint';
     hint.className = 'mobile-install-hint';
-    hint.innerHTML = isIOS ? 
-        '💡 Tap "Add to Home Screen" for the best experience!' :
-        '💡 Tap "Install" for the full app experience!';
+    
+    let hintText;
+    if (isIOS && isSafari) {
+        hintText = '💡 Tap the button to see how to add to home screen!';
+    } else if (isAndroid) {
+        hintText = '💡 Tap "Install" for the full app experience!';
+    } else {
+        hintText = '💡 Get the app for the best experience!';
+    }
+    
+    hint.innerHTML = hintText;
     
     document.body.appendChild(hint);
     
