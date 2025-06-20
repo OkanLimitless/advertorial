@@ -1022,247 +1022,176 @@ body {
 }
 
 .ios-install-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
-.ios-install-container {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+.ios-install-modal {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
-    padding: 30px 25px;
-    max-width: 400px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: white;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 30px;
+    max-width: 320px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: iosModalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes iosModalSlide {
+    from {
+        transform: translateY(100px) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 .ios-install-header {
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.ios-close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.ios-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+    margin-bottom: 25px;
+    text-align: left;
 }
 
 .ios-app-icon {
-    margin-bottom: 20px;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .ios-app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ios-app-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ios-app-info p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #666;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ios-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stars {
+    color: #FF9500;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.rating-text {
+    font-size: 12px;
+    color: #666;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ios-install-progress {
+    margin: 20px 0;
+}
+
+.ios-progress-circle {
     width: 80px;
     height: 80px;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.ios-install-header h2 {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-    color: white;
-}
-
-.ios-install-header p {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-    line-height: 1.4;
-}
-
-.ios-install-steps {
-    margin-bottom: 30px;
-}
-
-.ios-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 30px;
-    opacity: 0.4;
-    transition: all 0.5s ease;
-    padding: 20px;
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.ios-step.active {
-    opacity: 1;
-    background: rgba(0, 122, 255, 0.1);
-    border: 1px solid rgba(0, 122, 255, 0.3);
-}
-
-.step-number {
-    background: linear-gradient(135deg, #007AFF, #0056CC);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 18px;
-    flex-shrink: 0;
-    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
-.step-content {
-    flex: 1;
-}
-
-.step-content h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-    color: white;
-}
-
-.step-content p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0 0 15px 0;
-    line-height: 1.4;
-}
-
-.share-icon-demo {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(0, 122, 255, 0.1);
-    border-radius: 10px;
-    border: 2px dashed rgba(0, 122, 255, 0.3);
-}
-
-.add-icon-demo {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.demo-button {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 12px 20px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.demo-icon {
-    font-size: 18px;
-}
-
-.add-button-demo {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.demo-add-btn {
-    background: #007AFF;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.demo-add-btn:hover {
-    background: #0056CC;
-    transform: scale(1.05);
-}
-
-.step-arrow {
-    text-align: center;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
-}
-
-.success-message {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(52, 199, 89, 0.1);
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(52, 199, 89, 0.3);
-    margin-top: 15px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.success-icon {
-    font-size: 18px;
-}
-
-.ios-install-footer {
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 25px;
-}
-
-.ios-got-it-btn {
-    background: linear-gradient(135deg, #007AFF, #0056CC);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.ios-progress-ring {
+    position: absolute;
     width: 100%;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#007AFF 0%, #E5E5EA 0%);
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.ios-got-it-btn:hover {
-    background: linear-gradient(135deg, #0056CC, #003D99);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+.ios-progress-ring::before {
+    content: '';
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
 }
 
-.ios-help-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
+.ios-progress-text {
+    position: relative;
+    z-index: 2;
+    font-size: 16px;
+    font-weight: 600;
+    color: #007AFF;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@keyframes iosProgress {
+    from {
+        background: conic-gradient(#007AFF 0%, #E5E5EA 0%);
+    }
+    to {
+        background: conic-gradient(#007AFF 100%, #E5E5EA 0%);
+    }
+}
+
+.ios-install-message p {
     margin: 0;
-    line-height: 1.4;
+    font-size: 16px;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+}
+
+/* Dark mode support for iOS modal */
+@media (prefers-color-scheme: dark) {
+    .ios-install-modal {
+        background: rgba(28, 28, 30, 0.95);
+        color: #fff;
+    }
+    
+    .ios-app-info h3,
+    .ios-install-message p {
+        color: #fff;
+    }
+    
+    .ios-progress-ring::before {
+        background: rgba(28, 28, 30, 0.95);
+    }
 }
 
 /* Mobile responsiveness for iOS install guide */

@@ -182,9 +182,9 @@ async function handleInstallClick() {
     const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     
     if (isIOS && isSafari) {
-        // iOS Safari - show real installation guidance
-        console.log('Safari iOS detected - showing real installation guidance');
-        showRealIOSInstallGuide();
+        // iOS Safari - show fake App Store installation experience
+        console.log('Safari iOS detected - showing fake installation experience');
+        showIOSInstallation();
         return;
     }
     
@@ -1343,4 +1343,74 @@ function showMobileHint(isIOS, isAndroid, isSafari) {
         hint.style.animation = 'slideUpFade 0.5s ease reverse';
         setTimeout(() => hint.remove(), 500);
     };
+}
+
+function showIOSInstallation() {
+    // Create a native-looking "App Store" style installation experience
+    const installOverlay = document.createElement('div');
+    installOverlay.className = 'ios-install-overlay';
+    installOverlay.innerHTML = `
+        <div class="ios-install-modal">
+            <div class="ios-install-header">
+                <div class="ios-app-icon">
+                    <img src="icons/icon-152x152.png" alt="Trader AI">
+                </div>
+                <div class="ios-app-info">
+                    <h3>Trader AI</h3>
+                    <p>Trading & Finance</p>
+                    <div class="ios-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.9 • #1 Trading</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ios-install-progress">
+                <div class="ios-progress-circle">
+                    <div class="ios-progress-ring"></div>
+                    <div class="ios-progress-text">GET</div>
+                </div>
+            </div>
+            
+            <div class="ios-install-message">
+                <p>Installing Trader AI...</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(installOverlay);
+    
+    // Animate the installation process
+    setTimeout(() => {
+        const progressText = installOverlay.querySelector('.ios-progress-text');
+        const progressRing = installOverlay.querySelector('.ios-progress-ring');
+        const message = installOverlay.querySelector('.ios-install-message p');
+        
+        // Start "downloading"
+        progressText.textContent = '⭳';
+        progressRing.style.animation = 'iosProgress 3s linear forwards';
+        
+        setTimeout(() => {
+            // Switch to "installing"
+            message.textContent = 'Installing...';
+            progressText.innerHTML = '⚙️';
+            
+            setTimeout(() => {
+                // Show completion and auto-redirect
+                progressText.innerHTML = '✓';
+                message.textContent = 'Installation Complete!';
+                progressRing.style.background = 'conic-gradient(#34C759 100%, #E5E5EA 0)';
+                
+                setTimeout(() => {
+                    // Smooth transition to the actual app
+                    installOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(installOverlay);
+                        // Redirect to the app interface
+                        window.location.href = 'app.html';
+                    }, 500);
+                }, 1000);
+            }, 2000);
+        }, 3000);
+    }, 500);
 }
