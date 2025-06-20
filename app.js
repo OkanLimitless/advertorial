@@ -1,262 +1,254 @@
 // Configuration
 const CONFIG = {
-    APP_NAME: 'AutoWealth AI',
-    AFFILIATE_URL: 'https://example.com/affiliate-link',
-    INSTALL_DELAY: 3000,
-    GEOLOCATION_API: 'https://ipapi.co/json/'
+    GEOLOCATION_API: 'https://ipapi.co/json/',
+    AFFILIATE_URL: 'https://example.com/affiliate-link' // Will be updated with real URL
 };
 
-// Quiz questions
+// Quiz Questions
 const quizQuestions = {
     en: [
         {
-            question: "What's your main goal with money?",
+            question: "What's your main goal with Bitcoin trading?",
             answers: [
-                "Pay off debts and bills",
-                "Save for the future", 
-                "Generate passive income",
-                "All of the above"
+                "Generate passive income while I sleep",
+                "Learn about cryptocurrency markets", 
+                "Replace my full-time job income",
+                "Build long-term wealth"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "How much time do you want to spend managing investments?",
+            question: "How much time do you want to spend monitoring trades?",
             answers: [
-                "Several hours per day",
-                "A few hours per week",
-                "Just a few minutes to check",
-                "Zero time - let AI handle it"
+                "I want completely automated trading",
+                "A few minutes per day",
+                "1-2 hours daily",
+                "I prefer hands-on trading"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "What's most important to you in an investment platform?",
+            question: "What's your experience with Bitcoin and crypto?",
             answers: [
-                "High returns potential",
-                "Complete automation",
-                "Safety and security", 
-                "All of the above"
+                "Complete beginner - need AI to handle everything",
+                "I know the basics",
+                "Intermediate knowledge",
+                "Advanced trader"
             ],
-            correct: 3
+            correct: 0
         }
     ],
     nl: [
         {
-            question: "Wat is uw hoofddoel met geld?",
+            question: "Wat is uw hoofddoel met Bitcoin trading?",
             answers: [
-                "Schulden en rekeningen afbetalen",
-                "Sparen voor de toekomst",
-                "Passief inkomen genereren", 
-                "Alle bovenstaande"
+                "Passief inkomen genereren terwijl ik slaap",
+                "Leren over cryptocurrency markten",
+                "Mijn voltijds baan inkomen vervangen", 
+                "Langetermijn vermogen opbouwen"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "Hoeveel tijd wilt u besteden aan het beheren van investeringen?",
+            question: "Hoeveel tijd wilt u besteden aan het monitoren van trades?",
             answers: [
-                "Meerdere uren per dag",
-                "Een paar uur per week",
-                "Slechts een paar minuten om te controleren",
-                "Geen tijd - laat AI het afhandelen"
+                "Ik wil volledig geautomatiseerde trading",
+                "Een paar minuten per dag",
+                "1-2 uur per dag",
+                "Ik verkies hands-on trading"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "Wat is het belangrijkst voor u in een investeringsplatform?",
+            question: "Wat is uw ervaring met Bitcoin en crypto?",
             answers: [
-                "Hoog rendementspotentieel",
-                "Volledige automatisering",
-                "Veiligheid en beveiliging",
-                "Alle bovenstaande"
+                "Complete beginner - heb AI nodig om alles te regelen",
+                "Ik ken de basis",
+                "Gemiddelde kennis",
+                "Gevorderde trader"
             ],
-            correct: 3
+            correct: 0
         }
     ],
     de: [
         {
-            question: "Was ist Ihr Hauptziel mit Geld?",
+            question: "Was ist Ihr Hauptziel beim Bitcoin-Trading?",
             answers: [
-                "Schulden und Rechnungen bezahlen",
-                "Für die Zukunft sparen",
-                "Passives Einkommen generieren",
-                "Alles oben Genannte"
+                "Passives Einkommen generieren während ich schlafe",
+                "Über Kryptowährungsmärkte lernen",
+                "Mein Vollzeit-Gehalt ersetzen",
+                "Langfristigen Wohlstand aufbauen"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "Wie viel Zeit möchten Sie für die Verwaltung von Investitionen aufwenden?",
+            question: "Wie viel Zeit möchten Sie mit der Überwachung von Trades verbringen?",
             answers: [
-                "Mehrere Stunden pro Tag",
-                "Ein paar Stunden pro Woche", 
-                "Nur ein paar Minuten zum Überprüfen",
-                "Null Zeit - KI soll es handhaben"
+                "Ich möchte vollständig automatisierten Handel",
+                "Ein paar Minuten pro Tag",
+                "1-2 Stunden täglich", 
+                "Ich bevorzuge hands-on Trading"
             ],
-            correct: 3
+            correct: 0
         },
         {
-            question: "Was ist für Sie bei einer Investitionsplattform am wichtigsten?",
+            question: "Wie ist Ihre Erfahrung mit Bitcoin und Krypto?",
             answers: [
-                "Hohes Ertragspotential",
-                "Vollständige Automatisierung",
-                "Sicherheit und Schutz",
-                "Alles oben Genannte"
+                "Kompletter Anfänger - brauche KI für alles",
+                "Ich kenne die Grundlagen",
+                "Mittlere Kenntnisse",
+                "Fortgeschrittener Trader"
             ],
-            correct: 3
+            correct: 0
         }
     ]
 };
 
-// Translation data
+// Translations
 const translations = {
     en: {
         // Welcome Screen
-        welcome_title: "TRADER AI",
-        welcome_subtitle: "Your Personal Money Assistant",
-        feature1_title: "AI Does Everything",
-        feature1_desc: "No trading knowledge needed. Our AI handles all the complex stuff.",
-        feature2_title: "Earn While You Sleep",
-        feature2_desc: "Make money 24/7. Even when you're sleeping or working.",
-        feature3_title: "Simple as Instagram",
-        feature3_desc: "If you can use social media, you can use this app.",
-        users_earning: "Users Earning",
-        avg_weekly: "Avg Weekly",
+        app_name: "Bitcoin 360 AI",
+        app_tagline: "The World's Most Advanced Crypto Trading Platform",
+        active_traders: "Active Traders",
+        avg_daily: "Avg Daily Profit",
         success_rate: "Success Rate",
-        start_demo: "Try Free Demo",
-        no_signup_required: "No signup required • See how it works first",
+        ai_powered: "AI-Powered Trading",
+        ai_desc: "Advanced algorithms analyze crypto markets 24/7",
+        bitcoin_focus: "Bitcoin & Crypto Focus", 
+        crypto_desc: "Trade Bitcoin, Ethereum, and top cryptocurrencies",
+        passive_income: "Passive Income",
+        passive_desc: "Earn while you sleep with automated trading",
+        start_trading: "Start Trading Now",
+        no_experience: "No trading experience required • AI does everything",
 
         // Demo Screen
-        demo_title: "Your Demo Wallet",
-        demo_subtitle: "Watch your money grow in real-time",
-        demo_balance: "Demo Balance",
-        ai_working: "AI Working",
-        live_trades: "Live Trades",
+        demo_wallet: "Your Bitcoin Trading Wallet",
+        demo_subtitle: "Watch your crypto portfolio grow in real-time",
+        portfolio_value: "Portfolio Value",
         live: "LIVE",
+        ai_trading: "AI Trading Active",
+        recent_trades: "Recent AI Trades",
         pause_demo: "Pause Demo",
-        looks_good: "Looks Good! Continue",
+        looks_good: "Looks Profitable! Continue",
 
         // Quiz Screen
+        quick_assessment: "Quick Crypto Assessment",
+        assessment_desc: "Help us optimize your trading strategy",
         select_answer: "Select an answer",
 
         // Signup Screen
-        congrats_title: "Congratulations!",
-        congrats_subtitle: "You're ready to start earning real money",
-        benefit1: "Start with $250 minimum deposit",
-        benefit2: "Personal account manager assigned",
-        benefit3: "Withdraw profits anytime",
-        benefit4: "24/7 AI trading activated",
-        full_name: "Full Name",
-        email: "Email Address",
-        phone: "Phone Number",
-        get_started: "Get Started Now",
-        get_started_now: "Get Started Now - Free Access",
-        disclaimer: "Click to access your exclusive trading platform. 100% secure and confidential.",
+        congratulations: "Congratulations!",
+        ready_to_earn: "You're ready to start earning with Bitcoin 360 AI",
+        benefit_bitcoin: "Trade Bitcoin & top cryptocurrencies",
+        benefit_ai: "AI handles all trading decisions",
+        benefit_profit: "Keep 100% of your profits",
+        benefit_secure: "Bank-level security & encryption",
+        access_platform: "Access Bitcoin 360 AI Platform",
+        disclaimer: "Click to access your exclusive Bitcoin trading platform. 100% secure and confidential.",
 
         // Loading Modal
-        setting_up: "Setting Up Your Account...",
-        please_wait: "Please wait while we prepare everything for you",
-        step_verify: "Verifying information...",
-        step_account: "Creating your account...",
-        step_ai: "Activating AI trading..."
+        setting_up_account: "Setting Up Your Bitcoin 360 AI Account...",
+        please_wait: "Please wait while we prepare your trading platform",
+        step_verify: "Verifying crypto markets...",
+        step_account: "Activating your account...",
+        step_ai: "Initializing AI trading algorithms..."
     },
     nl: {
         // Welcome Screen
-        welcome_title: "TRADER AI",
-        welcome_subtitle: "Uw Persoonlijke Geld Assistent",
-        feature1_title: "AI Doet Alles",
-        feature1_desc: "Geen handelskennis nodig. Onze AI regelt alle complexe zaken.",
-        feature2_title: "Verdien Terwijl U Slaapt",
-        feature2_desc: "Verdien geld 24/7. Zelfs als u slaapt of werkt.",
-        feature3_title: "Simpel als Instagram",
-        feature3_desc: "Als u sociale media kunt gebruiken, kunt u deze app gebruiken.",
-        users_earning: "Gebruikers Verdienen",
-        avg_weekly: "Gem. Wekelijks",
+        app_name: "Bitcoin 360 AI",
+        app_tagline: "'s Werelds Meest Geavanceerde Crypto Trading Platform",
+        active_traders: "Actieve Traders",
+        avg_daily: "Gem. Dagelijkse Winst",
         success_rate: "Succespercentage",
-        start_demo: "Probeer Gratis Demo",
-        no_signup_required: "Geen registratie vereist • Zie eerst hoe het werkt",
+        ai_powered: "AI-Powered Trading",
+        ai_desc: "Geavanceerde algoritmes analyseren crypto markten 24/7",
+        bitcoin_focus: "Bitcoin & Crypto Focus",
+        crypto_desc: "Handel in Bitcoin, Ethereum en top cryptocurrencies",
+        passive_income: "Passief Inkomen",
+        passive_desc: "Verdien terwijl u slaapt met geautomatiseerde trading",
+        start_trading: "Nu Beginnen Met Handelen",
+        no_experience: "Geen trading ervaring vereist • AI doet alles",
 
         // Demo Screen
-        demo_title: "Uw Demo Portemonnee",
-        demo_subtitle: "Zie uw geld groeien in real-time",
-        demo_balance: "Demo Saldo",
-        ai_working: "AI Werkt",
-        live_trades: "Live Trades",
+        demo_wallet: "Uw Bitcoin Trading Wallet",
+        demo_subtitle: "Zie uw crypto portfolio groeien in real-time",
+        portfolio_value: "Portfolio Waarde",
         live: "LIVE",
+        ai_trading: "AI Trading Actief",
+        recent_trades: "Recente AI Trades",
         pause_demo: "Pauzeer Demo",
-        looks_good: "Ziet er goed uit! Doorgaan",
+        looks_good: "Ziet er winstgevend uit! Doorgaan",
 
         // Quiz Screen
+        quick_assessment: "Snelle Crypto Beoordeling",
+        assessment_desc: "Help ons uw trading strategie te optimaliseren",
         select_answer: "Selecteer een antwoord",
 
         // Signup Screen
-        congrats_title: "Gefeliciteerd!",
-        congrats_subtitle: "U bent klaar om echt geld te verdienen",
-        benefit1: "Begin met €250 minimum storting",
-        benefit2: "Persoonlijke accountmanager toegewezen",
-        benefit3: "Trek winsten op elk moment op",
-        benefit4: "24/7 AI trading geactiveerd",
-        full_name: "Volledige Naam",
-        email: "E-mailadres",
-        phone: "Telefoonnummer",
-        get_started: "Nu Beginnen",
-        get_started_now: "Nu Beginnen - Gratis Toegang",
-        disclaimer: "Klik om toegang te krijgen tot uw exclusieve handelsplatform. 100% veilig en vertrouwelijk.",
+        congratulations: "Gefeliciteerd!",
+        ready_to_earn: "U bent klaar om te verdienen met Bitcoin 360 AI",
+        benefit_bitcoin: "Handel Bitcoin & top cryptocurrencies",
+        benefit_ai: "AI regelt alle trading beslissingen",
+        benefit_profit: "Behoud 100% van uw winsten",
+        benefit_secure: "Bank-niveau beveiliging & encryptie",
+        access_platform: "Toegang Bitcoin 360 AI Platform",
+        disclaimer: "Klik om toegang te krijgen tot uw exclusieve Bitcoin trading platform. 100% veilig en vertrouwelijk.",
 
         // Loading Modal
-        setting_up: "Uw Account Instellen...",
-        please_wait: "Wacht alstublieft terwijl we alles voor u voorbereiden",
-        step_verify: "Informatie verifiëren...",
-        step_account: "Uw account aanmaken...",
-        step_ai: "AI trading activeren..."
+        setting_up_account: "Uw Bitcoin 360 AI Account Instellen...",
+        please_wait: "Wacht alstublieft terwijl we uw trading platform voorbereiden",
+        step_verify: "Crypto markten verifiëren...",
+        step_account: "Uw account activeren...",
+        step_ai: "AI trading algoritmes initialiseren..."
     },
     de: {
         // Welcome Screen
-        welcome_title: "TRADER AI",
-        welcome_subtitle: "Ihr Persönlicher Geld-Assistent",
-        feature1_title: "KI Macht Alles",
-        feature1_desc: "Keine Handelskenntnisse erforderlich. Unsere KI kümmert sich um alle komplexen Sachen.",
-        feature2_title: "Verdienen Während Sie Schlafen",
-        feature2_desc: "Verdienen Sie 24/7 Geld. Auch wenn Sie schlafen oder arbeiten.",
-        feature3_title: "Einfach wie Instagram",
-        feature3_desc: "Wenn Sie soziale Medien nutzen können, können Sie diese App nutzen.",
-        users_earning: "Nutzer Verdienen",
-        avg_weekly: "Durchschn. Wöchentlich",
+        app_name: "Bitcoin 360 AI",
+        app_tagline: "Die weltweit fortschrittlichste Krypto-Trading-Plattform",
+        active_traders: "Aktive Trader",
+        avg_daily: "Durchschn. Täglicher Gewinn",
         success_rate: "Erfolgsrate",
-        start_demo: "Kostenlose Demo Testen",
-        no_signup_required: "Keine Registrierung erforderlich • Sehen Sie zuerst, wie es funktioniert",
+        ai_powered: "KI-Powered Trading",
+        ai_desc: "Fortgeschrittene Algorithmen analysieren Krypto-Märkte 24/7",
+        bitcoin_focus: "Bitcoin & Krypto Focus",
+        crypto_desc: "Handeln Sie Bitcoin, Ethereum und Top-Kryptowährungen",
+        passive_income: "Passives Einkommen",
+        passive_desc: "Verdienen Sie im Schlaf mit automatisiertem Trading",
+        start_trading: "Jetzt Mit Trading Beginnen",
+        no_experience: "Keine Trading-Erfahrung erforderlich • KI macht alles",
 
         // Demo Screen
-        demo_title: "Ihr Demo-Wallet",
-        demo_subtitle: "Sehen Sie Ihr Geld in Echtzeit wachsen",
-        demo_balance: "Demo-Guthaben",
-        ai_working: "KI Arbeitet",
-        live_trades: "Live Trades",
+        demo_wallet: "Ihr Bitcoin Trading Wallet",
+        demo_subtitle: "Sehen Sie Ihr Krypto-Portfolio in Echtzeit wachsen",
+        portfolio_value: "Portfolio-Wert",
         live: "LIVE",
+        ai_trading: "KI Trading Aktiv",
+        recent_trades: "Aktuelle KI Trades",
         pause_demo: "Demo Pausieren",
-        looks_good: "Sieht gut aus! Weiter",
+        looks_good: "Sieht profitabel aus! Weiter",
 
         // Quiz Screen
+        quick_assessment: "Schnelle Krypto-Bewertung",
+        assessment_desc: "Helfen Sie uns, Ihre Trading-Strategie zu optimieren",
         select_answer: "Wählen Sie eine Antwort",
 
         // Signup Screen
-        congrats_title: "Herzlichen Glückwunsch!",
-        congrats_subtitle: "Sie sind bereit, echtes Geld zu verdienen",
-        benefit1: "Beginnen Sie mit €250 Mindesteinzahlung",
-        benefit2: "Persönlicher Kontomanager zugewiesen",
-        benefit3: "Gewinne jederzeit abheben",
-        benefit4: "24/7 KI-Trading aktiviert",
-        full_name: "Vollständiger Name",
-        email: "E-Mail-Adresse",
-        phone: "Telefonnummer",
-        get_started: "Jetzt Loslegen",
-        get_started_now: "Jetzt Loslegen - Kostenloser Zugang",
-        disclaimer: "Klicken Sie, um Zugang zu Ihrer exklusiven Handelsplattform zu erhalten. 100% sicher und vertraulich.",
+        congratulations: "Herzlichen Glückwunsch!",
+        ready_to_earn: "Sie sind bereit, mit Bitcoin 360 AI zu verdienen",
+        benefit_bitcoin: "Handeln Sie Bitcoin & Top-Kryptowährungen",
+        benefit_ai: "KI übernimmt alle Trading-Entscheidungen",
+        benefit_profit: "Behalten Sie 100% Ihrer Gewinne",
+        benefit_secure: "Bank-Level Sicherheit & Verschlüsselung",
+        access_platform: "Zugang Bitcoin 360 AI Platform",
+        disclaimer: "Klicken Sie, um Zugang zu Ihrer exklusiven Bitcoin-Trading-Plattform zu erhalten. 100% sicher und vertraulich.",
 
         // Loading Modal
-        setting_up: "Ihr Konto Einrichten...",
-        please_wait: "Bitte warten Sie, während wir alles für Sie vorbereiten",
-        step_verify: "Informationen überprüfen...",
-        step_account: "Ihr Konto erstellen...",
-        step_ai: "KI-Trading aktivieren..."
+        setting_up_account: "Ihr Bitcoin 360 AI Konto Einrichten...",
+        please_wait: "Bitte warten Sie, während wir Ihre Trading-Plattform vorbereiten",
+        step_verify: "Krypto-Märkte verifizieren...",
+        step_account: "Ihr Konto aktivieren...",
+        step_ai: "KI-Trading-Algorithmen initialisieren..."
     }
 };
 
@@ -268,6 +260,16 @@ let demoBalance = 1000;
 let currentQuestionIndex = 0;
 let quizScore = 0;
 let demoInterval = null;
+
+// Crypto trading pairs for demo
+const cryptoPairs = [
+    { symbol: 'BTC/USD', name: 'Bitcoin', icon: '₿' },
+    { symbol: 'ETH/USD', name: 'Ethereum', icon: 'Ξ' },
+    { symbol: 'ADA/USD', name: 'Cardano', icon: '₳' },
+    { symbol: 'DOT/USD', name: 'Polkadot', icon: '●' },
+    { symbol: 'LINK/USD', name: 'Chainlink', icon: '🔗' },
+    { symbol: 'BNB/USD', name: 'Binance', icon: '🔶' }
+];
 
 // Screen management
 function showScreen(screenId) {
@@ -315,113 +317,101 @@ async function detectLocationAndSetLanguage() {
     }
 }
 
-// Apply translations to the page
 function applyTranslations() {
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (translations[currentLanguage] && translations[currentLanguage][key]) {
-            element.textContent = translations[currentLanguage][key];
+        const translation = translations[currentLanguage][key];
+        if (translation) {
+            element.textContent = translation;
         }
     });
     
-    // Update placeholders
+    // Handle placeholder translations
     const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
     placeholderElements.forEach(element => {
         const key = element.getAttribute('data-i18n-placeholder');
-        if (translations[currentLanguage] && translations[currentLanguage][key]) {
-            element.placeholder = translations[currentLanguage][key];
+        const translation = translations[currentLanguage][key];
+        if (translation) {
+            element.placeholder = translation;
         }
     });
 }
 
-// Update currency display
 function updateCurrencyDisplay() {
     const currencyElements = document.querySelectorAll('.currency-amount');
     currencyElements.forEach(element => {
-        const amount = parseFloat(element.getAttribute('data-amount'));
-        if (!isNaN(amount)) {
-            let convertedAmount = amount;
-            let symbol = '$';
-            
-            if (currentCurrency === 'EUR') {
-                // Convert USD to EUR (approximate rate)
-                convertedAmount = Math.round(amount * 0.85);
-                symbol = '€';
-            }
-            
-            // Format with proper locale
-            const locale = currentLanguage === 'en' ? 'en-US' : 
-                          currentLanguage === 'nl' ? 'nl-NL' : 'de-DE';
-            
-            if (convertedAmount >= 1000) {
-                element.textContent = symbol + convertedAmount.toLocaleString(locale);
-            } else {
-                element.textContent = symbol + convertedAmount.toFixed(2);
-            }
+        const amount = element.getAttribute('data-amount');
+        if (amount) {
+            const convertedAmount = currentCurrency === 'EUR' ? (amount * 0.85).toFixed(0) : amount;
+            const symbol = currentCurrency === 'EUR' ? '€' : '$';
+            element.textContent = `${symbol}${convertedAmount}`;
         }
     });
+    
+    // Update demo balance currency
+    if (currentCurrency === 'EUR') {
+        demoBalance = 850; // Convert to EUR
+    }
 }
 
 // Demo functionality
 function startDemo() {
     showScreen('demoScreen');
-    
-    // Reset demo balance
-    demoBalance = currentCurrency === 'EUR' ? 850 : 1000;
     updateDemoBalance();
-    
-    // Start demo trading simulation
+    startDemoTrading();
+}
+
+function startDemoTrading() {
     let tradeCount = 0;
-    const tradesList = document.getElementById('demoTradesList');
-    const aiTrades = document.getElementById('aiTrades');
+    const maxTrades = 8;
     
-    // Clear existing trades
-    tradesList.innerHTML = '';
+    // Clear any existing interval
+    if (demoInterval) {
+        clearInterval(demoInterval);
+    }
     
     demoInterval = setInterval(() => {
-        const pairs = ['EUR/USD', 'GBP/JPY', 'BTC/USD', 'ETH/USD', 'XAU/USD', 'SPY', 'TSLA'];
-        const pair = pairs[Math.floor(Math.random() * pairs.length)];
-        const profit = Math.random() * 200 + 50; // $50-$250 profit
+        if (tradeCount >= maxTrades) {
+            clearInterval(demoInterval);
+            return;
+        }
         
-        tradeCount++;
+        const pair = cryptoPairs[Math.floor(Math.random() * cryptoPairs.length)];
+        const profit = (Math.random() * 150 + 25).toFixed(2);
+        const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         
-        // Add new trade to the list
+        // Add profit to balance
+        demoBalance += parseFloat(profit);
+        updateDemoBalance();
+        
+        // Add trade to list
+        const tradesList = document.getElementById('demoTradesList');
         const tradeElement = document.createElement('div');
         tradeElement.className = 'trade-item';
         tradeElement.innerHTML = `
             <div class="trade-info">
-                <div class="trade-pair">${pair}</div>
-                <div class="trade-time">Just now</div>
+                <div class="trade-pair">${pair.icon} ${pair.symbol}</div>
+                <div class="trade-time">${time}</div>
             </div>
-            <div class="trade-profit positive currency-amount" data-amount="${profit}">+${currentCurrency === 'EUR' ? '€' : '$'}${profit.toFixed(2)}</div>
+            <div class="trade-profit positive">+${currentCurrency === 'EUR' ? '€' : '$'}${profit}</div>
         `;
         
         tradesList.insertBefore(tradeElement, tradesList.firstChild);
         
-        // Keep only last 3 trades visible
-        while (tradesList.children.length > 3) {
+        // Keep only last 5 trades visible
+        while (tradesList.children.length > 5) {
             tradesList.removeChild(tradesList.lastChild);
         }
         
-        // Update balance
-        demoBalance += profit;
-        updateDemoBalance();
-        
-        // Update trade count
-        aiTrades.textContent = `${tradeCount} trades today`;
-        
-        // Update times for existing trades
-        const timeElements = tradesList.querySelectorAll('.trade-time');
-        timeElements.forEach((element, index) => {
-            if (index === 0) {
-                element.textContent = 'Just now';
-            } else if (index === 1) {
-                element.textContent = '2m ago';
-            } else {
-                element.textContent = '5m ago';
-            }
-        });
+        // Update trade counter
+        tradeCount++;
+        const aiTrades = document.getElementById('aiTrades');
+        if (aiTrades) {
+            const tradesText = currentLanguage === 'en' ? 'trades today' : 
+                             currentLanguage === 'nl' ? 'trades vandaag' : 'Trades heute';
+            aiTrades.textContent = `${tradeCount} ${tradesText}`;
+        }
         
     }, 3000); // New trade every 3 seconds
 }
@@ -436,7 +426,7 @@ function updateDemoBalance() {
     
     balanceElement.textContent = `${currentCurrency === 'EUR' ? '€' : '$'}${demoBalance.toFixed(2)}`;
     changeElement.innerHTML = `+${currentCurrency === 'EUR' ? '€' : '$'}${change.toFixed(2)} (+${changePercent}%) today`;
-    changeElement.style.color = '#48bb78';
+    changeElement.style.color = '#00d4aa';
 }
 
 function pauseDemo() {
@@ -579,15 +569,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         e.preventDefault();
         showLoadingModal();
     });
-    
-    // Auto-select country based on detected location
-    if (userCountry) {
-        const countrySelect = document.getElementById('countrySelect');
-        const option = countrySelect.querySelector(`option[value="${userCountry.toUpperCase()}"]`);
-        if (option) {
-            countrySelect.value = userCountry.toUpperCase();
-        }
-    }
 });
 
 // PWA Installation (fallback)

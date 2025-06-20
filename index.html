@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRADER AI - Your Personal Money Assistant</title>
-    <meta name="description" content="Turn your phone into a money-making machine. Join 847,000+ people earning $2,847+ weekly with AI.">
+    <title>Bitcoin 360 AI - The World's Most Advanced Crypto Trading Platform</title>
+    <meta name="description" content="Join thousands earning $2,847+ weekly with Bitcoin 360 AI. Automated crypto trading powered by advanced AI algorithms.">
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a365d">
+    <meta name="theme-color" content="#1a1a1a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="TRADER AI">
+    <meta name="apple-mobile-web-app-title" content="Bitcoin 360 AI">
     
     <!-- Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
@@ -20,7 +20,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -28,83 +28,113 @@
 <body>
     <!-- Welcome Screen -->
     <div id="welcomeScreen" class="screen active">
+        <div class="crypto-background">
+            <div class="stars"></div>
+            <div class="bitcoin-particles"></div>
+        </div>
+        
         <div class="welcome-container">
             <div class="welcome-header">
-                <div class="app-icon">
-                    <div class="icon-gradient">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
+                <div class="crypto-logo">
+                    <div class="bitcoin-icon">₿</div>
+                    <div class="logo-text">
+                        <h1 class="app-title" data-i18n="app_name">Bitcoin 360 AI</h1>
+                        <p class="app-subtitle" data-i18n="app_tagline">The World's Most Advanced Crypto Trading Platform</p>
                     </div>
                 </div>
-                <h1 class="welcome-title" data-i18n="welcome_title">TRADER AI</h1>
-                <p class="welcome-subtitle" data-i18n="welcome_subtitle">Your Personal Money Assistant</p>
             </div>
 
-            <div class="welcome-features">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 data-i18n="feature1_title">AI Does Everything</h3>
-                    <p data-i18n="feature1_desc">No trading knowledge needed. Our AI handles all the complex stuff.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3 data-i18n="feature2_title">Earn While You Sleep</h3>
-                    <p data-i18n="feature2_desc">Make money 24/7. Even when you're sleeping or working.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 data-i18n="feature3_title">Simple as Instagram</h3>
-                    <p data-i18n="feature3_desc">If you can use social media, you can use this app.</p>
-                </div>
-            </div>
-
-            <div class="welcome-stats">
+            <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-number">847K+</div>
-                    <div class="stat-label" data-i18n="users_earning">Users Earning</div>
+                    <div class="stat-label" data-i18n="active_traders">Active Traders</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number currency-amount" data-amount="2847">$2,847</div>
-                    <div class="stat-label" data-i18n="avg_weekly">Avg Weekly</div>
+                    <div class="stat-label" data-i18n="avg_daily">Avg Daily Profit</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98.4%</div>
+                    <div class="stat-number">99.4%</div>
                     <div class="stat-label" data-i18n="success_rate">Success Rate</div>
                 </div>
             </div>
 
-            <button class="welcome-btn" id="startDemo" data-i18n="start_demo">Try Free Demo</button>
-            <p class="welcome-note" data-i18n="no_signup_required">No signup required • See how it works first</p>
+            <div class="crypto-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-i18n="ai_powered">AI-Powered Trading</h3>
+                    <p data-i18n="ai_desc">Advanced algorithms analyze crypto markets 24/7</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">₿</div>
+                    <h3 data-i18n="bitcoin_focus">Bitcoin & Crypto Focus</h3>
+                    <p data-i18n="crypto_desc">Trade Bitcoin, Ethereum, and top cryptocurrencies</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 data-i18n="passive_income">Passive Income</h3>
+                    <p data-i18n="passive_desc">Earn while you sleep with automated trading</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button class="crypto-cta-btn" id="startDemo" data-i18n="start_trading">Start Trading Now</button>
+                <p class="cta-note" data-i18n="no_experience">No trading experience required • AI does everything</p>
+            </div>
         </div>
     </div>
 
     <!-- Demo Screen -->
     <div id="demoScreen" class="screen">
+        <div class="crypto-background">
+            <div class="stars"></div>
+            <div class="bitcoin-particles"></div>
+        </div>
+        
         <div class="demo-container">
             <div class="demo-header">
                 <button class="back-btn" id="backToWelcome">←</button>
                 <div class="demo-title">
-                    <h2 data-i18n="demo_title">Your Demo Wallet</h2>
-                    <p data-i18n="demo_subtitle">Watch your money grow in real-time</p>
+                    <h2 data-i18n="demo_wallet">Your Bitcoin Trading Wallet</h2>
+                    <p data-i18n="demo_subtitle">Watch your crypto portfolio grow in real-time</p>
                 </div>
             </div>
 
-            <div class="demo-wallet">
+            <div class="crypto-wallet">
+                <div class="wallet-header">
+                    <div class="wallet-title">
+                        <span data-i18n="portfolio_value">Portfolio Value</span>
+                        <div class="live-indicator">
+                            <span class="live-dot"></span>
+                            <span data-i18n="live">LIVE</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="wallet-balance">
-                    <div class="balance-label" data-i18n="demo_balance">Demo Balance</div>
                     <div class="balance-amount" id="demoBalance">$1,000.00</div>
-                    <div class="balance-change" id="balanceChange">+$0.00 today</div>
+                    <div class="balance-change" id="balanceChange">+$0.00 (+0.0%) today</div>
+                </div>
+
+                <div class="crypto-positions">
+                    <div class="position-item">
+                        <div class="crypto-symbol">₿ BTC</div>
+                        <div class="crypto-value">$45,230</div>
+                        <div class="crypto-change positive">+2.4%</div>
+                    </div>
+                    <div class="position-item">
+                        <div class="crypto-symbol">Ξ ETH</div>
+                        <div class="crypto-value">$3,125</div>
+                        <div class="crypto-change positive">+1.8%</div>
+                    </div>
                 </div>
 
                 <div class="ai-status">
                     <div class="ai-indicator">
                         <div class="ai-pulse"></div>
-                        <span data-i18n="ai_working">AI Working</span>
+                        <span data-i18n="ai_trading">AI Trading Active</span>
                     </div>
                     <div class="ai-trades" id="aiTrades">0 trades today</div>
                 </div>
@@ -112,11 +142,7 @@
 
             <div class="demo-trades">
                 <div class="trades-header">
-                    <h3 data-i18n="live_trades">Live Trades</h3>
-                    <div class="live-indicator">
-                        <span class="live-dot"></span>
-                        <span data-i18n="live">LIVE</span>
-                    </div>
+                    <h3 data-i18n="recent_trades">Recent AI Trades</h3>
                 </div>
                 <div class="trades-list" id="demoTradesList">
                     <!-- Trades will be added dynamically -->
@@ -125,21 +151,31 @@
 
             <div class="demo-actions">
                 <button class="demo-btn secondary" id="pauseDemo" data-i18n="pause_demo">Pause Demo</button>
-                <button class="demo-btn primary" id="startQuiz" data-i18n="looks_good">Looks Good! Continue</button>
+                <button class="demo-btn primary" id="startQuiz" data-i18n="looks_good">Looks Profitable! Continue</button>
             </div>
         </div>
     </div>
 
     <!-- Quiz Screen -->
     <div id="quizScreen" class="screen">
+        <div class="crypto-background">
+            <div class="stars"></div>
+        </div>
+        
         <div class="quiz-container">
             <div class="quiz-header">
                 <button class="back-btn" id="backToDemo">←</button>
-                <div class="quiz-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="quizProgress"></div>
+                <div class="quiz-progress-container">
+                    <div class="quiz-title">
+                        <h2 data-i18n="quick_assessment">Quick Crypto Assessment</h2>
+                        <p data-i18n="assessment_desc">Help us optimize your trading strategy</p>
                     </div>
-                    <span class="progress-text"><span id="currentQuestion">1</span>/3</span>
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="quizProgress"></div>
+                        </div>
+                        <span class="progress-text"><span id="currentQuestion">1</span>/3</span>
+                    </div>
                 </div>
             </div>
 
@@ -155,37 +191,42 @@
 
     <!-- Signup Screen -->
     <div id="signupScreen" class="screen">
+        <div class="crypto-background">
+            <div class="stars"></div>
+            <div class="bitcoin-particles"></div>
+        </div>
+        
         <div class="signup-container">
             <div class="signup-header">
                 <div class="success-icon">🎉</div>
-                <h2 data-i18n="congrats_title">Congratulations!</h2>
-                <p data-i18n="congrats_subtitle">You're ready to start earning real money</p>
+                <h2 data-i18n="congratulations">Congratulations!</h2>
+                <p data-i18n="ready_to_earn">You're ready to start earning with Bitcoin 360 AI</p>
             </div>
 
-            <div class="signup-benefits">
+            <div class="crypto-benefits">
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span data-i18n="benefit1">Start with $250 minimum deposit</span>
+                    <span class="benefit-icon">₿</span>
+                    <span data-i18n="benefit_bitcoin">Trade Bitcoin & top cryptocurrencies</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span data-i18n="benefit2">Personal account manager assigned</span>
+                    <span class="benefit-icon">🤖</span>
+                    <span data-i18n="benefit_ai">AI handles all trading decisions</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span data-i18n="benefit3">Withdraw profits anytime</span>
+                    <span class="benefit-icon">💰</span>
+                    <span data-i18n="benefit_profit">Keep 100% of your profits</span>
                 </div>
                 <div class="benefit-item">
-                    <span class="benefit-icon">✓</span>
-                    <span data-i18n="benefit4">24/7 AI trading activated</span>
+                    <span class="benefit-icon">🔒</span>
+                    <span data-i18n="benefit_secure">Bank-level security & encryption</span>
                 </div>
             </div>
 
             <div class="signup-cta">
-                <button class="cta-btn" id="finalCTA" data-i18n="get_started_now">Get Started Now - Free Access</button>
+                <button class="final-cta-btn" id="finalCTA" data-i18n="access_platform">Access Bitcoin 360 AI Platform</button>
                 
                 <p class="signup-disclaimer" data-i18n="disclaimer">
-                    Click to access your exclusive trading platform. 100% secure and confidential.
+                    Click to access your exclusive Bitcoin trading platform. 100% secure and confidential.
                 </p>
             </div>
         </div>
@@ -193,22 +234,24 @@
 
     <!-- Loading Modal -->
     <div id="loadingModal" class="modal">
-        <div class="modal-content loading-content">
-            <div class="loading-spinner"></div>
-            <h3 data-i18n="setting_up">Setting Up Your Account...</h3>
-            <p class="loading-text" id="loadingText" data-i18n="please_wait">Please wait while we prepare everything for you</p>
+        <div class="modal-content crypto-loading-content">
+            <div class="crypto-loading-spinner">
+                <div class="bitcoin-spinner">₿</div>
+            </div>
+            <h3 data-i18n="setting_up_account">Setting Up Your Bitcoin 360 AI Account...</h3>
+            <p class="loading-text" id="loadingText" data-i18n="please_wait">Please wait while we prepare your trading platform</p>
             <div class="loading-steps">
                 <div class="loading-step" id="step1">
                     <span class="step-icon">⏳</span>
-                    <span data-i18n="step_verify">Verifying information...</span>
+                    <span data-i18n="step_verify">Verifying crypto markets...</span>
                 </div>
                 <div class="loading-step" id="step2">
                     <span class="step-icon">⏳</span>
-                    <span data-i18n="step_account">Creating your account...</span>
+                    <span data-i18n="step_account">Activating your account...</span>
                 </div>
                 <div class="loading-step" id="step3">
                     <span class="step-icon">⏳</span>
-                    <span data-i18n="step_ai">Activating AI trading...</span>
+                    <span data-i18n="step_ai">Initializing AI trading algorithms...</span>
                 </div>
             </div>
         </div>
