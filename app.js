@@ -6,214 +6,254 @@ const CONFIG = {
     GEOLOCATION_API: 'https://ipapi.co/json/'
 };
 
+// Quiz questions
+const quizQuestions = {
+    en: [
+        {
+            question: "What's your main goal with money?",
+            answers: [
+                "Pay off debts and bills",
+                "Save for the future", 
+                "Generate passive income",
+                "All of the above"
+            ],
+            correct: 3
+        },
+        {
+            question: "How much time do you want to spend managing investments?",
+            answers: [
+                "Several hours per day",
+                "A few hours per week",
+                "Just a few minutes to check",
+                "Zero time - let AI handle it"
+            ],
+            correct: 3
+        },
+        {
+            question: "What's most important to you in an investment platform?",
+            answers: [
+                "High returns potential",
+                "Complete automation",
+                "Safety and security", 
+                "All of the above"
+            ],
+            correct: 3
+        }
+    ],
+    nl: [
+        {
+            question: "Wat is uw hoofddoel met geld?",
+            answers: [
+                "Schulden en rekeningen afbetalen",
+                "Sparen voor de toekomst",
+                "Passief inkomen genereren", 
+                "Alle bovenstaande"
+            ],
+            correct: 3
+        },
+        {
+            question: "Hoeveel tijd wilt u besteden aan het beheren van investeringen?",
+            answers: [
+                "Meerdere uren per dag",
+                "Een paar uur per week",
+                "Slechts een paar minuten om te controleren",
+                "Geen tijd - laat AI het afhandelen"
+            ],
+            correct: 3
+        },
+        {
+            question: "Wat is het belangrijkst voor u in een investeringsplatform?",
+            answers: [
+                "Hoog rendementspotentieel",
+                "Volledige automatisering",
+                "Veiligheid en beveiliging",
+                "Alle bovenstaande"
+            ],
+            correct: 3
+        }
+    ],
+    de: [
+        {
+            question: "Was ist Ihr Hauptziel mit Geld?",
+            answers: [
+                "Schulden und Rechnungen bezahlen",
+                "Für die Zukunft sparen",
+                "Passives Einkommen generieren",
+                "Alles oben Genannte"
+            ],
+            correct: 3
+        },
+        {
+            question: "Wie viel Zeit möchten Sie für die Verwaltung von Investitionen aufwenden?",
+            answers: [
+                "Mehrere Stunden pro Tag",
+                "Ein paar Stunden pro Woche", 
+                "Nur ein paar Minuten zum Überprüfen",
+                "Null Zeit - KI soll es handhaben"
+            ],
+            correct: 3
+        },
+        {
+            question: "Was ist für Sie bei einer Investitionsplattform am wichtigsten?",
+            answers: [
+                "Hohes Ertragspotential",
+                "Vollständige Automatisierung",
+                "Sicherheit und Schutz",
+                "Alles oben Genannte"
+            ],
+            correct: 3
+        }
+    ]
+};
+
 // Translation data
 const translations = {
     en: {
-        // Header & Navigation
-        live: "LIVE",
-        earned_24h: "earned by users in the last 24 hours",
-        users_earning: "users currently earning",
-        brand: "AutoWealth AI",
-        active_users: "Active Users",
+        // Welcome Screen
+        welcome_title: "AutoWealth AI",
+        welcome_subtitle: "Your Personal Money Assistant",
+        feature1_title: "AI Does Everything",
+        feature1_desc: "No trading knowledge needed. Our AI handles all the complex stuff.",
+        feature2_title: "Earn While You Sleep",
+        feature2_desc: "Make money 24/7. Even when you're sleeping or working.",
+        feature3_title: "Simple as Instagram",
+        feature3_desc: "If you can use social media, you can use this app.",
+        users_earning: "Users Earning",
         avg_weekly: "Avg Weekly",
-
-        // Hero Section
-        hero_title: "New AI Does Your Trading While You Sleep",
-        hero_subtitle_1: "Join 847,000+ people earning an average of",
-        per_week: "per week",
-        hero_subtitle_2: "with our automated wealth assistant. No experience needed.",
-        feature_automated: "100% Automated Trading",
-        feature_withdrawals: "Daily Profit Withdrawals",
-        feature_security: "Bank-Level Security",
-        cta_main: "Get Free Access Now",
-        cta_subtitle: "Setup takes 2 minutes",
-        cta_note: "Your information is 100% secure. No credit card required.",
-
-        // Dashboard
-        dashboard_title: "Your AutoWealth Dashboard",
-        ai_active: "AI Active",
-        today_profit: "Today's Profit",
-        since_morning: "since morning",
-        recent_trades: "Recent Trades",
-
-        // How It Works
-        how_it_works_title: "How It Works - Simple as 1, 2, 3",
-        step1_title: "Sign Up & Get Verified",
-        step1_desc: "Quick 2-minute registration. Our team calls to verify your account and ensure you're qualified for the program.",
-        step2_title: "AI Starts Trading",
-        step2_desc: "Our advanced AI analyzes markets 24/7 and executes profitable trades automatically. No experience needed.",
-        step3_title: "Withdraw Your Profits",
-        step3_desc: "Watch your account grow daily. Withdraw your profits anytime - most users see results in the first week.",
-
-        // Testimonials
-        testimonials_title: "What Our Users Are Saying",
-        testimonial1: "I was skeptical at first, but AutoWealth AI has completely changed my financial situation. I'm making more in a week than I used to make in a month!",
-        testimonial2: "The best part is I don't have to do anything. The AI handles everything while I focus on my family and other interests. Passive income at its finest!",
-        testimonial3: "I've tried other trading platforms before, but nothing comes close to AutoWealth AI. The results speak for themselves!",
-        location_teacher: "Teacher, Berlin",
-        location_engineer: "Engineer, Amsterdam", 
-        location_nurse: "Nurse, Munich",
-        this_week: "this week",
-        this_month: "this month",
-
-        // Stats
         success_rate: "Success Rate",
-        ai_trading: "AI Trading",
+        start_demo: "Try Free Demo",
+        no_signup_required: "No signup required • See how it works first",
 
-        // Final CTA
-        final_cta_title: "Ready to Start Earning?",
-        final_cta_desc: "Join thousands of people who are already using AutoWealth AI to build their financial future.",
-        limited_spots: "⚡ Limited spots available - ",
-        spots_left: "spots left today",
+        // Demo Screen
+        demo_title: "Your Demo Wallet",
+        demo_subtitle: "Watch your money grow in real-time",
+        demo_balance: "Demo Balance",
+        ai_working: "AI Working",
+        live_trades: "Live Trades",
+        live: "LIVE",
+        pause_demo: "Pause Demo",
+        looks_good: "Looks Good! Continue",
 
-        // Footer
-        copyright: "© 2024 AutoWealth AI. All rights reserved.",
-        risk_warning: "Risk Warning: Trading involves risk. Past performance does not guarantee future results.",
+        // Quiz Screen
+        select_answer: "Select an answer",
 
-        // Installation Modal
-        installing: "Installing AutoWealth AI...",
-        initializing: "Initializing secure connection...",
-        encryption_enabled: "Bank-level encryption enabled",
-        algorithms_loaded: "AI trading algorithms loaded",
-        market_data_connected: "Real-time market data connected"
+        // Signup Screen
+        congrats_title: "Congratulations!",
+        congrats_subtitle: "You're ready to start earning real money",
+        benefit1: "Start with $250 minimum deposit",
+        benefit2: "Personal account manager assigned",
+        benefit3: "Withdraw profits anytime",
+        benefit4: "24/7 AI trading activated",
+        full_name: "Full Name",
+        email: "Email Address",
+        phone: "Phone Number",
+        get_started: "Get Started Now",
+        disclaimer: "By continuing, you agree to receive a call from our team to verify your account and guide you through the setup process. 100% secure and confidential.",
+
+        // Loading Modal
+        setting_up: "Setting Up Your Account...",
+        please_wait: "Please wait while we prepare everything for you",
+        step_verify: "Verifying information...",
+        step_account: "Creating your account...",
+        step_ai: "Activating AI trading..."
     },
     nl: {
-        // Header & Navigation
-        live: "LIVE",
-        earned_24h: "verdiend door gebruikers in de afgelopen 24 uur",
-        users_earning: "gebruikers verdienen momenteel",
-        brand: "AutoWealth AI",
-        active_users: "Actieve Gebruikers",
+        // Welcome Screen
+        welcome_title: "AutoWealth AI",
+        welcome_subtitle: "Uw Persoonlijke Geld Assistent",
+        feature1_title: "AI Doet Alles",
+        feature1_desc: "Geen handelskennis nodig. Onze AI regelt alle complexe zaken.",
+        feature2_title: "Verdien Terwijl U Slaapt",
+        feature2_desc: "Verdien geld 24/7. Zelfs als u slaapt of werkt.",
+        feature3_title: "Simpel als Instagram",
+        feature3_desc: "Als u sociale media kunt gebruiken, kunt u deze app gebruiken.",
+        users_earning: "Gebruikers Verdienen",
         avg_weekly: "Gem. Wekelijks",
-
-        // Hero Section
-        hero_title: "Nieuwe AI Doet Uw Trading Terwijl U Slaapt",
-        hero_subtitle_1: "Sluit u aan bij 847.000+ mensen die gemiddeld",
-        per_week: "per week verdienen",
-        hero_subtitle_2: "met onze geautomatiseerde welvaart assistent. Geen ervaring nodig.",
-        feature_automated: "100% Geautomatiseerde Trading",
-        feature_withdrawals: "Dagelijkse Winst Opnames",
-        feature_security: "Bank-Niveau Beveiliging",
-        cta_main: "Krijg Nu Gratis Toegang",
-        cta_subtitle: "Installatie duurt 2 minuten",
-        cta_note: "Uw informatie is 100% veilig. Geen creditcard vereist.",
-
-        // Dashboard
-        dashboard_title: "Uw AutoWealth Dashboard",
-        ai_active: "AI Actief",
-        today_profit: "Winst van Vandaag",
-        since_morning: "sinds vanmorgen",
-        recent_trades: "Recente Trades",
-
-        // How It Works
-        how_it_works_title: "Hoe Het Werkt - Simpel als 1, 2, 3",
-        step1_title: "Registreer & Word Geverifieerd",
-        step1_desc: "Snelle 2-minuten registratie. Ons team belt om uw account te verifiëren en ervoor te zorgen dat u gekwalificeerd bent voor het programma.",
-        step2_title: "AI Begint Trading",
-        step2_desc: "Onze geavanceerde AI analyseert markten 24/7 en voert automatisch winstgevende trades uit. Geen ervaring nodig.",
-        step3_title: "Trek Uw Winsten Op",
-        step3_desc: "Zie uw account dagelijks groeien. Trek uw winsten op elk moment op - de meeste gebruikers zien resultaten in de eerste week.",
-
-        // Testimonials
-        testimonials_title: "Wat Onze Gebruikers Zeggen",
-        testimonial1: "Ik was eerst sceptisch, maar AutoWealth AI heeft mijn financiële situatie volledig veranderd. Ik verdien meer in een week dan ik vroeger in een maand verdiende!",
-        testimonial2: "Het beste deel is dat ik niets hoef te doen. De AI regelt alles terwijl ik me focus op mijn familie en andere interesses. Passief inkomen op zijn best!",
-        testimonial3: "Ik heb eerder andere trading platforms geprobeerd, maar niets komt in de buurt van AutoWealth AI. De resultaten spreken voor zich!",
-        location_teacher: "Leraar, Berlijn",
-        location_engineer: "Ingenieur, Amsterdam",
-        location_nurse: "Verpleegster, München",
-        this_week: "deze week",
-        this_month: "deze maand",
-
-        // Stats
         success_rate: "Succespercentage",
-        ai_trading: "AI Trading",
+        start_demo: "Probeer Gratis Demo",
+        no_signup_required: "Geen registratie vereist • Zie eerst hoe het werkt",
 
-        // Final CTA
-        final_cta_title: "Klaar om te Beginnen met Verdienen?",
-        final_cta_desc: "Sluit u aan bij duizenden mensen die AutoWealth AI al gebruiken om hun financiële toekomst op te bouwen.",
-        limited_spots: "⚡ Beperkte plekken beschikbaar - ",
-        spots_left: "plekken over vandaag",
+        // Demo Screen
+        demo_title: "Uw Demo Portemonnee",
+        demo_subtitle: "Zie uw geld groeien in real-time",
+        demo_balance: "Demo Saldo",
+        ai_working: "AI Werkt",
+        live_trades: "Live Trades",
+        live: "LIVE",
+        pause_demo: "Pauzeer Demo",
+        looks_good: "Ziet er goed uit! Doorgaan",
 
-        // Footer
-        copyright: "© 2024 AutoWealth AI. Alle rechten voorbehouden.",
-        risk_warning: "Risicowaarschuwing: Trading brengt risico's met zich mee. Prestaties uit het verleden garanderen geen toekomstige resultaten.",
+        // Quiz Screen
+        select_answer: "Selecteer een antwoord",
 
-        // Installation Modal
-        installing: "AutoWealth AI Installeren...",
-        initializing: "Veilige verbinding initialiseren...",
-        encryption_enabled: "Bank-niveau encryptie ingeschakeld",
-        algorithms_loaded: "AI trading algoritmes geladen",
-        market_data_connected: "Real-time marktdata verbonden"
+        // Signup Screen
+        congrats_title: "Gefeliciteerd!",
+        congrats_subtitle: "U bent klaar om echt geld te verdienen",
+        benefit1: "Begin met €250 minimum storting",
+        benefit2: "Persoonlijke accountmanager toegewezen",
+        benefit3: "Trek winsten op elk moment op",
+        benefit4: "24/7 AI trading geactiveerd",
+        full_name: "Volledige Naam",
+        email: "E-mailadres",
+        phone: "Telefoonnummer",
+        get_started: "Nu Beginnen",
+        disclaimer: "Door door te gaan, gaat u akkoord met het ontvangen van een telefoontje van ons team om uw account te verifiëren en u door het installatieproces te begeleiden. 100% veilig en vertrouwelijk.",
+
+        // Loading Modal
+        setting_up: "Uw Account Instellen...",
+        please_wait: "Wacht alstublieft terwijl we alles voor u voorbereiden",
+        step_verify: "Informatie verifiëren...",
+        step_account: "Uw account aanmaken...",
+        step_ai: "AI trading activeren..."
     },
     de: {
-        // Header & Navigation
-        live: "LIVE",
-        earned_24h: "von Nutzern in den letzten 24 Stunden verdient",
-        users_earning: "Nutzer verdienen derzeit",
-        brand: "AutoWealth AI",
-        active_users: "Aktive Nutzer",
+        // Welcome Screen
+        welcome_title: "AutoWealth AI",
+        welcome_subtitle: "Ihr Persönlicher Geld-Assistent",
+        feature1_title: "KI Macht Alles",
+        feature1_desc: "Keine Handelskenntnisse erforderlich. Unsere KI kümmert sich um alle komplexen Sachen.",
+        feature2_title: "Verdienen Während Sie Schlafen",
+        feature2_desc: "Verdienen Sie 24/7 Geld. Auch wenn Sie schlafen oder arbeiten.",
+        feature3_title: "Einfach wie Instagram",
+        feature3_desc: "Wenn Sie soziale Medien nutzen können, können Sie diese App nutzen.",
+        users_earning: "Nutzer Verdienen",
         avg_weekly: "Durchschn. Wöchentlich",
-
-        // Hero Section
-        hero_title: "Neue KI Macht Ihr Trading Während Sie Schlafen",
-        hero_subtitle_1: "Schließen Sie sich 847.000+ Menschen an, die durchschnittlich",
-        per_week: "pro Woche verdienen",
-        hero_subtitle_2: "mit unserem automatisierten Wohlstands-Assistenten. Keine Erfahrung erforderlich.",
-        feature_automated: "100% Automatisiertes Trading",
-        feature_withdrawals: "Tägliche Gewinn-Abhebungen",
-        feature_security: "Bank-Level Sicherheit",
-        cta_main: "Jetzt Kostenlosen Zugang Erhalten",
-        cta_subtitle: "Einrichtung dauert 2 Minuten",
-        cta_note: "Ihre Informationen sind 100% sicher. Keine Kreditkarte erforderlich.",
-
-        // Dashboard
-        dashboard_title: "Ihr AutoWealth Dashboard",
-        ai_active: "KI Aktiv",
-        today_profit: "Heutiger Gewinn",
-        since_morning: "seit heute Morgen",
-        recent_trades: "Aktuelle Trades",
-
-        // How It Works
-        how_it_works_title: "Wie Es Funktioniert - Einfach wie 1, 2, 3",
-        step1_title: "Registrieren & Verifiziert Werden",
-        step1_desc: "Schnelle 2-Minuten Registrierung. Unser Team ruft an, um Ihr Konto zu verifizieren und sicherzustellen, dass Sie für das Programm qualifiziert sind.",
-        step2_title: "KI Beginnt Trading",
-        step2_desc: "Unsere fortschrittliche KI analysiert Märkte 24/7 und führt automatisch profitable Trades aus. Keine Erfahrung erforderlich.",
-        step3_title: "Gewinne Abheben",
-        step3_desc: "Sehen Sie Ihr Konto täglich wachsen. Heben Sie Ihre Gewinne jederzeit ab - die meisten Nutzer sehen Ergebnisse in der ersten Woche.",
-
-        // Testimonials
-        testimonials_title: "Was Unsere Nutzer Sagen",
-        testimonial1: "Ich war zuerst skeptisch, aber AutoWealth AI hat meine finanzielle Situation völlig verändert. Ich verdiene mehr in einer Woche als ich früher in einem Monat verdient habe!",
-        testimonial2: "Das Beste daran ist, dass ich nichts tun muss. Die KI kümmert sich um alles, während ich mich auf meine Familie und andere Interessen konzentriere. Passives Einkommen vom Feinsten!",
-        testimonial3: "Ich habe schon andere Trading-Plattformen ausprobiert, aber nichts kommt an AutoWealth AI heran. Die Ergebnisse sprechen für sich!",
-        location_teacher: "Lehrer, Berlin",
-        location_engineer: "Ingenieur, Amsterdam",
-        location_nurse: "Krankenschwester, München",
-        this_week: "diese Woche",
-        this_month: "diesen Monat",
-
-        // Stats
         success_rate: "Erfolgsrate",
-        ai_trading: "KI Trading",
+        start_demo: "Kostenlose Demo Testen",
+        no_signup_required: "Keine Registrierung erforderlich • Sehen Sie zuerst, wie es funktioniert",
 
-        // Final CTA
-        final_cta_title: "Bereit zum Verdienen?",
-        final_cta_desc: "Schließen Sie sich Tausenden von Menschen an, die AutoWealth AI bereits nutzen, um ihre finanzielle Zukunft aufzubauen.",
-        limited_spots: "⚡ Begrenzte Plätze verfügbar - ",
-        spots_left: "Plätze heute übrig",
+        // Demo Screen
+        demo_title: "Ihr Demo-Wallet",
+        demo_subtitle: "Sehen Sie Ihr Geld in Echtzeit wachsen",
+        demo_balance: "Demo-Guthaben",
+        ai_working: "KI Arbeitet",
+        live_trades: "Live Trades",
+        live: "LIVE",
+        pause_demo: "Demo Pausieren",
+        looks_good: "Sieht gut aus! Weiter",
 
-        // Footer
-        copyright: "© 2024 AutoWealth AI. Alle Rechte vorbehalten.",
-        risk_warning: "Risikowarnung: Trading birgt Risiken. Vergangene Performance garantiert keine zukünftigen Ergebnisse.",
+        // Quiz Screen
+        select_answer: "Wählen Sie eine Antwort",
 
-        // Installation Modal
-        installing: "AutoWealth AI Installieren...",
-        initializing: "Sichere Verbindung initialisieren...",
-        encryption_enabled: "Bank-Level Verschlüsselung aktiviert",
-        algorithms_loaded: "KI Trading-Algorithmen geladen",
-        market_data_connected: "Echtzeit-Marktdaten verbunden"
+        // Signup Screen
+        congrats_title: "Herzlichen Glückwunsch!",
+        congrats_subtitle: "Sie sind bereit, echtes Geld zu verdienen",
+        benefit1: "Beginnen Sie mit €250 Mindesteinzahlung",
+        benefit2: "Persönlicher Kontomanager zugewiesen",
+        benefit3: "Gewinne jederzeit abheben",
+        benefit4: "24/7 KI-Trading aktiviert",
+        full_name: "Vollständiger Name",
+        email: "E-Mail-Adresse",
+        phone: "Telefonnummer",
+        get_started: "Jetzt Loslegen",
+        disclaimer: "Durch Fortfahren stimmen Sie zu, einen Anruf von unserem Team zu erhalten, um Ihr Konto zu verifizieren und Sie durch den Einrichtungsprozess zu führen. 100% sicher und vertraulich.",
+
+        // Loading Modal
+        setting_up: "Ihr Konto Einrichten...",
+        please_wait: "Bitte warten Sie, während wir alles für Sie vorbereiten",
+        step_verify: "Informationen überprüfen...",
+        step_account: "Ihr Konto erstellen...",
+        step_ai: "KI-Trading aktivieren..."
     }
 };
 
@@ -221,6 +261,18 @@ const translations = {
 let currentLanguage = 'en';
 let currentCurrency = 'USD';
 let userCountry = null;
+let demoBalance = 1000;
+let currentQuestionIndex = 0;
+let quizScore = 0;
+let demoInterval = null;
+
+// Screen management
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    document.getElementById(screenId).classList.add('active');
+}
 
 // Detect user location and set language/currency
 async function detectLocationAndSetLanguage() {
@@ -270,14 +322,14 @@ function applyTranslations() {
         }
     });
     
-    // Update document title and meta description
-    if (currentLanguage === 'nl') {
-        document.title = 'AutoWealth AI - Geautomatiseerde Trading Assistent';
-        document.querySelector('meta[name="description"]').content = 'AI-aangedreven trading assistent die passief inkomen genereert terwijl u slaapt. Sluit u aan bij 847.000+ gebruikers die gemiddeld €2.847 per week verdienen.';
-    } else if (currentLanguage === 'de') {
-        document.title = 'AutoWealth AI - Automatisierter Trading-Assistent';
-        document.querySelector('meta[name="description"]').content = 'KI-gestützter Trading-Assistent, der passives Einkommen generiert, während Sie schlafen. Schließen Sie sich 847.000+ Nutzern an, die durchschnittlich €2.847 pro Woche verdienen.';
-    }
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[currentLanguage] && translations[currentLanguage][key]) {
+            element.placeholder = translations[currentLanguage][key];
+        }
+    });
 }
 
 // Update currency display
@@ -308,110 +360,188 @@ function updateCurrencyDisplay() {
     });
 }
 
-// Live counters and animations
-function startLiveCounters() {
-    // Live earnings counter
-    const liveEarnings = document.getElementById('liveEarnings');
-    const todayProfit = document.getElementById('todayProfit');
-    const activeUsers = document.getElementById('activeUsers');
-    const spotsRemaining = document.getElementById('spotsRemaining');
+// Demo functionality
+function startDemo() {
+    showScreen('demoScreen');
     
-    if (liveEarnings) {
-        let earnings = currentCurrency === 'EUR' ? 720000 : 847293;
-        setInterval(() => {
-            earnings += Math.floor(Math.random() * 50) + 10;
-            const symbol = currentCurrency === 'EUR' ? '€' : '$';
-            liveEarnings.textContent = symbol + earnings.toLocaleString();
-        }, 3000);
-    }
+    // Reset demo balance
+    demoBalance = currentCurrency === 'EUR' ? 850 : 1000;
+    updateDemoBalance();
     
-    if (todayProfit) {
-        let profit = currentCurrency === 'EUR' ? 720.12 : 847.32;
-        setInterval(() => {
-            profit += Math.random() * 5;
-            const symbol = currentCurrency === 'EUR' ? '€' : '$';
-            todayProfit.textContent = symbol + profit.toFixed(2);
-        }, 5000);
-    }
+    // Start demo trading simulation
+    let tradeCount = 0;
+    const tradesList = document.getElementById('demoTradesList');
+    const aiTrades = document.getElementById('aiTrades');
     
-    if (activeUsers) {
-        let users = 23847;
-        setInterval(() => {
-            users += Math.floor(Math.random() * 3);
-            activeUsers.textContent = users.toLocaleString();
-        }, 7000);
-    }
+    // Clear existing trades
+    tradesList.innerHTML = '';
     
-    if (spotsRemaining) {
-        let spots = 127;
-        setInterval(() => {
-            if (spots > 50 && Math.random() > 0.7) {
-                spots--;
-                spotsRemaining.textContent = spots;
+    demoInterval = setInterval(() => {
+        const pairs = ['EUR/USD', 'GBP/JPY', 'BTC/USD', 'ETH/USD', 'XAU/USD', 'SPY', 'TSLA'];
+        const pair = pairs[Math.floor(Math.random() * pairs.length)];
+        const profit = Math.random() * 200 + 50; // $50-$250 profit
+        
+        tradeCount++;
+        
+        // Add new trade to the list
+        const tradeElement = document.createElement('div');
+        tradeElement.className = 'trade-item';
+        tradeElement.innerHTML = `
+            <div class="trade-info">
+                <div class="trade-pair">${pair}</div>
+                <div class="trade-time">Just now</div>
+            </div>
+            <div class="trade-profit positive currency-amount" data-amount="${profit}">+${currentCurrency === 'EUR' ? '€' : '$'}${profit.toFixed(2)}</div>
+        `;
+        
+        tradesList.insertBefore(tradeElement, tradesList.firstChild);
+        
+        // Keep only last 3 trades visible
+        while (tradesList.children.length > 3) {
+            tradesList.removeChild(tradesList.lastChild);
+        }
+        
+        // Update balance
+        demoBalance += profit;
+        updateDemoBalance();
+        
+        // Update trade count
+        aiTrades.textContent = `${tradeCount} trades today`;
+        
+        // Update times for existing trades
+        const timeElements = tradesList.querySelectorAll('.trade-time');
+        timeElements.forEach((element, index) => {
+            if (index === 0) {
+                element.textContent = 'Just now';
+            } else if (index === 1) {
+                element.textContent = '2m ago';
+            } else {
+                element.textContent = '5m ago';
             }
-        }, 15000);
+        });
+        
+    }, 3000); // New trade every 3 seconds
+}
+
+function updateDemoBalance() {
+    const balanceElement = document.getElementById('demoBalance');
+    const changeElement = document.getElementById('balanceChange');
+    
+    const startBalance = currentCurrency === 'EUR' ? 850 : 1000;
+    const change = demoBalance - startBalance;
+    const changePercent = ((change / startBalance) * 100).toFixed(1);
+    
+    balanceElement.textContent = `${currentCurrency === 'EUR' ? '€' : '$'}${demoBalance.toFixed(2)}`;
+    changeElement.innerHTML = `+${currentCurrency === 'EUR' ? '€' : '$'}${change.toFixed(2)} (+${changePercent}%) today`;
+    changeElement.style.color = '#48bb78';
+}
+
+function pauseDemo() {
+    if (demoInterval) {
+        clearInterval(demoInterval);
+        demoInterval = null;
+    }
+    
+    const pauseBtn = document.getElementById('pauseDemo');
+    pauseBtn.textContent = 'Demo Paused';
+    pauseBtn.style.background = '#fed7d7';
+    pauseBtn.style.color = '#c53030';
+}
+
+// Quiz functionality
+function startQuiz() {
+    showScreen('quizScreen');
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const questions = quizQuestions[currentLanguage];
+    const question = questions[currentQuestionIndex];
+    const quizContent = document.getElementById('quizContent');
+    const quizProgress = document.getElementById('quizProgress');
+    const currentQuestionSpan = document.getElementById('currentQuestion');
+    const quizAnswerBtn = document.getElementById('quizAnswer');
+    
+    // Update progress
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    quizProgress.style.width = `${progress}%`;
+    currentQuestionSpan.textContent = currentQuestionIndex + 1;
+    
+    // Load question
+    quizContent.innerHTML = `
+        <div class="question">
+            <h3>${question.question}</h3>
+            <div class="answers">
+                ${question.answers.map((answer, index) => `
+                    <div class="answer" data-index="${index}">${answer}</div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    // Reset button
+    quizAnswerBtn.disabled = true;
+    quizAnswerBtn.textContent = translations[currentLanguage].select_answer;
+    
+    // Add click handlers to answers
+    document.querySelectorAll('.answer').forEach(answer => {
+        answer.addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(a => a.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            quizAnswerBtn.disabled = false;
+            quizAnswerBtn.textContent = 'Next Question';
+            quizAnswerBtn.onclick = () => nextQuestion(parseInt(this.dataset.index));
+        });
+    });
+}
+
+function nextQuestion(selectedAnswer) {
+    const questions = quizQuestions[currentLanguage];
+    const question = questions[currentQuestionIndex];
+    
+    if (selectedAnswer === question.correct) {
+        quizScore++;
+    }
+    
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+    } else {
+        // Quiz completed
+        showScreen('signupScreen');
     }
 }
 
-// Installation modal functionality
-function showInstallModal() {
-    const modal = document.getElementById('installModal');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
+// Signup functionality
+function showLoadingModal() {
+    const modal = document.getElementById('loadingModal');
+    modal.classList.add('active');
     
-    if (!modal) return;
-    
-    modal.style.display = 'flex';
-    
-    // Progress messages based on language
-    const progressMessages = {
-        en: [
-            "Initializing secure connection...",
-            "Verifying account eligibility...", 
-            "Loading AI trading algorithms...",
-            "Connecting to market data feeds...",
-            "Finalizing installation..."
-        ],
-        nl: [
-            "Veilige verbinding initialiseren...",
-            "Account geschiktheid verifiëren...",
-            "AI trading algoritmes laden...",
-            "Verbinden met marktdata feeds...",
-            "Installatie afronden..."
-        ],
-        de: [
-            "Sichere Verbindung initialisieren...",
-            "Konto-Berechtigung überprüfen...",
-            "KI Trading-Algorithmen laden...",
-            "Mit Marktdaten-Feeds verbinden...",
-            "Installation abschließen..."
-        ]
-    };
-    
-    const messages = progressMessages[currentLanguage] || progressMessages.en;
-    let progress = 0;
-    let messageIndex = 0;
+    const steps = ['step1', 'step2', 'step3'];
+    let currentStep = 0;
     
     const interval = setInterval(() => {
-        progress += Math.random() * 15 + 5;
-        if (progress > 100) progress = 100;
-        
-        progressFill.style.width = progress + '%';
-        
-        if (messageIndex < messages.length - 1 && progress > (messageIndex + 1) * 20) {
-            messageIndex++;
-            progressText.textContent = messages[messageIndex];
+        if (currentStep > 0) {
+            document.getElementById(steps[currentStep - 1]).classList.add('completed');
+            document.getElementById(steps[currentStep - 1]).querySelector('.step-icon').textContent = '✓';
         }
         
-        if (progress >= 100) {
+        if (currentStep < steps.length) {
+            document.getElementById(steps[currentStep]).classList.add('active');
+            currentStep++;
+        } else {
             clearInterval(interval);
             setTimeout(() => {
-                modal.style.display = 'none';
+                modal.classList.remove('active');
                 // Redirect to affiliate URL
                 window.location.href = CONFIG.AFFILIATE_URL;
             }, 1000);
         }
-    }, 200);
+    }, 1500);
 }
 
 // Event listeners
@@ -421,34 +551,55 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Detect location and set language first
     await detectLocationAndSetLanguage();
     
-    // Start live counters
-    startLiveCounters();
+    // Welcome screen button
+    document.getElementById('startDemo').addEventListener('click', startDemo);
     
-    // CTA button handlers
-    const ctaButtons = document.querySelectorAll('#mainCTA, #finalCTA');
-    ctaButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            showInstallModal();
-        });
+    // Back buttons
+    document.getElementById('backToWelcome').addEventListener('click', () => {
+        if (demoInterval) {
+            clearInterval(demoInterval);
+            demoInterval = null;
+        }
+        showScreen('welcomeScreen');
     });
     
-    // Close modal handler
-    const closeModal = document.getElementById('closeModal');
-    if (closeModal) {
-        closeModal.addEventListener('click', function() {
-            document.getElementById('installModal').style.display = 'none';
-        });
-    }
+    document.getElementById('backToDemo').addEventListener('click', () => {
+        showScreen('demoScreen');
+    });
     
-    // Close modal on outside click
-    const modal = document.getElementById('installModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
+    // Demo buttons
+    document.getElementById('pauseDemo').addEventListener('click', pauseDemo);
+    document.getElementById('startQuiz').addEventListener('click', startQuiz);
+    
+    // Signup button
+    document.getElementById('finalSignup').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Basic form validation
+        const inputs = document.querySelectorAll('.signup-form input');
+        let valid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.style.borderColor = '#e53e3e';
+                valid = false;
+            } else {
+                input.style.borderColor = '#e2e8f0';
             }
         });
+        
+        if (valid) {
+            showLoadingModal();
+        }
+    });
+    
+    // Auto-select country based on detected location
+    if (userCountry) {
+        const countrySelect = document.getElementById('countrySelect');
+        const option = countrySelect.querySelector(`option[value="${userCountry.toUpperCase()}"]`);
+        if (option) {
+            countrySelect.value = userCountry.toUpperCase();
+        }
     }
 });
 
