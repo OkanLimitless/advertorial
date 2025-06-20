@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader AI - Trading Platform</title>
-    <meta name="description" content="Trader AI - Your automated trading platform for 2025.">
+    <title>AutoWealth AI - Trading Platform</title>
+    <meta name="description" content="AutoWealth AI - Your automated trading platform for 2025.">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1a1a2e">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Trader AI">
+    <meta name="apple-mobile-web-app-title" content="AutoWealth AI">
     
     <!-- Icons -->
     <link rel="manifest" href="manifest.json">
@@ -28,71 +28,66 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0f0f23;
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            height: 100vh;
             overflow: hidden;
         }
         
         .app-container {
-            width: 100vw;
             height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         
         .app-header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 15px 20px;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            justify-content: between;
+            position: relative;
+            z-index: 1000;
         }
         
         .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .logo-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
+            background: linear-gradient(135deg, #4299e1, #00f5ff);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
             font-weight: bold;
             font-size: 14px;
-            color: white;
-        }
-        
-        .app-title {
-            font-size: 18px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .app-status {
-            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-left: auto;
         }
         
         .status-dot {
             width: 8px;
             height: 8px;
-            background: #00ff88;
+            background: #48bb78;
             border-radius: 50%;
             animation: pulse 2s infinite;
-        }
-        
-        .status-text {
-            font-size: 12px;
-            color: #00ff88;
-            font-weight: 500;
         }
         
         @keyframes pulse {
@@ -100,25 +95,41 @@
             50% { opacity: 0.5; }
         }
         
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 12px;
+            transition: background 0.2s;
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
         .app-frame {
             flex: 1;
             position: relative;
-            background: #0f0f23;
+            overflow: hidden;
         }
         
         .loading-screen {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 5;
-            transition: opacity 0.5s ease;
+            z-index: 100;
+            transition: opacity 0.5s ease-out;
         }
         
         .loading-screen.hidden {
@@ -127,13 +138,13 @@
         }
         
         .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(0, 245, 255, 0.3);
-            border-top: 3px solid #00f5ff;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #4299e1;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         
         @keyframes spin {
@@ -142,104 +153,106 @@
         }
         
         .loading-text {
-            font-size: 18px;
-            color: #00f5ff;
-            margin-bottom: 10px;
+            font-size: 24px;
             font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
         }
         
         .loading-subtext {
             font-size: 14px;
-            color: #b0b0b0;
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
             max-width: 300px;
-        }
-        
-        .trading-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #0f0f23;
         }
         
         .error-screen {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            z-index: 99;
             padding: 40px;
             text-align: center;
         }
         
         .error-icon {
-            font-size: 4rem;
+            font-size: 48px;
             margin-bottom: 20px;
         }
         
         .error-title {
             font-size: 24px;
-            color: #ff4444;
-            margin-bottom: 15px;
             font-weight: 600;
+            margin-bottom: 12px;
+            color: #f56565;
         }
         
         .error-message {
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            max-width: 400px;
+            line-height: 1.5;
         }
         
         .retry-btn {
-            background: linear-gradient(135deg, #00f5ff 0%, #0066ff 100%);
-            color: white;
+            background: linear-gradient(135deg, #4299e1, #00f5ff);
             border: none;
+            color: white;
             padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
-            transition: transform 0.2s ease;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
         
         .retry-btn:hover {
             transform: translateY(-2px);
         }
         
+        .trading-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+        
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .app-header {
-                padding: 12px 15px;
+                padding: 10px 16px;
             }
             
-            .app-title {
+            .app-logo {
                 font-size: 16px;
             }
             
-            .status-text {
-                display: none;
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
             }
-        }
-        
-        /* Fullscreen mode */
-        .fullscreen-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #b0b0b0;
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .fullscreen-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            
+            .fullscreen-btn {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            
+            .loading-text {
+                font-size: 20px;
+            }
+            
+            .error-title {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -247,25 +260,23 @@
     <div class="app-container">
         <!-- App Header -->
         <div class="app-header">
-            <div class="app-logo">AI</div>
-            <div class="app-title">Trader AI</div>
-            <div class="app-status">
-                <div class="status-dot"></div>
-                <span class="status-text">Live</span>
+            <div class="app-logo">
+                <div class="logo-icon">AW</div>
+                <span>AutoWealth AI</span>
             </div>
-            <button class="fullscreen-btn" id="fullscreenBtn" title="Toggle Fullscreen">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
-                </svg>
-            </button>
+            <div class="app-status">
+                <span class="status-dot"></span>
+                <span>Connected</span>
+                <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+            </div>
         </div>
         
-        <!-- App Frame -->
+        <!-- Main App Frame -->
         <div class="app-frame">
             <!-- Loading Screen -->
             <div class="loading-screen" id="loadingScreen">
                 <div class="loading-spinner"></div>
-                <div class="loading-text">Initializing Trader AI</div>
+                <div class="loading-text">Initializing AutoWealth AI</div>
                 <div class="loading-subtext">Connecting to trading servers and loading your dashboard...</div>
             </div>
             
@@ -284,7 +295,7 @@
                 id="tradingIframe" 
                 class="trading-iframe" 
                 src="about:blank"
-                title="Trader AI Trading Platform"
+                title="AutoWealth AI Trading Platform"
                 sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
                 loading="lazy">
             </iframe>
@@ -297,7 +308,7 @@
         
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Trader AI App initialized');
+            console.log('AutoWealth AI App initialized');
             
             // Start loading the trading platform
             setTimeout(() => {
@@ -343,8 +354,8 @@
             
             // Timeout fallback
             setTimeout(() => {
-                if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
-                    console.log('Loading timeout, hiding loading screen');
+                if (iframe.src !== 'about:blank' && loadingScreen && !loadingScreen.classList.contains('hidden')) {
+                    console.log('Platform loaded (timeout fallback)');
                     loadingScreen.classList.add('hidden');
                 }
             }, 10000); // 10 second timeout
@@ -358,16 +369,24 @@
             errorScreen.style.display = 'flex';
         }
         
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
         function setupFullscreenToggle() {
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            
-            fullscreenBtn.addEventListener('click', function() {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(err => {
-                        console.log('Error attempting to enable fullscreen:', err);
-                    });
+            // Update fullscreen button text
+            document.addEventListener('fullscreenchange', () => {
+                const btn = document.querySelector('.fullscreen-btn');
+                if (document.fullscreenElement) {
+                    btn.textContent = '⛶ Exit Fullscreen';
                 } else {
-                    document.exitFullscreen();
+                    btn.textContent = '⛶ Fullscreen';
                 }
             });
         }
@@ -375,48 +394,46 @@
         function setupIframeErrorHandling() {
             const iframe = document.getElementById('tradingIframe');
             
-            // Monitor iframe for navigation errors
-            iframe.addEventListener('error', function() {
+            // Enhanced error detection
+            iframe.addEventListener('error', () => {
                 console.error('Iframe error detected');
                 showErrorScreen();
             });
             
-            // Check if iframe is still loading after timeout
-            setTimeout(() => {
+            // Check if iframe content loaded properly
+            iframe.addEventListener('load', () => {
                 try {
-                    if (iframe.contentDocument === null) {
-                        console.log('Iframe may have failed to load, but continuing...');
-                        document.getElementById('loadingScreen').classList.add('hidden');
+                    // Basic connectivity check
+                    if (iframe.contentWindow) {
+                        console.log('Iframe content accessible');
                     }
                 } catch (e) {
-                    // Cross-origin iframe, this is expected
-                    console.log('Cross-origin iframe detected (normal)');
-                    document.getElementById('loadingScreen').classList.add('hidden');
+                    // Cross-origin restrictions are normal
+                    console.log('Iframe loaded (cross-origin)');
                 }
-            }, 5000);
+            });
         }
         
-        // Handle visibility change (app switching)
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                console.log('App hidden');
-            } else {
-                console.log('App visible');
+        // Handle app visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                console.log('AutoWealth AI app became visible');
             }
         });
         
-        // Handle app installation detection
-        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-            console.log('App is running in standalone mode');
-            document.body.classList.add('standalone-mode');
-        }
+        // Handle online/offline status
+        window.addEventListener('online', () => {
+            console.log('Connection restored');
+            const errorScreen = document.getElementById('errorScreen');
+            if (errorScreen.style.display === 'flex') {
+                loadTradingPlatform();
+            }
+        });
         
-        // Service worker registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => console.log('SW registered'))
-                .catch(error => console.log('SW registration failed'));
-        }
+        window.addEventListener('offline', () => {
+            console.log('Connection lost');
+            showErrorScreen();
+        });
     </script>
 </body>
 </html> 

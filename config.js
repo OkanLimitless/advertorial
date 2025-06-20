@@ -1,4 +1,4 @@
-// Trader AI PWA Configuration
+// AutoWealth AI PWA Configuration
 // Replace these values with your actual affiliate URLs and settings
 
 const CONFIG = {
@@ -21,12 +21,12 @@ const CONFIG = {
     // App settings
     APP_SETTINGS: {
         // App branding
-        APP_NAME: 'Trader AI',
+        APP_NAME: 'AutoWealth AI',
         APP_DESCRIPTION: 'The Automated Trading System for 2025',
         APP_VERSION: '2.1.0',
         
         // Loading screen text
-        LOADING_TEXT: 'Initializing Trader AI',
+        LOADING_TEXT: 'Initializing AutoWealth AI',
         LOADING_SUBTEXT: 'Connecting to trading servers and loading your dashboard...',
         
         // Show demo mode (for testing)
@@ -37,7 +37,7 @@ const CONFIG = {
         
         // Affiliate tracking parameters
         TRACKING_PARAMS: {
-            utm_source: 'trader-ai-pwa',
+            utm_source: 'autowealth-ai-pwa',
             utm_medium: 'app-install',
             utm_campaign: 'mobile-app'
         }
@@ -89,7 +89,7 @@ const CONFIG = {
     
     // Press Mentions
     PRESS_MENTIONS: [
-        { outlet: 'TechCrunch', quote: 'Trader AI is revolutionizing how people invest...' },
+        { outlet: 'TechCrunch', quote: 'AutoWealth AI is revolutionizing how people invest...' },
         { outlet: 'Forbes', quote: 'The future of automated trading is here...' },
         { outlet: 'Bloomberg', quote: 'AI trading platform sees 500% user growth...' },
         { outlet: 'CNBC', quote: 'Ordinary people making extraordinary profits...' }

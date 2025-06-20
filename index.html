@@ -17,123 +17,145 @@
     <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Live Earnings Banner -->
-    <div class="live-banner">
-        <div class="container">
-            <div class="live-indicator">
-                <span class="pulse-dot"></span>
-                <span>LIVE</span>
-            </div>
-            <div class="live-earnings">
-                <span id="liveEarnings">$847,293</span> earned by users in the last 24 hours
-            </div>
-            <div class="live-users">
-                <span id="activeUsers">23,847</span> users currently earning
-            </div>
-        </div>
-    </div>
-
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <span>AutoWealth AI</span>
-            </div>
-            <div class="header-stats">
-                <div class="stat">
-                    <span class="stat-number">847K+</span>
-                    <span class="stat-label">Active Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">$2,847</span>
-                    <span class="stat-label">Avg Weekly</span>
+            <div class="header-content">
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <span class="badge" data-i18n="secure">Bank-Level Security</span>
+                    <span class="badge" data-i18n="verified">Verified Platform</span>
+                    <span class="badge live-badge">
+                        <span class="live-dot"></span>
+                        <span class="live-count" id="activeUsers">23,847</span> <span data-i18n="active_users">Active Users</span>
+                    </span>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <div class="announcement-content">
+                <span class="announcement-badge" data-i18n="new">NEW</span>
+                <span class="announcement-text" data-i18n="announcement">Limited Time: Free access to our AI trading system - Join 847,000+ users earning weekly profits</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1>New AI Does Your Trading While You Sleep</h1>
-                    <p class="hero-subtitle">Join 847,000+ people earning an average of <strong>$2,847 per week</strong> with our automated wealth assistant. No experience needed.</p>
-                    
-                    <div class="hero-features">
-                        <div class="feature">
-                            <span class="feature-icon">🤖</span>
-                            <span>100% Automated Trading</span>
-                        </div>
-                        <div class="feature">
-                            <span class="feature-icon">💰</span>
-                            <span>Daily Profit Withdrawals</span>
-                        </div>
-                        <div class="feature">
-                            <span class="feature-icon">🛡️</span>
-                            <span>Bank-Level Security</span>
-                        </div>
-                    </div>
-
-                    <div class="cta-section">
-                        <button class="cta-button" id="mainCTA">
-                            Get Free Access Now
-                            <span class="cta-subtitle">Setup takes 2 minutes</span>
-                        </button>
-                        <p class="cta-note">
-                            <span class="security-badge">🔒</span>
-                            Your information is 100% secure. No credit card required.
-                        </p>
+                <!-- Featured In -->
+                <div class="featured-in">
+                    <span data-i18n="featured_in">As featured in:</span>
+                    <div class="press-logos">
+                        <img src="https://via.placeholder.com/80x30/ffffff/666666?text=CNN" alt="CNN">
+                        <img src="https://via.placeholder.com/80x30/ffffff/666666?text=Forbes" alt="Forbes">
+                        <img src="https://via.placeholder.com/80x30/ffffff/666666?text=CNBC" alt="CNBC">
+                        <img src="https://via.placeholder.com/80x30/ffffff/666666?text=Bloomberg" alt="Bloomberg">
                     </div>
                 </div>
 
-                <div class="hero-visual">
-                    <div class="dashboard-preview">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Your AutoWealth Dashboard</div>
-                            <div class="dashboard-status">
-                                <span class="status-dot active"></span>
-                                AI Active
-                            </div>
-                        </div>
-                        
-                        <div class="profit-display">
-                            <div class="profit-label">Today's Profit</div>
-                            <div class="profit-amount" id="todayProfit">$847.32</div>
-                            <div class="profit-change">+$127.43 (+17.8%) since morning</div>
+                <div class="hero-main">
+                    <div class="hero-text">
+                        <h1 class="hero-title" data-i18n="hero_title">New AI Does Your Trading While You Sleep</h1>
+                        <div class="hero-subtitle">
+                            <p><span data-i18n="hero_subtitle_1">Join 847,000+ people earning an average of</span></p>
+                            <p class="hero-amount">
+                                <span class="currency-amount" data-amount="2847">$2,847</span> 
+                                <span data-i18n="per_week">per week</span>
+                            </p>
+                            <p><span data-i18n="hero_subtitle_2">with our automated wealth assistant. No experience needed.</span></p>
                         </div>
 
-                        <div class="trades-list">
-                            <div class="trade-item">
-                                <div class="trade-info">
-                                    <span class="trade-pair">EUR/USD</span>
-                                    <span class="trade-time">2 min ago</span>
-                                </div>
-                                <div class="trade-profit positive">+$43.21</div>
+                        <!-- Features -->
+                        <div class="hero-features">
+                            <div class="feature">
+                                <div class="feature-icon">🤖</div>
+                                <span data-i18n="feature_automated">100% Automated Trading</span>
                             </div>
-                            <div class="trade-item">
-                                <div class="trade-info">
-                                    <span class="trade-pair">BTC/USD</span>
-                                    <span class="trade-time">5 min ago</span>
-                                </div>
-                                <div class="trade-profit positive">+$89.15</div>
+                            <div class="feature">
+                                <div class="feature-icon">💰</div>
+                                <span data-i18n="feature_withdrawals">Daily Profit Withdrawals</span>
                             </div>
-                            <div class="trade-item">
-                                <div class="trade-info">
-                                    <span class="trade-pair">GBP/JPY</span>
-                                    <span class="trade-time">8 min ago</span>
+                            <div class="feature">
+                                <div class="feature-icon">🔒</div>
+                                <span data-i18n="feature_security">Bank-Level Security</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="hero-cta">
+                            <button id="mainCTA" class="cta-button">
+                                <span data-i18n="cta_main">Get Free Access Now</span>
+                                <div class="cta-subtitle" data-i18n="cta_subtitle">Setup takes 2 minutes</div>
+                            </button>
+                            <p class="cta-note" data-i18n="cta_note">Your information is 100% secure. No credit card required.</p>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Preview -->
+                    <div class="hero-dashboard">
+                        <div class="dashboard-container">
+                            <div class="dashboard-header">
+                                <h3 data-i18n="dashboard_title">Your AutoWealth Dashboard</h3>
+                                <div class="dashboard-status">
+                                    <span class="status-indicator active"></span>
+                                    <span data-i18n="ai_active">AI Active</span>
                                 </div>
-                                <div class="trade-profit positive">+$67.83</div>
+                            </div>
+                            
+                            <div class="dashboard-stats">
+                                <div class="stat-card">
+                                    <div class="stat-label" data-i18n="today_profit">Today's Profit</div>
+                                    <div class="stat-value" id="todayProfit">$847.32</div>
+                                    <div class="stat-change positive" data-i18n="since_morning">+$127.45 since morning</div>
+                                </div>
+                            </div>
+
+                            <div class="trading-activity">
+                                <div class="activity-header">
+                                    <h4 data-i18n="recent_trades">Recent Trades</h4>
+                                    <span class="live-indicator">
+                                        <span class="live-dot"></span>
+                                        <span data-i18n="live">LIVE</span>
+                                    </span>
+                                </div>
+                                <div class="trades-list">
+                                    <div class="trade-item">
+                                        <div class="trade-info">
+                                            <span class="trade-pair">EUR/USD</span>
+                                            <span class="trade-time">2 min ago</span>
+                                        </div>
+                                        <div class="trade-profit positive">+$67.50</div>
+                                    </div>
+                                    <div class="trade-item">
+                                        <div class="trade-info">
+                                            <span class="trade-pair">BTC/USD</span>
+                                            <span class="trade-time">5 min ago</span>
+                                        </div>
+                                        <div class="trade-profit positive">+$143.20</div>
+                                    </div>
+                                    <div class="trade-item">
+                                        <div class="trade-info">
+                                            <span class="trade-pair">GBP/JPY</span>
+                                            <span class="trade-time">8 min ago</span>
+                                        </div>
+                                        <div class="trade-profit positive">+$89.75</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -145,113 +167,90 @@
     <!-- How It Works -->
     <section class="how-it-works">
         <div class="container">
-            <h2>How It Works (It's Surprisingly Simple)</h2>
+            <h2 class="section-title" data-i18n="how_it_works_title">How It Works - Simple as 1, 2, 3</h2>
             
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Get Free Access</h3>
-                        <p>Sign up in 2 minutes. No credit card needed, no hidden fees.</p>
+                        <h3 data-i18n="step1_title">Sign Up & Get Verified</h3>
+                        <p data-i18n="step1_desc">Quick 2-minute registration. Our team calls to verify your account and ensure you're qualified for the program.</p>
                     </div>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Qualification Call</h3>
-                        <p>Our team calls to verify you're eligible and walks you through the setup.</p>
+                        <h3 data-i18n="step2_title">AI Starts Trading</h3>
+                        <p data-i18n="step2_desc">Our advanced AI analyzes markets 24/7 and executes profitable trades automatically. No experience needed.</p>
                     </div>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>AI Takes Over</h3>
-                        <p>Sit back and relax. The AI trades 24/7 while you earn passive income.</p>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Withdraw Daily</h3>
-                        <p>Access your profits anytime. Most users withdraw $400+ daily.</p>
+                        <h3 data-i18n="step3_title">Withdraw Your Profits</h3>
+                        <p data-i18n="step3_desc">Watch your account grow daily. Withdraw your profits anytime - most users see results in the first week.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof -->
-    <section class="social-proof">
+    <!-- Testimonials -->
+    <section class="testimonials">
         <div class="container">
-            <h2>What Our Users Are Saying</h2>
+            <h2 class="section-title" data-i18n="testimonials_title">What Our Users Are Saying</h2>
             
-            <div class="testimonials">
+            <div class="testimonials-grid">
                 <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234299e1'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3ESM%3C/text%3E%3C/svg%3E" alt="Sarah M.">
-                        </div>
-                        <div class="user-info">
-                            <div class="user-name">Sarah M.</div>
-                            <div class="user-location">Teacher, Austin TX</div>
-                        </div>
-                        <div class="social-actions">
-                            <span class="likes">❤️ 247</span>
-                            <span class="time">3h</span>
-                        </div>
-                    </div>
                     <div class="testimonial-content">
-                        "I was skeptical at first, but after the qualification call, everything made sense. I've been earning $300-500 daily for 3 months now. It's literally changed my life. No more stress about bills!"
+                        <p data-i18n="testimonial1">"I was skeptical at first, but AutoWealth AI has completely changed my financial situation. I'm making more in a week than I used to make in a month!"</p>
                     </div>
-                    <div class="testimonial-footer">
-                        <span class="earnings-badge">Earned $47,832 total</span>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍💼</div>
+                        <div class="author-info">
+                            <div class="author-name">Marcus K.</div>
+                            <div class="author-location" data-i18n="location_teacher">Teacher, Berlin</div>
+                            <div class="author-earnings">
+                                <span class="currency-amount" data-amount="3247">$3,247</span> 
+                                <span data-i18n="this_week">this week</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                
                 <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2348bb78'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EMJ%3C/text%3E%3C/svg%3E" alt="Mike J.">
-                        </div>
-                        <div class="user-info">
-                            <div class="user-name">Mike J.</div>
-                            <div class="user-location">Retired, Phoenix AZ</div>
-                        </div>
-                        <div class="social-actions">
-                            <span class="likes">❤️ 189</span>
-                            <span class="time">5h</span>
-                        </div>
-                    </div>
                     <div class="testimonial-content">
-                        "Retirement wasn't going as planned until I found AutoWealth. The AI works even when I'm sleeping or playing golf. Made $2,100 just this week. My wife thinks I'm a genius 😂"
+                        <p data-i18n="testimonial2">"The best part is I don't have to do anything. The AI handles everything while I focus on my family and other interests. Passive income at its finest!"</p>
                     </div>
-                    <div class="testimonial-footer">
-                        <span class="earnings-badge">Earned $63,247 total</span>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍💻</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah V.</div>
+                            <div class="author-location" data-i18n="location_engineer">Engineer, Amsterdam</div>
+                            <div class="author-earnings">
+                                <span class="currency-amount" data-amount="4891">$4,891</span> 
+                                <span data-i18n="this_month">this month</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                
                 <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ed8936'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EJR%3C/text%3E%3C/svg%3E" alt="Jessica R.">
-                        </div>
-                        <div class="user-info">
-                            <div class="user-name">Jessica R.</div>
-                            <div class="user-location">Nurse, Miami FL</div>
-                        </div>
-                        <div class="social-actions">
-                            <span class="likes">❤️ 312</span>
-                            <span class="time">1d</span>
-                        </div>
-                    </div>
                     <div class="testimonial-content">
-                        "Working 12-hour shifts, I had no time for investing. AutoWealth does everything automatically. The qualification call was super helpful - they explained everything clearly. Now I make more from this than my nursing job!"
+                        <p data-i18n="testimonial3">"I've tried other trading platforms before, but nothing comes close to AutoWealth AI. The results speak for themselves!"</p>
                     </div>
-                    <div class="testimonial-footer">
-                        <span class="earnings-badge">Earned $89,156 total</span>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍⚕️</div>
+                        <div class="author-info">
+                            <div class="author-name">Anna M.</div>
+                            <div class="author-location" data-i18n="location_nurse">Nurse, Munich</div>
+                            <div class="author-earnings">
+                                <span class="currency-amount" data-amount="2156">$2,156</span> 
+                                <span data-i18n="this_week">this week</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,21 +261,21 @@
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">847,293</div>
-                    <div class="stat-label">Active Users</div>
+                    <div class="stat-label" data-i18n="active_users">Active Users</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">$2,847</div>
-                    <div class="stat-label">Average Weekly Earnings</div>
+                <div class="stat">
+                    <div class="stat-number currency-amount" data-amount="2847">$2,847</div>
+                    <div class="stat-label" data-i18n="avg_weekly">Average Weekly Earnings</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">94.7%</div>
-                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-label" data-i18n="success_rate">Success Rate</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-number">24/7</div>
-                    <div class="stat-label">AI Trading</div>
+                    <div class="stat-label" data-i18n="ai_trading">AI Trading</div>
                 </div>
             </div>
         </div>
@@ -286,28 +285,20 @@
     <section class="final-cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Start Earning?</h2>
-                <p>Join 847,000+ people who are already building wealth with AI. Setup takes 2 minutes.</p>
+                <h2 data-i18n="final_cta_title">Ready to Start Earning?</h2>
+                <p data-i18n="final_cta_desc">Join thousands of people who are already using AutoWealth AI to build their financial future.</p>
                 
-                <button class="cta-button large" id="finalCTA">
-                    Get Free Access Now
-                    <span class="cta-subtitle">No credit card required</span>
-                </button>
-                
-                <div class="trust-indicators">
-                    <div class="trust-item">
-                        <span class="trust-icon">🔒</span>
-                        <span>Bank-Level Security</span>
-                    </div>
-                    <div class="trust-item">
-                        <span class="trust-icon">✅</span>
-                        <span>No Hidden Fees</span>
-                    </div>
-                    <div class="trust-item">
-                        <span class="trust-icon">💯</span>
-                        <span>100% Automated</span>
-                    </div>
+                <div class="urgency-bar">
+                    <p>
+                        <span data-i18n="limited_spots">⚡ Limited spots available - </span>
+                        <span id="spotsLeft">127</span> 
+                        <span data-i18n="spots_left">spots left today</span>
+                    </p>
                 </div>
+                
+                <button id="finalCTA" class="cta-button large">
+                    <span data-i18n="cta_main">Get Free Access Now</span>
+                </button>
             </div>
         </div>
     </section>
@@ -316,20 +307,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <span>AutoWealth AI</span>
-                </div>
-                <div class="footer-text">
-                    <p>© 2024 AutoWealth AI. All rights reserved.</p>
-                    <p>Risk Warning: Trading involves risk. Past performance does not guarantee future results.</p>
-                </div>
+                <p data-i18n="copyright">© 2024 AutoWealth AI. All rights reserved.</p>
+                <p class="risk-warning" data-i18n="risk_warning">Risk Warning: Trading involves risk. Past performance does not guarantee future results.</p>
             </div>
         </div>
     </footer>
@@ -338,34 +317,26 @@
     <div id="installModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Installing AutoWealth AI...</h3>
-                <button class="modal-close" id="closeModal">&times;</button>
+                <h3 data-i18n="installing">Installing AutoWealth AI...</h3>
+                <button id="closeModal" class="close-btn">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="install-progress">
+                <div class="progress-container">
                     <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
+                        <div id="progressFill" class="progress-fill"></div>
                     </div>
-                    <div class="progress-text" id="progressText">Initializing secure connection...</div>
+                    <p id="progressText" data-i18n="initializing">Initializing secure connection...</p>
                 </div>
-                <div class="install-features">
-                    <div class="install-feature">
-                        <span class="feature-check">✓</span>
-                        <span>Bank-level encryption enabled</span>
-                    </div>
-                    <div class="install-feature">
-                        <span class="feature-check">✓</span>
-                        <span>AI trading algorithms loaded</span>
-                    </div>
-                    <div class="install-feature">
-                        <span class="feature-check">✓</span>
-                        <span>Real-time market data connected</span>
-                    </div>
+                <div class="installation-steps">
+                    <div class="step-item">✓ <span data-i18n="encryption_enabled">Bank-level encryption enabled</span></div>
+                    <div class="step-item">✓ <span data-i18n="algorithms_loaded">AI trading algorithms loaded</span></div>
+                    <div class="step-item">✓ <span data-i18n="market_data_connected">Real-time market data connected</span></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script src="app.js"></script>
 </body>
 </html> 
