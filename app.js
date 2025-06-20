@@ -260,28 +260,40 @@ class ElonBitcoinAI {
     setupEventListeners() {
         const joinButton = document.getElementById('joinNow');
         if (joinButton) {
-            joinButton.addEventListener('click', () => this.handleJoin());
+            joinButton.addEventListener('click', (event) => {
+                console.log('Button clicked!');
+                event.preventDefault(); // Prevent any default form submission
+                this.handleJoin();
+            });
         }
     }
 
     handleJoin() {
+        console.log('handleJoin called');
         // Simple direct redirect - no loading modal to avoid infinite loading
         this.redirectToAffiliate();
     }
 
     redirectToAffiliate() {
-        // Direct redirect to affiliate URL with tracking
+        // Simple direct redirect with multiple fallback methods
         const affiliateUrl = 'https://exl-redircd.com/?a=25528&c=395863';
-        const url = new URL(affiliateUrl);
         
-        // Add tracking parameters
-        url.searchParams.set('utm_source', 'bitcoin360ai-pwa');
-        url.searchParams.set('utm_medium', 'elon-musk-landing');
-        url.searchParams.set('utm_campaign', 'tesla-ai-trading');
-        url.searchParams.set('t', Date.now());
+        console.log('Redirecting to:', affiliateUrl);
         
-        console.log('Redirecting to:', url.toString());
-        window.location.href = url.toString();
+        try {
+            // Method 1: Standard redirect
+            window.location.href = affiliateUrl;
+        } catch (error) {
+            console.log('Method 1 failed, trying method 2');
+            try {
+                // Method 2: Replace current location
+                window.location.replace(affiliateUrl);
+            } catch (error2) {
+                console.log('Method 2 failed, trying method 3');
+                // Method 3: Open in new window as last resort
+                window.open(affiliateUrl, '_self');
+            }
+        }
     }
 
     destroy() {
