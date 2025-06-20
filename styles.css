@@ -135,16 +135,16 @@ body {
     50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
 }
 
-/* Welcome Screen */
-.welcome-container {
+/* Bridge Page */
+.bridge-container {
     position: relative;
     z-index: 2;
     height: 100vh;
     height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 15px;
     max-width: 380px;
     margin: 0 auto;
     text-align: center;
@@ -152,14 +152,60 @@ body {
     overflow: hidden;
 }
 
-.welcome-header {
-    margin-bottom: 40px;
+/* Urgent Banner */
+.urgent-banner {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    border-radius: 12px;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+    animation: pulse-red 2s ease-in-out infinite;
+}
+
+@keyframes pulse-red {
+    0%, 100% { box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(255, 68, 68, 0.6); }
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+}
+
+.urgent-text {
+    flex: 1;
+    text-align: center;
+}
+
+.timer-mini {
+    font-family: 'Courier New', monospace;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Bridge Header */
+.bridge-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .app-logo {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: var(--accent-gold);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-shadow: 0 0 30px rgba(247, 147, 26, 0.6);
     animation: glow 2s ease-in-out infinite alternate;
 }
@@ -170,13 +216,20 @@ body {
 }
 
 .app-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0;
 }
 
 .earning-highlight {
@@ -268,6 +321,246 @@ body {
     color: var(--text-muted);
     margin-top: 0;
     line-height: 1.3;
+}
+
+/* Profit Showcase */
+.profit-showcase {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.profit-header {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.profit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.profit-card {
+    background: rgba(247, 147, 26, 0.1);
+    border-radius: 12px;
+    padding: 15px 10px;
+    border: 1px solid rgba(247, 147, 26, 0.3);
+}
+
+.profit-amount {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.profit-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.profit-disclaimer {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Social Proof */
+.social-proof {
+    margin-bottom: 20px;
+}
+
+.live-activity {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.activity-header {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.activity-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.live-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 15px rgba(247, 147, 26, 0.3);
+}
+
+.activity-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.recent-signups {
+    background: rgba(0, 212, 170, 0.1);
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid rgba(0, 212, 170, 0.3);
+    overflow: hidden;
+}
+
+.signup-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--success-color);
+    font-weight: 600;
+    animation: slideInUp 0.5s ease;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.signup-time {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* Access Section */
+.access-section {
+    margin-top: auto;
+}
+
+.countdown-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.countdown-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.timer-box {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+    padding: 12px 8px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.timer-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #000;
+    font-family: 'Courier New', monospace;
+    line-height: 1;
+}
+
+.timer-label {
+    display: block;
+    font-size: 0.6rem;
+    color: #000;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.timer-separator {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+}
+
+.cta-container {
+    text-align: center;
+}
+
+.bridge-cta-btn {
+    width: 100%;
+    background: var(--gradient-primary);
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    padding: 18px 30px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-primary);
+    margin-bottom: 15px;
+    max-width: 320px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: var(--shadow-primary); }
+    50% { box-shadow: 0 10px 40px rgba(247, 147, 26, 0.5); }
+}
+
+.bridge-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px rgba(247, 147, 26, 0.6);
+}
+
+.cta-benefits {
+    margin-bottom: 12px;
+}
+
+.benefit-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.check-icon {
+    color: var(--success-color);
+    font-weight: 800;
+}
+
+.urgency-note {
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    font-weight: 600;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
 }
 
 /* Demo Screen */

@@ -107,136 +107,73 @@ const quizQuestions = {
 // Translations
 const translations = {
     en: {
-        // Welcome Screen
         app_name: "Bitcoin 360 AI",
+        subtitle: "Exclusive Member Portal",
         currency_symbol: "$",
-        earning_period: "Average Weekly Earnings",
-        user_count: "Join 847,000+ Users",
-        feature_ai: "AI Does Everything",
-        feature_passive: "Earn While You Sleep",
-        feature_simple: "100% Automated",
-        cta_button: "Get Started - It's Free",
-        cta_note: "No experience needed • Takes 2 minutes",
-
-        // Demo Screen
-        demo_wallet: "Your Bitcoin Trading Wallet",
-        demo_subtitle: "Watch your crypto portfolio grow in real-time",
-        portfolio_value: "Portfolio Value",
-        live: "LIVE",
-        ai_trading: "AI Trading Active",
-        recent_trades: "Recent AI Trades",
-        pause_demo: "Pause Demo",
-        looks_good: "Looks Profitable! Continue",
-
-        // Quiz Screen
-        quick_assessment: "Quick Crypto Assessment",
-        assessment_desc: "Help us optimize your trading strategy",
-        select_answer: "Select an answer",
-
-        // Signup Screen
-        congratulations: "Congratulations!",
-        ready_to_earn: "You're ready to start earning with Bitcoin 360 AI",
-        benefit_bitcoin: "Trade Bitcoin & top cryptocurrencies",
-        benefit_ai: "AI handles all trading decisions",
-        benefit_profit: "Keep 100% of your profits",
-        benefit_secure: "Bank-level security & encryption",
-        access_platform: "Access Bitcoin 360 AI Platform",
-        disclaimer: "Click to access your exclusive Bitcoin trading platform. 100% secure and confidential.",
-
-        // Loading Modal
-        setting_up_account: "Setting Up Your Bitcoin 360 AI Account...",
-        please_wait: "Please wait while we prepare your trading platform",
-        step_verify: "Verifying crypto markets...",
-        step_account: "Activating your account...",
-        step_ai: "Initializing AI trading algorithms..."
+        urgent_text: "Only 23 Spots Left Today!",
+        profit_header: "Our Members Made Today:",
+        daily_avg: "Daily Average",
+        monthly_avg: "Monthly Average", 
+        profit_disclaimer: "*Based on verified member accounts",
+        activity_header: "Live Member Activity:",
+        members_online: "Members Online Now",
+        countdown_text: "Your Reserved Spot Expires In:",
+        bridge_cta: "CLAIM MY SPOT NOW - FREE",
+        benefit_instant: "Instant Access - No Waiting",
+        benefit_free: "100% Free - No Hidden Fees",
+        benefit_start: "Start Earning Within Minutes",
+        urgency_note: "⚠️ This offer expires when timer reaches zero",
+        loading_title: "Securing Your Spot...",
+        loading_text: "Connecting to Bitcoin 360 AI servers",
+        step1: "Verifying availability",
+        step2: "Reserving your spot", 
+        step3: "Redirecting to platform"
     },
     nl: {
-        // Welcome Screen
         app_name: "Bitcoin 360 AI",
+        subtitle: "Exclusief Leden Portaal",
         currency_symbol: "€",
-        earning_period: "Gemiddelde Wekelijkse Verdiensten",
-        user_count: "Doe mee met 847.000+ Gebruikers",
-        feature_ai: "AI Doet Alles",
-        feature_passive: "Verdien Terwijl U Slaapt",
-        feature_simple: "100% Geautomatiseerd",
-        cta_button: "Begin Nu - Het Is Gratis",
-        cta_note: "Geen ervaring nodig • Duurt 2 minuten",
-
-        // Demo Screen
-        demo_wallet: "Uw Bitcoin Trading Wallet",
-        demo_subtitle: "Zie uw crypto portfolio groeien in real-time",
-        portfolio_value: "Portfolio Waarde",
-        live: "LIVE",
-        ai_trading: "AI Trading Actief",
-        recent_trades: "Recente AI Trades",
-        pause_demo: "Pauzeer Demo",
-        looks_good: "Ziet er winstgevend uit! Doorgaan",
-
-        // Quiz Screen
-        quick_assessment: "Snelle Crypto Beoordeling",
-        assessment_desc: "Help ons uw trading strategie te optimaliseren",
-        select_answer: "Selecteer een antwoord",
-
-        // Signup Screen
-        congratulations: "Gefeliciteerd!",
-        ready_to_earn: "U bent klaar om te verdienen met Bitcoin 360 AI",
-        benefit_bitcoin: "Handel Bitcoin & top cryptocurrencies",
-        benefit_ai: "AI regelt alle trading beslissingen",
-        benefit_profit: "Behoud 100% van uw winsten",
-        benefit_secure: "Bank-niveau beveiliging & encryptie",
-        access_platform: "Toegang Bitcoin 360 AI Platform",
-        disclaimer: "Klik om toegang te krijgen tot uw exclusieve Bitcoin trading platform. 100% veilig en vertrouwelijk.",
-
-        // Loading Modal
-        setting_up_account: "Uw Bitcoin 360 AI Account Instellen...",
-        please_wait: "Wacht alstublieft terwijl we uw trading platform voorbereiden",
-        step_verify: "Crypto markten verifiëren...",
-        step_account: "Uw account activeren...",
-        step_ai: "AI trading algoritmes initialiseren..."
+        urgent_text: "Slechts 23 Plekken Over Vandaag!",
+        profit_header: "Onze Leden Verdienden Vandaag:",
+        daily_avg: "Dagelijks Gemiddelde",
+        monthly_avg: "Maandelijks Gemiddelde",
+        profit_disclaimer: "*Gebaseerd op geverifieerde leden accounts",
+        activity_header: "Live Leden Activiteit:",
+        members_online: "Leden Nu Online",
+        countdown_text: "Uw Gereserveerde Plek Verloopt Over:",
+        bridge_cta: "CLAIM MIJN PLEK NU - GRATIS",
+        benefit_instant: "Directe Toegang - Geen Wachten",
+        benefit_free: "100% Gratis - Geen Verborgen Kosten",
+        benefit_start: "Begin Binnen Minuten Te Verdienen",
+        urgency_note: "⚠️ Dit aanbod verloopt wanneer de timer nul bereikt",
+        loading_title: "Uw Plek Beveiligen...",
+        loading_text: "Verbinden met Bitcoin 360 AI servers",
+        step1: "Beschikbaarheid verifiëren",
+        step2: "Uw plek reserveren",
+        step3: "Doorverwijzen naar platform"
     },
     de: {
-        // Welcome Screen
-        app_name: "Bitcoin 360 AI",
+        app_name: "Bitcoin 360 AI", 
+        subtitle: "Exklusives Mitglieder Portal",
         currency_symbol: "€",
-        earning_period: "Durchschnittliche Wöchentliche Gewinne",
-        user_count: "Schließen Sie sich 847.000+ Nutzern an",
-        feature_ai: "KI Macht Alles",
-        feature_passive: "Verdienen Im Schlaf",
-        feature_simple: "100% Automatisiert",
-        cta_button: "Jetzt Starten - Kostenlos",
-        cta_note: "Keine Erfahrung nötig • Dauert 2 Minuten",
-
-        // Demo Screen
-        demo_wallet: "Ihr Bitcoin Trading Wallet",
-        demo_subtitle: "Sehen Sie Ihr Krypto-Portfolio in Echtzeit wachsen",
-        portfolio_value: "Portfolio-Wert",
-        live: "LIVE",
-        ai_trading: "KI Trading Aktiv",
-        recent_trades: "Aktuelle KI Trades",
-        pause_demo: "Demo Pausieren",
-        looks_good: "Sieht profitabel aus! Weiter",
-
-        // Quiz Screen
-        quick_assessment: "Schnelle Krypto-Bewertung",
-        assessment_desc: "Helfen Sie uns, Ihre Trading-Strategie zu optimieren",
-        select_answer: "Wählen Sie eine Antwort",
-
-        // Signup Screen
-        congratulations: "Herzlichen Glückwunsch!",
-        ready_to_earn: "Sie sind bereit, mit Bitcoin 360 AI zu verdienen",
-        benefit_bitcoin: "Handeln Sie Bitcoin & Top-Kryptowährungen",
-        benefit_ai: "KI übernimmt alle Trading-Entscheidungen",
-        benefit_profit: "Behalten Sie 100% Ihrer Gewinne",
-        benefit_secure: "Bank-Level Sicherheit & Verschlüsselung",
-        access_platform: "Zugang Bitcoin 360 AI Platform",
-        disclaimer: "Klicken Sie, um Zugang zu Ihrer exklusiven Bitcoin-Trading-Plattform zu erhalten. 100% sicher und vertraulich.",
-
-        // Loading Modal
-        setting_up_account: "Ihr Bitcoin 360 AI Konto Einrichten...",
-        please_wait: "Bitte warten Sie, während wir Ihre Trading-Plattform vorbereiten",
-        step_verify: "Krypto-Märkte verifizieren...",
-        step_account: "Ihr Konto aktivieren...",
-        step_ai: "KI-Trading-Algorithmen initialisieren..."
+        urgent_text: "Nur noch 23 Plätze heute verfügbar!",
+        profit_header: "Unsere Mitglieder verdienten heute:",
+        daily_avg: "Täglicher Durchschnitt",
+        monthly_avg: "Monatlicher Durchschnitt",
+        profit_disclaimer: "*Basierend auf verifizierten Mitglieder-Konten",
+        activity_header: "Live Mitglieder Aktivität:",
+        members_online: "Mitglieder Jetzt Online",
+        countdown_text: "Ihr reservierter Platz läuft ab in:",
+        bridge_cta: "MEINEN PLATZ JETZT SICHERN - KOSTENLOS",
+        benefit_instant: "Sofortiger Zugang - Kein Warten",
+        benefit_free: "100% Kostenlos - Keine versteckten Gebühren", 
+        benefit_start: "Beginnen Sie innerhalb von Minuten zu verdienen",
+        urgency_note: "⚠️ Dieses Angebot läuft ab, wenn der Timer Null erreicht",
+        loading_title: "Ihren Platz Sichern...",
+        loading_text: "Verbindung zu Bitcoin 360 AI Servern",
+        step1: "Verfügbarkeit prüfen",
+        step2: "Ihren Platz reservieren",
+        step3: "Weiterleitung zur Plattform"
     }
 };
 
@@ -248,6 +185,11 @@ let demoBalance = 1000;
 let currentQuestionIndex = 0;
 let quizScore = 0;
 let demoInterval = null;
+let countdownInterval;
+let liveUsersInterval;
+let signupTickerInterval;
+let countdownMinutes = 14;
+let countdownSeconds = 37;
 
 // Crypto trading pairs for demo
 const cryptoPairs = [
@@ -258,6 +200,50 @@ const cryptoPairs = [
     { symbol: 'LINK/USD', name: 'Chainlink', icon: '🔗' },
     { symbol: 'BNB/USD', name: 'Binance', icon: '🔶' }
 ];
+
+// DOM Elements
+const bridgeScreen = document.getElementById('bridgeScreen');
+const claimSpotBtn = document.getElementById('claimSpot');
+const loadingModal = document.getElementById('loadingModal');
+const minutesEl = document.getElementById('minutes');
+const secondsEl = document.getElementById('seconds');
+const miniTimerEl = document.getElementById('miniTimer');
+const liveUsersEl = document.getElementById('liveUsers');
+const signupTickerEl = document.getElementById('signupTicker');
+
+// Fake user data for signup ticker
+const fakeUsers = {
+    en: [
+        { name: "Michael R.", location: "Texas", time: "3 seconds ago" },
+        { name: "Sarah K.", location: "California", time: "8 seconds ago" },
+        { name: "David M.", location: "New York", time: "12 seconds ago" },
+        { name: "Jennifer L.", location: "Florida", time: "18 seconds ago" },
+        { name: "Robert W.", location: "Illinois", time: "23 seconds ago" },
+        { name: "Lisa H.", location: "Ohio", time: "31 seconds ago" },
+        { name: "James P.", location: "Michigan", time: "37 seconds ago" },
+        { name: "Maria G.", location: "Georgia", time: "44 seconds ago" }
+    ],
+    nl: [
+        { name: "Pieter V.", location: "Amsterdam", time: "3 seconden geleden" },
+        { name: "Emma D.", location: "Rotterdam", time: "8 seconden geleden" },
+        { name: "Lars M.", location: "Utrecht", time: "12 seconden geleden" },
+        { name: "Sophie B.", location: "Den Haag", time: "18 seconden geleden" },
+        { name: "Thijs K.", location: "Eindhoven", time: "23 seconden geleden" },
+        { name: "Lotte S.", location: "Tilburg", time: "31 seconden geleden" },
+        { name: "Bram H.", location: "Groningen", time: "37 seconden geleden" },
+        { name: "Anouk R.", location: "Breda", time: "44 seconden geleden" }
+    ],
+    de: [
+        { name: "Stefan M.", location: "Berlin", time: "vor 3 Sekunden" },
+        { name: "Anna K.", location: "München", time: "vor 8 Sekunden" },
+        { name: "Thomas W.", location: "Hamburg", time: "vor 12 Sekunden" },
+        { name: "Julia S.", location: "Köln", time: "vor 18 Sekunden" },
+        { name: "Markus B.", location: "Frankfurt", time: "vor 23 Sekunden" },
+        { name: "Sandra H.", location: "Stuttgart", time: "vor 31 Sekunden" },
+        { name: "Daniel R.", location: "Düsseldorf", time: "vor 37 Sekunden" },
+        { name: "Petra L.", location: "Leipzig", time: "vor 44 Sekunden" }
+    ]
+};
 
 // Screen management
 function showScreen(screenId) {
@@ -530,38 +516,17 @@ function showLoadingModal() {
     }, 1500);
 }
 
-// Event listeners
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM loaded, detecting location...');
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    detectLocationAndSetLanguage();
+    startCountdownTimer();
+    startLiveUsersCounter();
+    startSignupTicker();
     
-    // Detect location and set language first
-    await detectLocationAndSetLanguage();
-    
-    // Welcome screen button
-    document.getElementById('startDemo').addEventListener('click', startDemo);
-    
-    // Back buttons
-    document.getElementById('backToWelcome').addEventListener('click', () => {
-        if (demoInterval) {
-            clearInterval(demoInterval);
-            demoInterval = null;
-        }
-        showScreen('welcomeScreen');
-    });
-    
-    document.getElementById('backToDemo').addEventListener('click', () => {
-        showScreen('demoScreen');
-    });
-    
-    // Demo buttons
-    document.getElementById('pauseDemo').addEventListener('click', pauseDemo);
-    document.getElementById('startQuiz').addEventListener('click', startQuiz);
-    
-    // CTA button
-    document.getElementById('finalCTA').addEventListener('click', function(e) {
-        e.preventDefault();
-        showLoadingModal();
-    });
+    // Add click handler for CTA button
+    if (claimSpotBtn) {
+        claimSpotBtn.addEventListener('click', handleClaimSpot);
+    }
 });
 
 // PWA Installation (fallback)
@@ -578,3 +543,101 @@ if ('serviceWorker' in navigator) {
         .then(registration => console.log('SW registered'))
         .catch(error => console.log('SW registration failed'));
 }
+
+// Start countdown timer
+function startCountdownTimer() {
+    countdownInterval = setInterval(() => {
+        countdownSeconds--;
+        
+        if (countdownSeconds < 0) {
+            countdownMinutes--;
+            countdownSeconds = 59;
+        }
+        
+        if (countdownMinutes < 0) {
+            countdownMinutes = 14;
+            countdownSeconds = 37;
+        }
+        
+        // Update main timer
+        if (minutesEl) minutesEl.textContent = countdownMinutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = countdownSeconds.toString().padStart(2, '0');
+        
+        // Update mini timer
+        if (miniTimerEl) {
+            miniTimerEl.textContent = `${countdownMinutes}:${countdownSeconds.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
+// Start live users counter with realistic fluctuation
+function startLiveUsersCounter() {
+    let baseUsers = 2847293;
+    
+    liveUsersInterval = setInterval(() => {
+        const change = Math.floor(Math.random() * 20) - 10; // -10 to +10
+        baseUsers += change;
+        
+        if (baseUsers < 2800000) baseUsers = 2800000;
+        if (baseUsers > 2900000) baseUsers = 2900000;
+        
+        if (liveUsersEl) {
+            liveUsersEl.textContent = baseUsers.toLocaleString();
+        }
+    }, 3000);
+}
+
+// Start signup ticker with fake user signups
+function startSignupTicker() {
+    let currentUserIndex = 0;
+    const users = fakeUsers[currentLanguage] || fakeUsers.en;
+    
+    signupTickerInterval = setInterval(() => {
+        const user = users[currentUserIndex];
+        
+        if (signupTickerEl) {
+            signupTickerEl.innerHTML = `
+                <div class="signup-item">
+                    <span class="user-info">${user.name} from ${user.location}</span>
+                    <span class="signup-time">joined ${user.time}</span>
+                </div>
+            `;
+        }
+        
+        currentUserIndex = (currentUserIndex + 1) % users.length;
+    }, 4000);
+}
+
+// Handle claim spot button click
+function handleClaimSpot() {
+    showLoadingModal();
+    
+    // Simulate loading steps
+    setTimeout(() => {
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step2').classList.add('active');
+    }, 1500);
+    
+    setTimeout(() => {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step2').classList.add('completed');
+        document.getElementById('step3').classList.add('active');
+    }, 3000);
+    
+    setTimeout(() => {
+        document.getElementById('step3').classList.remove('active');
+        document.getElementById('step3').classList.add('completed');
+        
+        // Redirect to affiliate URL
+        window.location.href = CONFIG.AFFILIATE_URL;
+    }, 4500);
+}
+
+// Clean up intervals when page unloads
+window.addEventListener('beforeunload', () => {
+    if (countdownInterval) clearInterval(countdownInterval);
+    if (liveUsersInterval) clearInterval(liveUsersInterval);
+    if (signupTickerInterval) clearInterval(signupTickerInterval);
+});
+
