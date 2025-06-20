@@ -2,6 +2,29 @@
 // Replace these values with your actual affiliate URLs and settings
 
 const CONFIG = {
+    // Affiliate URLs for different languages
+    affiliateUrls: {
+        en: 'https://exl-redircd.com/?a=25528&c=395863',
+        nl: 'https://exl-redircd.com/?a=25528&c=395863',
+        de: 'https://exl-redircd.com/?a=25528&c=395863'
+    },
+    
+    // App Configuration
+    appName: 'Bitcoin 360 AI',
+    version: '1.0.0',
+    
+    // Default Settings
+    defaultLanguage: 'en',
+    defaultCurrency: 'USD',
+    
+    // Feature Flags
+    features: {
+        multiLanguage: true,
+        currencyConversion: true,
+        geolocation: true,
+        pwaInstall: true
+    },
+    
     // Affiliate URL - Replace this with your actual affiliate link
     AFFILIATE_URL: 'https://your-affiliate-link.com',
     
