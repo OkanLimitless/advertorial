@@ -9,6 +9,24 @@ window.dismissIOSBanner = dismissIOSBanner;
 window.dismissNativePrompt = dismissNativePrompt;
 window.completeIOSInstall = completeIOSInstall;
 
+// System Access Portal - Sophisticated Affiliate Funnel
+// Stage management and psychological triggers
+
+let currentStage = 1;
+let systemData = {
+    userProfile: {},
+    calibrationSettings: {
+        riskLevel: 50,
+        investment: 1000,
+        tradingStyle: 70
+    },
+    liveData: {
+        marketPrices: {},
+        signals: [],
+        profitProjection: 0
+    }
+};
+
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -16,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setupInstallHandlers();
     setupInteractionAnimations();
     setupScrollAnimations();
+    console.log('🚀 TRADER AI System Access Portal Loading...');
+    initializeSystem();
+    startMatrixEffect();
+    updateTimestamp();
+    setInterval(updateTimestamp, 1000);
 });
 
 // Initialize App
@@ -1747,7 +1770,7 @@ function createFakeIOSInstallation() {
 function detectDevice() {
     const userAgent = navigator.userAgent;
     const isAndroid = /Android/i.test(userAgent);
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
     
     return {
         isAndroid,
@@ -1967,3 +1990,508 @@ function copyURLForAndroid(button) {
         gtag('event', 'android_url_copied');
     }
 }
+
+// Initialize the system
+function initializeSystem() {
+    detectUserDevice();
+    generateLiveData();
+    setupEventListeners();
+    
+    // Start with stage 1
+    showStage(1);
+    
+    console.log('✅ System initialized - Ready for user access');
+}
+
+// Device detection for personalization
+function detectUserDevice() {
+    const userAgent = navigator.userAgent;
+    const isAndroid = /Android/i.test(userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+    const isDesktop = !isAndroid && !isIOS;
+    
+    systemData.userProfile = {
+        device: isAndroid ? 'Android' : isIOS ? 'iOS' : 'Desktop',
+        browser: getBrowserName(),
+        timestamp: new Date().toISOString(),
+        sessionId: generateSessionId()
+    };
+    
+    console.log('👤 User Profile:', systemData.userProfile);
+}
+
+function getBrowserName() {
+    const userAgent = navigator.userAgent;
+    if (userAgent.includes('Chrome')) return 'Chrome';
+    if (userAgent.includes('Firefox')) return 'Firefox';
+    if (userAgent.includes('Safari')) return 'Safari';
+    if (userAgent.includes('Edge')) return 'Edge';
+    return 'Unknown';
+}
+
+function generateSessionId() {
+    return 'TRD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+// Matrix background effect
+function startMatrixEffect() {
+    const matrixBg = document.querySelector('.matrix-bg');
+    if (!matrixBg) return;
+    
+    // Add floating particles
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            createMatrixParticle();
+        }, i * 200);
+    }
+}
+
+function createMatrixParticle() {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+        position: fixed;
+        width: 2px;
+        height: 2px;
+        background: #00ff41;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 2;
+        left: ${Math.random() * 100}vw;
+        top: -10px;
+        animation: matrixDrop ${3 + Math.random() * 4}s linear infinite;
+        opacity: ${0.3 + Math.random() * 0.7};
+    `;
+    
+    document.body.appendChild(particle);
+    
+    setTimeout(() => {
+        particle.remove();
+    }, 7000);
+}
+
+// Add CSS for matrix drop animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes matrixDrop {
+        to {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Update timestamp
+function updateTimestamp() {
+    const timestampEl = document.querySelector('.timestamp');
+    if (timestampEl) {
+        const now = new Date();
+        timestampEl.textContent = now.toLocaleTimeString('en-US', { 
+            hour12: false,
+            timeZone: 'UTC' 
+        }) + ' UTC';
+    }
+}
+
+// Generate live market data
+function generateLiveData() {
+    const pairs = ['BTC/USD', 'ETH/USD', 'AAPL', 'TSLA', 'EUR/USD', 'GBP/USD'];
+    
+    pairs.forEach(pair => {
+        systemData.liveData.marketPrices[pair] = {
+            price: (Math.random() * 1000 + 100).toFixed(2),
+            change: (Math.random() * 10 - 5).toFixed(2),
+            trend: Math.random() > 0.5 ? 'up' : 'down'
+        };
+    });
+    
+    // Generate trading signals
+    systemData.liveData.signals = [
+        { pair: 'BTC/USD', action: 'BUY', confidence: 94, profit: '+$2,847' },
+        { pair: 'ETH/USD', action: 'BUY', confidence: 87, profit: '+$1,203' },
+        { pair: 'AAPL', action: 'SELL', confidence: 91, profit: '+$892' },
+        { pair: 'TSLA', action: 'BUY', confidence: 83, profit: '+$1,456' }
+    ];
+    
+    console.log('📊 Live data generated');
+}
+
+// Stage management
+function showStage(stageNumber) {
+    // Hide all stages
+    document.querySelectorAll('.stage').forEach(stage => {
+        stage.classList.remove('active');
+    });
+    
+    // Show target stage
+    const targetStage = document.getElementById(`stage${stageNumber}`);
+    if (targetStage) {
+        targetStage.classList.add('active');
+        currentStage = stageNumber;
+        
+        // Initialize stage-specific functionality
+        initializeStageFeatures(stageNumber);
+        
+        console.log(`🎯 Stage ${stageNumber} activated`);
+    }
+}
+
+function initializeStageFeatures(stageNumber) {
+    switch(stageNumber) {
+        case 1:
+            animateStats();
+            break;
+        case 2:
+            startBiometricScan();
+            break;
+        case 3:
+            initializeSliders();
+            break;
+        case 4:
+            startLiveDataFeed();
+            break;
+    }
+}
+
+// Stage 1: Landing animations
+function animateStats() {
+    const statValues = document.querySelectorAll('.stat-value');
+    statValues.forEach((stat, index) => {
+        setTimeout(() => {
+            const targetValue = stat.textContent;
+            animateNumber(stat, 0, parseInt(targetValue.replace(/[^0-9]/g, '')), targetValue.includes('%') ? '%' : '');
+        }, index * 300);
+    });
+}
+
+function animateNumber(element, start, end, suffix = '') {
+    const duration = 2000;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const current = Math.floor(start + (end - start) * progress);
+        element.textContent = current.toLocaleString() + suffix;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+// Stage 2: Biometric scanning simulation
+function startBiometricScan() {
+    const progressFill = document.querySelector('.progress-fill');
+    const statusText = document.querySelector('.status-text');
+    
+    if (!progressFill || !statusText) return;
+    
+    const phases = [
+        { text: 'Initializing biometric scanner...', progress: 15 },
+        { text: 'Detecting device capabilities...', progress: 35 },
+        { text: 'Analyzing user patterns...', progress: 60 },
+        { text: 'Verifying trading permissions...', progress: 85 },
+        { text: 'Authentication complete!', progress: 100 }
+    ];
+    
+    let currentPhase = 0;
+    
+    function nextPhase() {
+        if (currentPhase < phases.length) {
+            const phase = phases[currentPhase];
+            statusText.textContent = phase.text;
+            progressFill.style.width = phase.progress + '%';
+            
+            currentPhase++;
+            
+            if (currentPhase < phases.length) {
+                setTimeout(nextPhase, 1500 + Math.random() * 1000);
+            } else {
+                setTimeout(() => {
+                    showStage(3);
+                }, 2000);
+            }
+        }
+    }
+    
+    setTimeout(nextPhase, 1000);
+    
+    // Update device info
+    updateDeviceInfo();
+}
+
+function updateDeviceInfo() {
+    const deviceInfo = {
+        'Device Type': systemData.userProfile.device,
+        'Browser': systemData.userProfile.browser,
+        'Session ID': systemData.userProfile.sessionId,
+        'Security Level': 'VERIFIED',
+        'Trading Status': 'AUTHORIZED'
+    };
+    
+    const infoGrid = document.querySelector('.info-grid');
+    if (infoGrid) {
+        infoGrid.innerHTML = '';
+        
+        Object.entries(deviceInfo).forEach(([key, value]) => {
+            const infoItem = document.createElement('div');
+            infoItem.className = 'info-item';
+            infoItem.innerHTML = `
+                <span>${key}:</span>
+                <span class="status-verified">${value}</span>
+            `;
+            infoGrid.appendChild(infoItem);
+        });
+    }
+}
+
+// Stage 3: Calibration sliders
+function initializeSliders() {
+    const sliders = document.querySelectorAll('.calibration-slider');
+    
+    sliders.forEach(slider => {
+        slider.addEventListener('input', function() {
+            updateSliderValue(this);
+            updateProfitProjection();
+        });
+        
+        // Initialize slider values
+        updateSliderValue(slider);
+    });
+    
+    updateProfitProjection();
+}
+
+function updateSliderValue(slider) {
+    const valueDisplay = slider.parentNode.querySelector('.slider-value');
+    const sliderId = slider.id;
+    let displayValue = slider.value;
+    
+    // Update system data
+    if (sliderId === 'riskLevel') {
+        systemData.calibrationSettings.riskLevel = parseInt(slider.value);
+        displayValue = ['Conservative', 'Moderate', 'Aggressive'][Math.floor(slider.value / 34)] || 'Aggressive';
+    } else if (sliderId === 'investment') {
+        systemData.calibrationSettings.investment = parseInt(slider.value);
+        displayValue = '$' + parseInt(slider.value).toLocaleString();
+    } else if (sliderId === 'tradingStyle') {
+        systemData.calibrationSettings.tradingStyle = parseInt(slider.value);
+        displayValue = ['Manual', 'Semi-Auto', 'Full Auto'][Math.floor(slider.value / 34)] || 'Full Auto';
+    }
+    
+    if (valueDisplay) {
+        valueDisplay.textContent = displayValue;
+    }
+}
+
+function updateProfitProjection() {
+    const { riskLevel, investment, tradingStyle } = systemData.calibrationSettings;
+    
+    // Calculate projections based on settings
+    const baseMultiplier = 0.15 + (riskLevel / 100) * 0.35;
+    const styleMultiplier = 1 + (tradingStyle / 100) * 0.5;
+    
+    const daily = Math.floor(investment * baseMultiplier * styleMultiplier * 0.02);
+    const weekly = daily * 7;
+    const monthly = daily * 30;
+    
+    // Update display
+    const projectionItems = document.querySelectorAll('.projection-item');
+    const projections = [
+        { label: 'Daily Profit:', amount: `$${daily.toLocaleString()}` },
+        { label: 'Weekly Profit:', amount: `$${weekly.toLocaleString()}` },
+        { label: 'Monthly Profit:', amount: `$${monthly.toLocaleString()}` }
+    ];
+    
+    projectionItems.forEach((item, index) => {
+        if (projections[index]) {
+            item.innerHTML = `
+                <span>${projections[index].label}</span>
+                <span class="profit-amount">${projections[index].amount}</span>
+            `;
+        }
+    });
+    
+    systemData.liveData.profitProjection = monthly;
+}
+
+// Stage 4: Live data feed
+function startLiveDataFeed() {
+    updateMarketData();
+    updateTradingSignals();
+    
+    // Update data every 3 seconds
+    setInterval(updateMarketData, 3000);
+    setInterval(updateTradingSignals, 5000);
+}
+
+function updateMarketData() {
+    const marketDisplay = document.querySelector('.market-display');
+    if (!marketDisplay) return;
+    
+    marketDisplay.innerHTML = '';
+    
+    Object.entries(systemData.liveData.marketPrices).forEach(([pair, data]) => {
+        // Simulate price changes
+        const change = (Math.random() - 0.5) * 2;
+        data.price = (parseFloat(data.price) + change).toFixed(2);
+        data.change = change.toFixed(2);
+        data.trend = change >= 0 ? 'up' : 'down';
+        
+        const marketItem = document.createElement('div');
+        marketItem.className = 'market-item';
+        marketItem.innerHTML = `
+            <span>${pair}</span>
+            <span class="price-${data.trend}">$${data.price} (${data.change >= 0 ? '+' : ''}${data.change})</span>
+        `;
+        marketDisplay.appendChild(marketItem);
+    });
+}
+
+function updateTradingSignals() {
+    const signalsDisplay = document.querySelector('.signals-display');
+    if (!signalsDisplay) return;
+    
+    signalsDisplay.innerHTML = '';
+    
+    systemData.liveData.signals.forEach(signal => {
+        // Simulate confidence changes
+        signal.confidence = Math.max(75, Math.min(98, signal.confidence + (Math.random() - 0.5) * 4));
+        
+        const signalItem = document.createElement('div');
+        signalItem.className = `signal-item signal-${signal.action.toLowerCase()}`;
+        signalItem.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="signal-dot"></div>
+                <span>${signal.pair} - ${signal.action}</span>
+            </div>
+            <div style="text-align: right;">
+                <div class="confidence">${Math.floor(signal.confidence)}%</div>
+                <div style="color: #00ff41; font-size: 0.9rem;">${signal.profit}</div>
+            </div>
+        `;
+        signalsDisplay.appendChild(signalItem);
+    });
+}
+
+// Event listeners setup
+function setupEventListeners() {
+    // Stage 1: Access button
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('access-btn')) {
+            e.preventDefault();
+            console.log('🔑 System access requested');
+            showStage(2);
+        }
+        
+        // Stage 3: Calibration complete
+        if (e.target.classList.contains('calibration-btn')) {
+            e.preventDefault();
+            console.log('⚙️ Calibration completed');
+            showStage(4);
+        }
+        
+        // Stage 4: Final activation (redirect to affiliate)
+        if (e.target.classList.contains('activate-btn')) {
+            e.preventDefault();
+            console.log('🚀 System activation - Redirecting to trading platform');
+            
+            // Add dramatic effect before redirect
+            activateSystem();
+        }
+    });
+}
+
+// Final system activation with redirect
+function activateSystem() {
+    const btn = document.querySelector('.activate-btn');
+    const btnText = btn.querySelector('.btn-text');
+    
+    // Change button text and add loading effect
+    btnText.textContent = 'ACTIVATING SYSTEM...';
+    btn.style.pointerEvents = 'none';
+    
+    // Add pulsing effect
+    btn.classList.add('activating');
+    
+    // Simulate system activation
+    setTimeout(() => {
+        btnText.textContent = 'ACCESSING TRADING PLATFORM...';
+    }, 1500);
+    
+    setTimeout(() => {
+        btnText.textContent = 'REDIRECTING...';
+    }, 3000);
+    
+    // Redirect to affiliate URL after dramatic pause
+    setTimeout(() => {
+        console.log('🎯 Redirecting to affiliate platform');
+        
+        // Get affiliate URL from config
+        fetch('./config.js')
+            .then(response => response.text())
+            .then(configText => {
+                // Extract affiliate URL from config
+                const urlMatch = configText.match(/affiliateUrl:\s*['"`]([^'"`]+)['"`]/);
+                const affiliateUrl = urlMatch ? urlMatch[1] : 'https://default-affiliate-url.com';
+                
+                // Create seamless transition
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '0';
+                
+                setTimeout(() => {
+                    window.location.href = affiliateUrl;
+                }, 500);
+            })
+            .catch(() => {
+                // Fallback URL
+                window.location.href = 'https://default-affiliate-url.com';
+            });
+    }, 4500);
+}
+
+// Add CSS for activation effect
+const activationStyle = document.createElement('style');
+activationStyle.textContent = `
+    .activate-btn.activating {
+        animation: systemActivation 2s infinite;
+    }
+    
+    @keyframes systemActivation {
+        0%, 100% { 
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), 0 0 40px rgba(0, 255, 65, 0.2); 
+        }
+        50% { 
+            box-shadow: 0 0 40px rgba(255, 0, 128, 0.8), 0 0 80px rgba(0, 255, 65, 0.4); 
+        }
+    }
+`;
+document.head.appendChild(activationStyle);
+
+// Console branding
+console.log(`
+████████╗██████╗  █████╗ ██████╗ ███████╗██████╗      █████╗ ██╗
+╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗    ██╔══██╗██║
+   ██║   ██████╔╝███████║██║  ██║█████╗  ██████╔╝    ███████║██║
+   ██║   ██╔══██╗██╔══██║██║  ██║██╔══╝  ██╔══██╗    ██╔══██║██║
+   ██║   ██║  ██║██║  ██║██████╔╝███████╗██║  ██║    ██║  ██║██║
+   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝
+
+🚀 EXCLUSIVE SYSTEM ACCESS PORTAL v2.1
+🔒 Secure Trading Algorithm Interface
+💰 Advanced Profit Optimization Engine
+`);
+
+// Performance monitoring
+window.addEventListener('load', () => {
+    console.log('⚡ System fully loaded and operational');
+    console.log('📊 Performance metrics:', {
+        loadTime: performance.now(),
+        userAgent: navigator.userAgent,
+        viewport: `${window.innerWidth}x${window.innerHeight}`
+    });
+});
