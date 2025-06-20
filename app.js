@@ -182,9 +182,9 @@ async function handleInstallClick() {
     const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     
     if (isIOS && isSafari) {
-        // iOS Safari - trigger native Add to Home Screen prompt
-        console.log('Safari iOS detected - triggering native prompt');
-        triggerIOSInstallPrompt();
+        // iOS Safari - show real installation guidance
+        console.log('Safari iOS detected - showing real installation guidance');
+        showRealIOSInstallGuide();
         return;
     }
     
@@ -224,6 +224,133 @@ async function handleInstallClick() {
         console.log('No deferred prompt available - showing fallback');
         showNotification('Install not available on this browser. Try Chrome or Edge!', 'warning');
     }
+}
+
+// Show Real iOS Install Guide
+function showRealIOSInstallGuide() {
+    // Create a full-screen overlay with step-by-step instructions
+    const overlay = document.createElement('div');
+    overlay.id = 'realIOSInstallGuide';
+    overlay.innerHTML = `
+        <div class="ios-install-overlay">
+            <div class="ios-install-container">
+                <div class="ios-install-header">
+                    <button class="ios-close-btn" id="closeIOSGuide">&times;</button>
+                    <div class="ios-app-icon">
+                        <img src="/icons/icon-192x192.png" alt="Trader AI" />
+                    </div>
+                    <h2>Install Trader AI</h2>
+                    <p>Follow these steps to add Trader AI to your home screen</p>
+                </div>
+                
+                <div class="ios-install-steps">
+                    <div class="ios-step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Tap the Share Button</h3>
+                            <p>Look at the bottom of your Safari browser and tap the share icon</p>
+                            <div class="share-icon-demo">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#007AFF">
+                                    <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .9 2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="step-arrow">↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ios-step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Find "Add to Home Screen"</h3>
+                            <p>Scroll through the options and tap "Add to Home Screen"</p>
+                            <div class="add-icon-demo">
+                                <div class="demo-button">
+                                    <span class="demo-icon">📱</span>
+                                    <span>Add to Home Screen</span>
+                                </div>
+                            </div>
+                            <div class="step-arrow">↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ios-step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Tap "Add"</h3>
+                            <p>Confirm the installation by tapping "Add" in the top right</p>
+                            <div class="add-button-demo">
+                                <button class="demo-add-btn">Add</button>
+                            </div>
+                            <div class="success-message">
+                                <span class="success-icon">✅</span>
+                                <span>Trader AI will appear on your home screen!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ios-install-footer">
+                    <button class="ios-got-it-btn" id="iosGotItBtn">
+                        Got it! Let me try
+                    </button>
+                    <p class="ios-help-text">Need help? The share button is at the bottom of Safari</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add styles
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 50000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeInOverlay 0.3s ease;
+        padding: 20px;
+        box-sizing: border-box;
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Add event listeners
+    document.getElementById('closeIOSGuide').addEventListener('click', closeIOSInstallGuide);
+    document.getElementById('iosGotItBtn').addEventListener('click', closeIOSInstallGuide);
+    
+    // Add step progression animation
+    setTimeout(() => {
+        document.getElementById('step2').classList.add('active');
+    }, 2000);
+    
+    setTimeout(() => {
+        document.getElementById('step3').classList.add('active');
+    }, 4000);
+    
+    // Track that we showed the guide
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'ios_install_guide_shown', {
+            'platform': 'ios_safari'
+        });
+    }
+}
+
+// Close iOS Install Guide
+function closeIOSInstallGuide() {
+    const guide = document.getElementById('realIOSInstallGuide');
+    if (guide) {
+        guide.style.animation = 'fadeOutOverlay 0.3s ease';
+        setTimeout(() => {
+            guide.remove();
+        }, 300);
+    }
+    
+    // Show encouraging notification
+    showNotification('🎯 Look for the share button at the bottom of Safari!', 'info');
 }
 
 // Trigger iOS Install Prompt
