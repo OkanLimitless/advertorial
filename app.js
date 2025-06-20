@@ -109,18 +109,14 @@ const translations = {
     en: {
         // Welcome Screen
         app_name: "Bitcoin 360 AI",
-        app_tagline: "The World's Most Advanced Crypto Trading Platform",
-        active_traders: "Active Traders",
-        avg_daily: "Avg Daily Profit",
-        success_rate: "Success Rate",
-        ai_powered: "AI-Powered Trading",
-        ai_desc: "Advanced algorithms analyze crypto markets 24/7",
-        bitcoin_focus: "Bitcoin & Crypto Focus", 
-        crypto_desc: "Trade Bitcoin, Ethereum, and top cryptocurrencies",
-        passive_income: "Passive Income",
-        passive_desc: "Earn while you sleep with automated trading",
-        start_trading: "Start Trading Now",
-        no_experience: "No trading experience required • AI does everything",
+        currency_symbol: "$",
+        earning_period: "Average Weekly Earnings",
+        user_count: "Join 847,000+ Users",
+        feature_ai: "AI Does Everything",
+        feature_passive: "Earn While You Sleep",
+        feature_simple: "100% Automated",
+        cta_button: "Get Started - It's Free",
+        cta_note: "No experience needed • Takes 2 minutes",
 
         // Demo Screen
         demo_wallet: "Your Bitcoin Trading Wallet",
@@ -157,18 +153,14 @@ const translations = {
     nl: {
         // Welcome Screen
         app_name: "Bitcoin 360 AI",
-        app_tagline: "'s Werelds Meest Geavanceerde Crypto Trading Platform",
-        active_traders: "Actieve Traders",
-        avg_daily: "Gem. Dagelijkse Winst",
-        success_rate: "Succespercentage",
-        ai_powered: "AI-Powered Trading",
-        ai_desc: "Geavanceerde algoritmes analyseren crypto markten 24/7",
-        bitcoin_focus: "Bitcoin & Crypto Focus",
-        crypto_desc: "Handel in Bitcoin, Ethereum en top cryptocurrencies",
-        passive_income: "Passief Inkomen",
-        passive_desc: "Verdien terwijl u slaapt met geautomatiseerde trading",
-        start_trading: "Nu Beginnen Met Handelen",
-        no_experience: "Geen trading ervaring vereist • AI doet alles",
+        currency_symbol: "€",
+        earning_period: "Gemiddelde Wekelijkse Verdiensten",
+        user_count: "Doe mee met 847.000+ Gebruikers",
+        feature_ai: "AI Doet Alles",
+        feature_passive: "Verdien Terwijl U Slaapt",
+        feature_simple: "100% Geautomatiseerd",
+        cta_button: "Begin Nu - Het Is Gratis",
+        cta_note: "Geen ervaring nodig • Duurt 2 minuten",
 
         // Demo Screen
         demo_wallet: "Uw Bitcoin Trading Wallet",
@@ -205,18 +197,14 @@ const translations = {
     de: {
         // Welcome Screen
         app_name: "Bitcoin 360 AI",
-        app_tagline: "Die weltweit fortschrittlichste Krypto-Trading-Plattform",
-        active_traders: "Aktive Trader",
-        avg_daily: "Durchschn. Täglicher Gewinn",
-        success_rate: "Erfolgsrate",
-        ai_powered: "KI-Powered Trading",
-        ai_desc: "Fortgeschrittene Algorithmen analysieren Krypto-Märkte 24/7",
-        bitcoin_focus: "Bitcoin & Krypto Focus",
-        crypto_desc: "Handeln Sie Bitcoin, Ethereum und Top-Kryptowährungen",
-        passive_income: "Passives Einkommen",
-        passive_desc: "Verdienen Sie im Schlaf mit automatisiertem Trading",
-        start_trading: "Jetzt Mit Trading Beginnen",
-        no_experience: "Keine Trading-Erfahrung erforderlich • KI macht alles",
+        currency_symbol: "€",
+        earning_period: "Durchschnittliche Wöchentliche Gewinne",
+        user_count: "Schließen Sie sich 847.000+ Nutzern an",
+        feature_ai: "KI Macht Alles",
+        feature_passive: "Verdienen Im Schlaf",
+        feature_simple: "100% Automatisiert",
+        cta_button: "Jetzt Starten - Kostenlos",
+        cta_note: "Keine Erfahrung nötig • Dauert 2 Minuten",
 
         // Demo Screen
         demo_wallet: "Ihr Bitcoin Trading Wallet",
@@ -344,9 +332,14 @@ function updateCurrencyDisplay() {
         const amount = element.getAttribute('data-amount');
         if (amount) {
             const convertedAmount = currentCurrency === 'EUR' ? (amount * 0.85).toFixed(0) : amount;
-            const symbol = currentCurrency === 'EUR' ? '€' : '$';
-            element.textContent = `${symbol}${convertedAmount}`;
+            element.textContent = convertedAmount;
         }
+    });
+    
+    // Update currency symbol
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
+    currencySymbols.forEach(element => {
+        element.textContent = currentCurrency === 'EUR' ? '€' : '$';
     });
     
     // Update demo balance currency
