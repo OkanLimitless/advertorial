@@ -269,21 +269,19 @@ class ElonBitcoinAI {
         this.redirectToAffiliate();
     }
 
-    async redirectToAffiliate() {
-        try {
-            // Try to get affiliate URL from API endpoint first
-            const response = await fetch('/api/affiliate');
-            const data = await response.json();
-            const affiliateUrl = data.url;
-            
-            console.log('Redirecting to:', affiliateUrl);
-            window.location.href = affiliateUrl;
-        } catch (error) {
-            // Fallback to hardcoded URL if API fails
-            console.log('API failed, using fallback URL');
-            const fallbackUrl = 'https://exl-redircd.com/?a=25528&c=395863';
-            window.location.href = fallbackUrl;
-        }
+    redirectToAffiliate() {
+        // Direct redirect to affiliate URL with tracking
+        const affiliateUrl = 'https://exl-redircd.com/?a=25528&c=395863';
+        const url = new URL(affiliateUrl);
+        
+        // Add tracking parameters
+        url.searchParams.set('utm_source', 'bitcoin360ai-pwa');
+        url.searchParams.set('utm_medium', 'elon-musk-landing');
+        url.searchParams.set('utm_campaign', 'tesla-ai-trading');
+        url.searchParams.set('t', Date.now());
+        
+        console.log('Redirecting to:', url.toString());
+        window.location.href = url.toString();
     }
 
     destroy() {

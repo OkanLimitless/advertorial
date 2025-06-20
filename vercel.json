@@ -63,13 +63,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/affiliate.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "env": {
-    "AFFILIATE_URL": "@affiliate-url"
-  }
+  ]
 } 
