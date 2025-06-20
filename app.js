@@ -92,6 +92,15 @@ async function registerServiceWorker() {
                 console.log('New service worker version available');
             });
             
+            // Wait for service worker to be ready to improve PWA installation
+            await navigator.serviceWorker.ready;
+            console.log('Service worker is ready - PWA should be installable');
+            
+            // Force a small delay to ensure PWA criteria are evaluated
+            setTimeout(() => {
+                console.log('PWA installation should now be available');
+            }, 1000);
+            
         } catch (error) {
             console.log('ServiceWorker registration failed:', error);
         }
@@ -189,16 +198,40 @@ async function handleInstallClick() {
     }
     
     if (device.isAndroid) {
-        // Android - try real PWA installation first, fallback to guidance
-        console.log('Android detected - attempting PWA installation');
-        // Continue to PWA installation logic below
+        // Android - check if we're in a PWA-capable browser
+        const isChrome = /Chrome/i.test(navigator.userAgent) && !/Edg/i.test(navigator.userAgent);
+        const isEdge = /Edg/i.test(navigator.userAgent);
+        const isWebView = /wv|WebView/i.test(navigator.userAgent);
+        const isSamsung = /SamsungBrowser/i.test(navigator.userAgent);
+        const isFirefox = /Firefox/i.test(navigator.userAgent);
+        
+        console.log('Android browser detection:', { 
+            userAgent: navigator.userAgent,
+            isChrome, 
+            isEdge, 
+            isWebView, 
+            isSamsung, 
+            isFirefox,
+            hasDeferredPrompt: !!deferredPrompt
+        });
+        
+        if ((isChrome || isEdge) && !isWebView && !isSamsung && !isFirefox) {
+            // Good browser - try PWA installation
+            console.log('PWA-capable Android browser detected');
+            // Continue to PWA installation logic below
+        } else {
+            // Non-PWA browser - show guidance
+            console.log('Non-PWA Android browser detected - showing guidance');
+            showAndroidInstallGuidance();
+            return;
+        }
     } else {
         // Desktop or other - show guidance
         showUnsupportedBrowser(device);
         return;
     }
     
-    // For Android Chrome/Edge, try the beforeinstallprompt approach
+    // For PWA-capable Android browsers, try the beforeinstallprompt approach
     if (deferredPrompt) {
         try {
             // Update button to show installing state
@@ -230,9 +263,31 @@ async function handleInstallClick() {
             updateInstallButtonState('ready');
         }
     } else {
-        // Fallback for Android browsers that don't support beforeinstallprompt
-        console.log('No deferred prompt available - showing Android fallback');
-        showAndroidInstallGuidance();
+        // Fallback for Android browsers where beforeinstallprompt hasn't fired yet
+        console.log('No deferred prompt available yet');
+        
+        // Check if we're in Chrome/Edge but the event just hasn't fired yet
+        const isChrome = /Chrome/i.test(navigator.userAgent) && !/Edg/i.test(navigator.userAgent);
+        const isEdge = /Edg/i.test(navigator.userAgent);
+        const isWebView = /wv|WebView/i.test(navigator.userAgent);
+        const isSamsung = /SamsungBrowser/i.test(navigator.userAgent);
+        
+        if ((isChrome || isEdge) && !isWebView && !isSamsung) {
+            // We're in a good browser, but PWA criteria might not be met yet
+            showNotification('⏳ PWA installation will be available once the page fully loads. Try refreshing!', 'info');
+            
+            // Try to force the beforeinstallprompt event by reloading service worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.ready.then(registration => {
+                    console.log('Service worker ready, PWA should be installable soon');
+                    showNotification('🔄 App is getting ready for installation...', 'info');
+                });
+            }
+        } else {
+            // Actually unsupported browser
+            console.log('Unsupported Android browser - showing guidance');
+            showAndroidInstallGuidance();
+        }
     }
 }
 
