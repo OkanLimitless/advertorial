@@ -177,20 +177,24 @@ async function handleInstallClick() {
     console.log('Install button clicked');
     trackInstallAttempt();
     
-    // Use enhanced device detection
+    // Use simple device detection
     const device = detectDevice();
-    console.log('Enhanced device detection:', device);
+    console.log('Device detection:', device);
     
-    // Handle unsupported browsers first
-    if (!device.supportsPWA) {
-        showUnsupportedBrowser(device);
+    if (device.isIOS) {
+        // iOS - show fake App Store installation experience
+        console.log('iOS detected - showing fake installation experience');
+        showIOSInstallation();
         return;
     }
     
-    if (device.isIOS && device.isSafari) {
-        // iOS Safari - show fake App Store installation experience
-        console.log('Safari iOS detected - showing fake installation experience');
-        showIOSInstallation();
+    if (device.isAndroid) {
+        // Android - try real PWA installation first, fallback to guidance
+        console.log('Android detected - attempting PWA installation');
+        // Continue to PWA installation logic below
+    } else {
+        // Desktop or other - show guidance
+        showUnsupportedBrowser(device);
         return;
     }
     
@@ -226,9 +230,9 @@ async function handleInstallClick() {
             updateInstallButtonState('ready');
         }
     } else {
-        // Fallback for browsers that don't support beforeinstallprompt
-        console.log('No deferred prompt available - showing fallback');
-        showNotification('Install not available on this browser. Try Chrome or Edge!', 'warning');
+        // Fallback for Android browsers that don't support beforeinstallprompt
+        console.log('No deferred prompt available - showing Android fallback');
+        showAndroidInstallGuidance();
     }
 }
 
@@ -1684,32 +1688,16 @@ function createFakeIOSInstallation() {
     }, 500);
 }
 
-// Enhanced device and browser detection
+// Simple device detection - Android vs iOS
 function detectDevice() {
     const userAgent = navigator.userAgent;
     const isAndroid = /Android/i.test(userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-    const isChrome = /Chrome/i.test(userAgent) && !/Edg/i.test(userAgent);
-    const isEdge = /Edg/i.test(userAgent);
-    const isSafari = /Safari/i.test(userAgent) && !/Chrome/i.test(userAgent);
-    const isFirefox = /Firefox/i.test(userAgent);
-    const isSamsungBrowser = /SamsungBrowser/i.test(userAgent);
-    const isWebView = /wv|WebView/i.test(userAgent);
-    
-    // More specific Chrome detection for Android
-    const isChromeAndroid = isAndroid && isChrome && !isWebView && !isSamsungBrowser;
-    const isEdgeAndroid = isAndroid && isEdge && !isWebView;
     
     return {
         isAndroid,
         isIOS,
-        isChrome: isChromeAndroid,
-        isEdge: isEdgeAndroid,
-        isSafari,
-        isFirefox,
-        isSamsungBrowser,
-        isWebView,
-        supportsPWA: isChromeAndroid || isEdgeAndroid || (isIOS && isSafari)
+        supportsPWA: isAndroid || isIOS // We'll handle both with different approaches
     };
 }
 
@@ -1786,5 +1774,141 @@ function showUnsupportedBrowser(device) {
             'browser': device.isSamsungBrowser ? 'samsung' : device.isFirefox ? 'firefox' : 'other',
             'platform': device.isAndroid ? 'android' : device.isIOS ? 'ios' : 'desktop'
         });
+    }
+}
+
+// Android-specific installation guidance
+function showAndroidInstallGuidance() {
+    const modal = document.createElement('div');
+    modal.className = 'android-install-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📱 Install Trader AI</h3>
+                    <button class="close-btn" onclick="this.closest('.android-install-modal').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <p>To install Trader AI as an app on your Android device, you need to use <strong>Chrome</strong> or <strong>Microsoft Edge</strong>.</p>
+                    
+                    <div class="browser-options">
+                        <div class="browser-option">
+                            <div class="browser-icon">🌐</div>
+                            <div class="browser-info">
+                                <h4>Google Chrome</h4>
+                                <p>Best support for app installation</p>
+                                <button class="browser-btn" onclick="openInChrome()">Open in Chrome</button>
+                            </div>
+                        </div>
+                        
+                        <div class="browser-option">
+                            <div class="browser-icon">🔷</div>
+                            <div class="browser-info">
+                                <h4>Microsoft Edge</h4>
+                                <p>Also supports app installation</p>
+                                <button class="browser-btn" onclick="openInEdge()">Open in Edge</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-copy">
+                        <p><strong>Quick option:</strong> Copy this URL and paste it in Chrome or Edge</p>
+                        <div class="url-copy">
+                            <input type="text" value="${window.location.href}" readonly>
+                            <button onclick="copyURLForAndroid(this)">Copy URL</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="this.closest('.android-install-modal').remove()">
+                        I'll use my current browser
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Track Android guidance shown
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'android_install_guidance_shown', {
+            'user_agent': navigator.userAgent
+        });
+    }
+}
+
+// Helper functions for Android guidance
+function openInChrome() {
+    const chromeURL = `googlechrome://${window.location.href}`;
+    const fallbackURL = `https://play.google.com/store/apps/details?id=com.android.chrome`;
+    
+    try {
+        window.location.href = chromeURL;
+        // If Chrome isn't installed, redirect to Play Store after a delay
+        setTimeout(() => {
+            window.open(fallbackURL, '_blank');
+        }, 2000);
+    } catch (error) {
+        window.open(fallbackURL, '_blank');
+    }
+    
+    // Track attempt
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'android_chrome_redirect_attempted');
+    }
+}
+
+function openInEdge() {
+    const edgeURL = `microsoft-edge:${window.location.href}`;
+    const fallbackURL = `https://play.google.com/store/apps/details?id=com.microsoft.emmx`;
+    
+    try {
+        window.location.href = edgeURL;
+        // If Edge isn't installed, redirect to Play Store after a delay
+        setTimeout(() => {
+            window.open(fallbackURL, '_blank');
+        }, 2000);
+    } catch (error) {
+        window.open(fallbackURL, '_blank');
+    }
+    
+    // Track attempt
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'android_edge_redirect_attempted');
+    }
+}
+
+function copyURLForAndroid(button) {
+    const url = window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+            button.textContent = 'Copied!';
+            button.style.background = '#4CAF50';
+            
+            setTimeout(() => {
+                button.textContent = 'Copy URL';
+                button.style.background = '';
+            }, 2000);
+            
+            showNotification('📋 URL copied! Now paste it in Chrome or Edge', 'success');
+        });
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        button.textContent = 'Copied!';
+        showNotification('📋 URL copied! Now paste it in Chrome or Edge', 'success');
+    }
+    
+    // Track copy
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'android_url_copied');
     }
 }
