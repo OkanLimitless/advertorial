@@ -2,8 +2,8 @@
 // Replace these values with your actual affiliate URLs and settings
 
 const CONFIG = {
-    // Your main affiliate URL - users will be directed here after "installing" the app
-    AFFILIATE_URL: 'https://your-affiliate-platform.com/signup?ref=your-id',
+    // Affiliate URL - Replace this with your actual affiliate link
+    AFFILIATE_URL: 'https://your-affiliate-link.com',
     
     // Alternative/backup URLs (optional)
     BACKUP_URLS: [
@@ -23,6 +23,7 @@ const CONFIG = {
         // App branding
         APP_NAME: 'Trader AI',
         APP_DESCRIPTION: 'The Automated Trading System for 2025',
+        APP_VERSION: '2.1.0',
         
         // Loading screen text
         LOADING_TEXT: 'Initializing Trader AI',
@@ -53,7 +54,46 @@ const CONFIG = {
         
         // Company/affiliate name
         COMPANY_NAME: 'Your Trading Company'
-    }
+    },
+    
+    // Installation Settings
+    INSTALLATION_DELAY: 3000, // 3 seconds
+    
+    // Animation Settings
+    LIVE_COUNT_UPDATE_INTERVAL: 3000, // 3 seconds
+    SPOTS_DECREASE_INTERVAL: 8000, // 8 seconds
+    TRADING_DATA_UPDATE_INTERVAL: 5000, // 5 seconds
+    
+    // Initial Values
+    INITIAL_LIVE_COUNT: 47293,
+    INITIAL_SPOTS_REMAINING: 127,
+    
+    // Countdown Timer (hours:minutes:seconds)
+    COUNTDOWN_START: {
+        hours: 23,
+        minutes: 45,
+        seconds: 12
+    },
+    
+    // Trading Data Simulation
+    BASE_BALANCE: 47382.91,
+    BASE_DAILY_CHANGE: 2847.33,
+    
+    // Company References (for social proof)
+    FEATURED_COMPANIES: [
+        'Goldman Sachs',
+        'JP Morgan',
+        'Morgan Stanley',
+        'BlackRock'
+    ],
+    
+    // Press Mentions
+    PRESS_MENTIONS: [
+        { outlet: 'TechCrunch', quote: 'Trader AI is revolutionizing how people invest...' },
+        { outlet: 'Forbes', quote: 'The future of automated trading is here...' },
+        { outlet: 'Bloomberg', quote: 'AI trading platform sees 500% user growth...' },
+        { outlet: 'CNBC', quote: 'Ordinary people making extraordinary profits...' }
+    ]
 };
 
 // Function to get the current affiliate URL with tracking parameters

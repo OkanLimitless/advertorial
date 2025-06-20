@@ -27,18 +27,467 @@ let systemData = {
     }
 };
 
-// DOM Content Loaded
+// Configuration
+const config = {
+    affiliateUrl: 'https://your-affiliate-link.com',
+    appName: 'Trader AI',
+    installationDelay: 3000
+};
+
+// DOM Elements
+let downloadBtns;
+let liveCount;
+let countdown;
+let spotsLeft;
+
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
+    initializeElements();
+    startLiveCounter();
+    startCountdown();
+    startSpotsCounter();
+    setupDownloadButtons();
+    animateStats();
+    setupPWAInstallation();
     registerServiceWorker();
-    setupInstallHandlers();
-    setupInteractionAnimations();
-    setupScrollAnimations();
-    console.log('🚀 TRADER AI System Access Portal Loading...');
-    initializeSystem();
-    startMatrixEffect();
-    updateTimestamp();
-    setInterval(updateTimestamp, 1000);
+});
+
+function initializeElements() {
+    downloadBtns = document.querySelectorAll('#downloadBtn, #downloadBtn2');
+    liveCount = document.getElementById('live-count');
+    countdown = document.getElementById('countdown');
+    spotsLeft = document.getElementById('spotsLeft');
+}
+
+// Live user counter animation
+function startLiveCounter() {
+    if (!liveCount) return;
+    
+    const baseCount = 47293;
+    let currentCount = baseCount;
+    
+    setInterval(() => {
+        // Random fluctuation between -5 and +10
+        const change = Math.floor(Math.random() * 16) - 5;
+        currentCount = Math.max(45000, Math.min(50000, currentCount + change));
+        liveCount.textContent = currentCount.toLocaleString();
+    }, 3000);
+}
+
+// Countdown timer
+function startCountdown() {
+    if (!countdown) return;
+    
+    let hours = 23;
+    let minutes = 45;
+    let seconds = 12;
+    
+    setInterval(() => {
+        seconds--;
+        if (seconds < 0) {
+            seconds = 59;
+            minutes--;
+            if (minutes < 0) {
+                minutes = 59;
+                hours--;
+                if (hours < 0) {
+                    hours = 23;
+                    minutes = 59;
+                    seconds = 59;
+                }
+            }
+        }
+        
+        const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        countdown.textContent = timeString;
+    }, 1000);
+}
+
+// Spots remaining counter
+function startSpotsCounter() {
+    if (!spotsLeft) return;
+    
+    let spots = 127;
+    
+    setInterval(() => {
+        if (Math.random() < 0.3 && spots > 50) { // 30% chance to decrease
+            spots--;
+            spotsLeft.textContent = spots;
+        }
+    }, 8000);
+}
+
+// Animate statistics on scroll
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const finalValue = target.textContent;
+                
+                // Extract number from text
+                const numMatch = finalValue.match(/[\d.]+/);
+                if (numMatch) {
+                    const num = parseFloat(numMatch[0]);
+                    animateNumber(target, 0, num, finalValue);
+                }
+            }
+        });
+    });
+    
+    stats.forEach(stat => observer.observe(stat));
+}
+
+function animateNumber(element, start, end, finalText) {
+    const duration = 2000;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const current = start + (end - start) * easeOutQuart(progress);
+        
+        if (finalText.includes('$')) {
+            element.textContent = '$' + current.toFixed(1) + 'B+';
+        } else if (finalText.includes('K+')) {
+            element.textContent = Math.floor(current) + 'K+';
+        } else if (finalText.includes('%')) {
+            element.textContent = Math.floor(current) + '%';
+        } else {
+            element.textContent = Math.floor(current);
+        }
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = finalText;
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+}
+
+// Setup download buttons
+function setupDownloadButtons() {
+    downloadBtns.forEach(btn => {
+        btn.addEventListener('click', handleDownload);
+    });
+}
+
+function handleDownload(event) {
+    const button = event.target.closest('.download-btn');
+    if (!button) return;
+    
+    // Disable button and show loading
+    button.disabled = true;
+    const originalContent = button.innerHTML;
+    
+    button.innerHTML = `
+        <div class="btn-content">
+            <span class="btn-icon">⏳</span>
+            <div class="btn-text">
+                <div class="btn-main">Preparing Download...</div>
+                <div class="btn-sub">Please wait</div>
+            </div>
+        </div>
+    `;
+    
+    // Show installation modal
+    showInstallationModal();
+    
+    // Simulate installation process
+    setTimeout(() => {
+        button.innerHTML = originalContent;
+        button.disabled = false;
+    }, config.installationDelay);
+}
+
+function showInstallationModal() {
+    // Create modal overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'installation-modal-overlay';
+    overlay.innerHTML = `
+        <div class="installation-modal">
+            <div class="modal-header">
+                <div class="app-icon">
+                    <img src="icons/icon-152x152.png" alt="Trader AI">
+                </div>
+                <h3>Installing Trader AI</h3>
+                <p>Setting up your trading account...</p>
+            </div>
+            
+            <div class="installation-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="installProgress"></div>
+                </div>
+                <div class="progress-text" id="progressText">Initializing...</div>
+            </div>
+            
+            <div class="installation-steps">
+                <div class="step" id="step1">
+                    <span class="step-icon">⏳</span>
+                    <span>Downloading app files...</span>
+                </div>
+                <div class="step" id="step2">
+                    <span class="step-icon">⏳</span>
+                    <span>Setting up AI algorithms...</span>
+                </div>
+                <div class="step" id="step3">
+                    <span class="step-icon">⏳</span>
+                    <span>Creating your account...</span>
+                </div>
+                <div class="step" id="step4">
+                    <span class="step-icon">⏳</span>
+                    <span>Finalizing installation...</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal styles
+    const modalStyles = document.createElement('style');
+    modalStyles.textContent = `
+        .installation-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .installation-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header .app-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .modal-header .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .modal-header p {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        
+        .installation-progress {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .installation-steps {
+            text-align: left;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #6c757d;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .step.active {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .step.completed {
+            color: #28a745;
+        }
+        
+        .step.completed .step-icon {
+            color: #28a745;
+        }
+        
+        .step-icon {
+            font-size: 18px;
+            width: 20px;
+        }
+    `;
+    
+    document.head.appendChild(modalStyles);
+    document.body.appendChild(overlay);
+    
+    // Start installation animation
+    simulateInstallation();
+}
+
+function simulateInstallation() {
+    const progressFill = document.getElementById('installProgress');
+    const progressText = document.getElementById('progressText');
+    const steps = ['step1', 'step2', 'step3', 'step4'];
+    
+    const phases = [
+        { progress: 25, text: 'Downloading app files...', duration: 1000 },
+        { progress: 50, text: 'Setting up AI algorithms...', duration: 800 },
+        { progress: 75, text: 'Creating your account...', duration: 600 },
+        { progress: 100, text: 'Installation complete!', duration: 500 }
+    ];
+    
+    let currentPhase = 0;
+    
+    function nextPhase() {
+        if (currentPhase >= phases.length) {
+            // Installation complete - redirect to affiliate
+            setTimeout(() => {
+                window.location.href = config.affiliateUrl;
+            }, 1000);
+            return;
+        }
+        
+        const phase = phases[currentPhase];
+        
+        // Update progress bar
+        progressFill.style.width = phase.progress + '%';
+        progressText.textContent = phase.text;
+        
+        // Update step status
+        if (currentPhase > 0) {
+            const prevStep = document.getElementById(steps[currentPhase - 1]);
+            prevStep.classList.remove('active');
+            prevStep.classList.add('completed');
+            prevStep.querySelector('.step-icon').textContent = '✅';
+        }
+        
+        if (currentPhase < steps.length) {
+            const currentStep = document.getElementById(steps[currentPhase]);
+            currentStep.classList.add('active');
+            currentStep.querySelector('.step-icon').textContent = '⏳';
+        }
+        
+        currentPhase++;
+        setTimeout(nextPhase, phase.duration);
+    }
+    
+    // Start the installation process
+    setTimeout(nextPhase, 500);
+}
+
+// PWA Installation (for real PWA functionality)
+function setupPWAInstallation() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+    });
+}
+
+// Service Worker Registration
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+}
+
+// Update live trading data in phone mockup
+function updateTradingData() {
+    const balanceAmount = document.querySelector('.balance-amount');
+    const balanceChange = document.querySelector('.balance-change');
+    const tradeProfits = document.querySelectorAll('.trade-profit');
+    
+    if (balanceAmount) {
+        // Simulate small balance changes
+        const currentBalance = 47382.91;
+        const change = (Math.random() - 0.5) * 100;
+        const newBalance = currentBalance + change;
+        const dailyChange = 2847.33 + change;
+        const percentage = ((dailyChange / (newBalance - dailyChange)) * 100).toFixed(1);
+        
+        balanceAmount.textContent = `$${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        balanceChange.textContent = `+$${dailyChange.toFixed(2)} (+${percentage}%) today`;
+    }
+    
+    // Update individual trade profits
+    tradeProfits.forEach(profit => {
+        const currentValue = parseFloat(profit.textContent.replace(/[+$,]/g, ''));
+        const change = (Math.random() - 0.3) * 10; // Slight upward bias
+        const newValue = Math.max(0, currentValue + change);
+        profit.textContent = `+$${newValue.toFixed(2)}`;
+    });
+}
+
+// Update trading data every 5 seconds
+setInterval(updateTradingData, 5000);
+
+// Smooth scrolling for anchor links
+document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href') && e.target.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 });
 
 // Initialize App
