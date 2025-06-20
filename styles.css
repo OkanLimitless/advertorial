@@ -21,12 +21,23 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--primary-bg);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -42,10 +53,13 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .screen.active {
@@ -126,7 +140,8 @@ body {
 .welcome-container {
     position: relative;
     z-index: 2;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -134,6 +149,7 @@ body {
     max-width: 380px;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 
 .welcome-header {
@@ -258,12 +274,14 @@ body {
 .demo-container {
     position: relative;
     z-index: 2;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .demo-header {
@@ -558,12 +576,14 @@ body {
 .quiz-container {
     position: relative;
     z-index: 2;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .quiz-header {
@@ -707,13 +727,15 @@ body {
 .signup-container {
     position: relative;
     z-index: 2;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 20px;
     max-width: 400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .signup-header {
@@ -914,75 +936,258 @@ body {
 }
 
 /* Responsive Design */
-@media (min-width: 768px) {
+
+/* Large screens (desktops) */
+@media (min-width: 1024px) {
     .welcome-container,
     .demo-container,
     .quiz-container,
     .signup-container {
-        max-width: 450px;
+        max-width: 420px;
+        padding: 30px;
     }
     
-    .crypto-features {
-        grid-template-columns: 1fr;
+    .app-logo {
+        font-size: 4.5rem;
+        margin-bottom: 25px;
     }
     
-    .hero-stats {
-        padding: 25px 20px;
+    .app-title {
+        font-size: 2.8rem;
     }
     
-    .stat-number {
-        font-size: 1.6rem;
+    .earning-highlight {
+        margin-bottom: 50px;
+    }
+    
+    .currency-symbol {
+        font-size: 3rem;
+    }
+    
+    .amount {
+        font-size: 4.5rem;
+    }
+    
+    .earning-period {
+        font-size: 1.3rem;
+    }
+    
+    .user-count {
+        font-size: 1.1rem;
+    }
+    
+    .simple-features {
+        gap: 25px;
+        margin-bottom: 60px;
+    }
+    
+    .feature-item {
+        font-size: 1.3rem;
+        gap: 18px;
+    }
+    
+    .feature-emoji {
+        font-size: 2.2rem;
+    }
+    
+    .main-cta-btn {
+        padding: 20px 45px;
+        font-size: 1.3rem;
+        max-width: 350px;
+    }
+    
+    .cta-note {
+        font-size: 1rem;
     }
 }
 
+/* Medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .welcome-container,
+    .demo-container,
+    .quiz-container,
+    .signup-container {
+        max-width: 400px;
+        padding: 25px;
+    }
+    
+    .welcome-header {
+        margin-bottom: 45px;
+    }
+    
+    .app-logo {
+        font-size: 4.2rem;
+        margin-bottom: 22px;
+    }
+    
+    .app-title {
+        font-size: 2.6rem;
+    }
+    
+    .earning-highlight {
+        margin-bottom: 45px;
+    }
+    
+    .currency-symbol {
+        font-size: 2.8rem;
+    }
+    
+    .amount {
+        font-size: 4.2rem;
+    }
+    
+    .earning-period {
+        font-size: 1.2rem;
+    }
+    
+    .user-count {
+        font-size: 1rem;
+    }
+    
+    .simple-features {
+        gap: 22px;
+        margin-bottom: 55px;
+    }
+    
+    .feature-item {
+        font-size: 1.2rem;
+        gap: 16px;
+    }
+    
+    .feature-emoji {
+        font-size: 2rem;
+    }
+    
+    .main-cta-btn {
+        padding: 19px 42px;
+        font-size: 1.25rem;
+        max-width: 340px;
+    }
+    
+    .cta-note {
+        font-size: 0.95rem;
+    }
+}
+
+/* Small screens (large phones) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .welcome-container,
+    .demo-container,
+    .quiz-container,
+    .signup-container {
+        padding: 20px;
+        max-width: 380px;
+    }
+    
+    .welcome-header {
+        margin-bottom: 35px;
+    }
+    
+    .app-logo {
+        font-size: 3.8rem;
+        margin-bottom: 18px;
+    }
+    
+    .app-title {
+        font-size: 2.3rem;
+    }
+    
+    .earning-highlight {
+        margin-bottom: 35px;
+    }
+    
+    .currency-symbol {
+        font-size: 2.3rem;
+    }
+    
+    .amount {
+        font-size: 3.8rem;
+    }
+    
+    .earning-period {
+        font-size: 1.05rem;
+    }
+    
+    .user-count {
+        font-size: 0.9rem;
+    }
+    
+    .simple-features {
+        gap: 18px;
+        margin-bottom: 45px;
+    }
+    
+    .feature-item {
+        font-size: 1.05rem;
+        gap: 14px;
+    }
+    
+    .feature-emoji {
+        font-size: 1.7rem;
+    }
+    
+    .main-cta-btn {
+        padding: 17px 38px;
+        font-size: 1.15rem;
+        max-width: 310px;
+    }
+    
+    .cta-note {
+        font-size: 0.9rem;
+    }
+}
+
+/* Very small screens (small phones) */
 @media (max-width: 480px) {
     .welcome-container,
     .demo-container,
     .quiz-container,
     .signup-container {
         padding: 15px;
+        max-width: 100%;
     }
     
     .welcome-header {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
     
     .app-logo {
-        font-size: 3rem;
+        font-size: 3.2rem;
         margin-bottom: 15px;
     }
     
     .app-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
     
     .earning-highlight {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
     
     .currency-symbol {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .amount {
-        font-size: 3rem;
+        font-size: 3.2rem;
     }
     
     .earning-period {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
     }
     
     .user-count {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .simple-features {
         gap: 15px;
-        margin-bottom: 40px;
+        margin-bottom: 35px;
     }
     
     .feature-item {
-        font-size: 1rem;
+        font-size: 0.95rem;
         gap: 12px;
     }
     
@@ -991,17 +1196,161 @@ body {
     }
     
     .main-cta-btn {
-        padding: 16px 32px;
-        font-size: 1.1rem;
-        max-width: 300px;
+        padding: 15px 30px;
+        font-size: 1.05rem;
+        max-width: 290px;
     }
     
     .cta-note {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .balance-amount {
         font-size: 2rem;
+    }
+}
+
+/* Extra small screens (very old phones) */
+@media (max-width: 360px) {
+    .welcome-container,
+    .demo-container,
+    .quiz-container,
+    .signup-container {
+        padding: 12px;
+    }
+    
+    .welcome-header {
+        margin-bottom: 20px;
+    }
+    
+    .app-logo {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .app-title {
+        font-size: 1.6rem;
+    }
+    
+    .earning-highlight {
+        margin-bottom: 20px;
+    }
+    
+    .currency-symbol {
+        font-size: 1.5rem;
+        margin-right: 3px;
+    }
+    
+    .amount {
+        font-size: 2.8rem;
+    }
+    
+    .earning-period {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    
+    .user-count {
+        font-size: 0.75rem;
+    }
+    
+    .simple-features {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+    
+    .feature-item {
+        font-size: 0.85rem;
+        gap: 10px;
+    }
+    
+    .feature-emoji {
+        font-size: 1.3rem;
+    }
+    
+    .main-cta-btn {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+        max-width: 270px;
+    }
+    
+    .cta-note {
+        font-size: 0.75rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .welcome-container {
+        justify-content: flex-start;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .welcome-header {
+        margin-bottom: 15px;
+    }
+    
+    .app-logo {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .app-title {
+        font-size: 1.8rem;
+    }
+    
+    .earning-highlight {
+        margin-bottom: 20px;
+    }
+    
+    .currency-symbol {
+        font-size: 1.8rem;
+    }
+    
+    .amount {
+        font-size: 2.8rem;
+    }
+    
+    .earning-period {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .user-count {
+        font-size: 0.75rem;
+    }
+    
+    .simple-features {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .feature-item {
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+    
+    .feature-emoji {
+        font-size: 1.2rem;
+    }
+    
+    .main-cta-btn {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+    
+    .cta-note {
+        font-size: 0.75rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .app-logo,
+    .feature-emoji {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
 
