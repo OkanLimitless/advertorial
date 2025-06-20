@@ -1,87 +1,93 @@
 {
-  "name": "Trader AI - Automated Trading System",
-  "short_name": "Trader AI",
-  "description": "The most advanced automated trading system for 2025. AI-powered analysis, 24/7 trading, for beginners & professionals.",
-  "start_url": "/app.html",
+  "name": "AutoWealth AI - Automated Trading Assistant",
+  "short_name": "AutoWealth AI",
+  "description": "AI-powered trading assistant that generates passive income while you sleep. Join 847,000+ users earning $2,847 weekly on average.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0f23",
-  "theme_color": "#1a1a2e",
+  "background_color": "#1a365d",
+  "theme_color": "#1a365d",
   "orientation": "portrait-primary",
   "scope": "/",
-  "categories": ["finance", "business", "productivity"],
-  "lang": "en-US",
+  "categories": ["finance", "productivity", "business"],
+  "lang": "en",
   "dir": "ltr",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
     {
       "name": "View Dashboard",
       "short_name": "Dashboard",
-      "description": "View your trading dashboard",
-      "url": "/#dashboard",
+      "description": "Check your trading performance and profits",
+      "url": "/app.html?view=dashboard",
       "icons": [
         {
-          "src": "icons/shortcut-dashboard.png",
+          "src": "icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Live Signals",
-      "short_name": "Signals",
-      "description": "Check live trading signals",
-      "url": "/#signals",
+      "name": "Withdraw Funds",
+      "short_name": "Withdraw",
+      "description": "Access your trading profits",
+      "url": "/app.html?view=withdraw",
       "icons": [
         {
-          "src": "icons/shortcut-signals.png",
+          "src": "icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -89,18 +95,10 @@
   ],
   "screenshots": [
     {
-      "src": "screenshots/desktop-1.png",
-      "sizes": "1280x720",
+      "src": "icons/icon-512x512.png",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Trader AI Dashboard - Desktop View"
-    },
-    {
-      "src": "screenshots/mobile-1.png",
-      "sizes": "375x812",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Trader AI Dashboard - Mobile View"
+      "sizes": "512x512",
+      "form_factor": "narrow"
     }
   ],
   "prefer_related_applications": false,

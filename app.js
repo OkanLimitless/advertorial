@@ -2971,3 +2971,340 @@ window.addEventListener('load', () => {
         viewport: `${window.innerWidth}x${window.innerHeight}`
     });
 });
+
+// AutoWealth AI - Progressive Web App
+class AutoWealthApp {
+    constructor() {
+        this.init();
+        this.setupEventListeners();
+        this.startLiveCounters();
+        this.setupPWA();
+    }
+
+    init() {
+        console.log('AutoWealth AI initialized');
+        this.animateNumbers();
+        this.updateLiveStats();
+    }
+
+    setupEventListeners() {
+        // CTA Button clicks
+        const ctaButtons = document.querySelectorAll('#mainCTA, #finalCTA');
+        ctaButtons.forEach(btn => {
+            btn.addEventListener('click', () => this.handleCTAClick());
+        });
+
+        // Modal close
+        const closeModal = document.getElementById('closeModal');
+        if (closeModal) {
+            closeModal.addEventListener('click', () => this.closeInstallModal());
+        }
+
+        // Click outside modal to close
+        const modal = document.getElementById('installModal');
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.closeInstallModal();
+                }
+            });
+        }
+    }
+
+    handleCTAClick() {
+        // Show installation modal
+        this.showInstallModal();
+        
+        // Start fake installation process
+        setTimeout(() => {
+            this.startInstallProcess();
+        }, 1000);
+    }
+
+    showInstallModal() {
+        const modal = document.getElementById('installModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    closeInstallModal() {
+        const modal = document.getElementById('installModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    startInstallProcess() {
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        
+        if (!progressFill || !progressText) return;
+
+        const steps = [
+            { progress: 20, text: 'Verifying account eligibility...' },
+            { progress: 40, text: 'Connecting to trading servers...' },
+            { progress: 60, text: 'Loading AI algorithms...' },
+            { progress: 80, text: 'Initializing secure wallet...' },
+            { progress: 100, text: 'Installation complete!' }
+        ];
+
+        let currentStep = 0;
+
+        const updateProgress = () => {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                progressFill.style.width = step.progress + '%';
+                progressText.textContent = step.text;
+                currentStep++;
+                
+                if (currentStep < steps.length) {
+                    setTimeout(updateProgress, 2000);
+                } else {
+                    // Installation complete - redirect to affiliate
+                    setTimeout(() => {
+                        this.redirectToAffiliate();
+                    }, 1500);
+                }
+            }
+        };
+
+        updateProgress();
+    }
+
+    redirectToAffiliate() {
+        // Import affiliate URL from config
+        import('./config.js').then(config => {
+            window.location.href = config.AFFILIATE_URL;
+        }).catch(() => {
+            // Fallback if config fails
+            window.location.href = 'https://example.com/affiliate';
+        });
+    }
+
+    startLiveCounters() {
+        // Live earnings counter
+        this.animateCounter('liveEarnings', 847293, 950000, 30000);
+        
+        // Active users counter
+        this.animateCounter('activeUsers', 23847, 25000, 1000);
+        
+        // Today's profit animation
+        this.animateProfitCounter();
+        
+        // Update trading list
+        this.updateTradingList();
+    }
+
+    animateCounter(elementId, start, end, duration) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const range = end - start;
+        const increment = range / (duration / 50);
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment + Math.random() * 10;
+            if (current >= end) {
+                current = end;
+                clearInterval(timer);
+            }
+            
+            element.textContent = this.formatNumber(Math.floor(current));
+        }, 50);
+    }
+
+    animateProfitCounter() {
+        const profitElement = document.getElementById('todayProfit');
+        if (!profitElement) return;
+
+        let currentProfit = 847.32;
+        
+        setInterval(() => {
+            // Random profit increase between $0.50 - $5.00
+            const increase = (Math.random() * 4.5 + 0.5);
+            currentProfit += increase;
+            
+            profitElement.textContent = '$' + currentProfit.toFixed(2);
+        }, 8000 + Math.random() * 12000); // Random interval 8-20 seconds
+    }
+
+    updateTradingList() {
+        const tradesList = document.querySelector('.trades-list');
+        if (!tradesList) return;
+
+        const pairs = ['EUR/USD', 'GBP/JPY', 'BTC/USD', 'ETH/USD', 'AUD/CAD', 'USD/CHF', 'NZD/USD'];
+        
+        setInterval(() => {
+            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+            const profit = (Math.random() * 100 + 20).toFixed(2);
+            
+            // Create new trade item
+            const newTrade = document.createElement('div');
+            newTrade.className = 'trade-item';
+            newTrade.style.opacity = '0';
+            newTrade.style.transform = 'translateY(-20px)';
+            
+            newTrade.innerHTML = `
+                <div class="trade-info">
+                    <span class="trade-pair">${randomPair}</span>
+                    <span class="trade-time">just now</span>
+                </div>
+                <div class="trade-profit positive">+$${profit}</div>
+            `;
+            
+            // Add to top of list
+            tradesList.insertBefore(newTrade, tradesList.firstChild);
+            
+            // Animate in
+            setTimeout(() => {
+                newTrade.style.transition = 'all 0.3s ease';
+                newTrade.style.opacity = '1';
+                newTrade.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Remove oldest trade if more than 3
+            const trades = tradesList.querySelectorAll('.trade-item');
+            if (trades.length > 3) {
+                const oldestTrade = trades[trades.length - 1];
+                oldestTrade.style.transition = 'all 0.3s ease';
+                oldestTrade.style.opacity = '0';
+                oldestTrade.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    if (oldestTrade.parentNode) {
+                        oldestTrade.parentNode.removeChild(oldestTrade);
+                    }
+                }, 300);
+            }
+            
+        }, 15000 + Math.random() * 10000); // Random interval 15-25 seconds
+    }
+
+    formatNumber(num) {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        } else if (num >= 1000) {
+            return (num / 1000).toFixed(0) + 'K';
+        }
+        return num.toLocaleString();
+    }
+
+    animateNumbers() {
+        // Animate profit amount on page load
+        const profitAmount = document.getElementById('todayProfit');
+        if (profitAmount) {
+            let start = 0;
+            const end = 847.32;
+            const duration = 2000;
+            const increment = end / (duration / 50);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= end) {
+                    start = end;
+                    clearInterval(timer);
+                }
+                profitAmount.textContent = '$' + start.toFixed(2);
+            }, 50);
+        }
+    }
+
+    updateLiveStats() {
+        // Update live stats every few seconds
+        setInterval(() => {
+            const liveEarnings = document.getElementById('liveEarnings');
+            const activeUsers = document.getElementById('activeUsers');
+            
+            if (liveEarnings) {
+                const current = parseInt(liveEarnings.textContent.replace(/[,$]/g, ''));
+                const increase = Math.floor(Math.random() * 1000 + 500);
+                liveEarnings.textContent = '$' + (current + increase).toLocaleString();
+            }
+            
+            if (activeUsers) {
+                const current = parseInt(activeUsers.textContent.replace(/[,]/g, ''));
+                const change = Math.floor(Math.random() * 20 - 10); // +/- 10 users
+                activeUsers.textContent = (current + change).toLocaleString();
+            }
+        }, 30000); // Update every 30 seconds
+    }
+
+    setupPWA() {
+        // Check if PWA is installable
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('PWA install prompt available');
+        });
+
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
+
+        // Handle app installed
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('AutoWealth AI was installed');
+        });
+    }
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new AutoWealthApp();
+});
+
+// Smooth scrolling for anchor links
+document.addEventListener('click', (e) => {
+    if (e.target.matches('a[href^="#"]')) {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+});
+
+// Add scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.step, .testimonial, .stat-card');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Export for module usage
+export default AutoWealthApp;

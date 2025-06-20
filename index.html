@@ -3,158 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader AI by Elon Musk - Revolutionary Trading Platform | Free Access</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>AutoWealth AI - Automated Trading Assistant</title>
+    <meta name="description" content="AI-powered trading assistant that generates passive income while you sleep. Join 847,000+ users earning $2,847 weekly on average.">
+    
+    <!-- PWA Configuration -->
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AutoWealth AI">
+    
+    <!-- Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
-    <meta name="theme-color" content="#1a73e8">
-    <meta name="description" content="Elon Musk's revolutionary AI trading platform - democratizing wealth creation for everyone. Free access to the same AI technology used by Tesla and SpaceX.">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Live Earnings Banner -->
+    <div class="live-banner">
+        <div class="container">
+            <div class="live-indicator">
+                <span class="pulse-dot"></span>
+                <span>LIVE</span>
+            </div>
+            <div class="live-earnings">
+                <span id="liveEarnings">$847,293</span> earned by users in the last 24 hours
+            </div>
+            <div class="live-users">
+                <span id="activeUsers">23,847</span> users currently earning
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <nav class="nav">
-                <div class="logo">
-                    <div class="logo-img">🚀</div>
-                    <div class="logo-text">
-                        <div class="logo-main">Trader AI</div>
-                        <div class="logo-sub">by Elon Musk</div>
-                    </div>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-                <div class="nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#testimonials">Success Stories</a>
-                    <a href="#download" class="nav-cta">Get Free Access</a>
+                <span>AutoWealth AI</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="stat-number">847K+</span>
+                    <span class="stat-label">Active Users</span>
                 </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Elon's Message Banner -->
-    <section class="elon-message">
-        <div class="container">
-            <div class="message-content">
-                <div class="elon-avatar">
-                    <div class="avatar-circle">EM</div>
-                    <div class="verified-badge">✓</div>
-                </div>
-                <div class="message-text">
-                    <h3>"I'm giving away my personal AI trading system for free"</h3>
-                    <p>"After making billions with Tesla and SpaceX, I want to democratize wealth creation. This is the same AI that manages my personal portfolio. Time to give back to the people." - <strong>Elon Musk</strong></p>
-                    <div class="message-meta">
-                        <span class="timestamp">Posted 2 hours ago</span>
-                        <span class="engagement">2.3M views • 847K likes</span>
-                    </div>
+                <div class="stat">
+                    <span class="stat-number">$2,847</span>
+                    <span class="stat-label">Avg Weekly</span>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-badge">
-                        <span class="badge-icon">🎯</span>
-                        <span>Elon's Personal AI Trading System</span>
-                    </div>
-                    <h1>The Same AI That Built My $200B Fortune</h1>
-                    <p class="hero-subtitle">I've used this exact system to generate billions. Now I'm releasing it to the public for free. No catches, no hidden fees. Just my way of giving back to humanity.</p>
+                    <h1>New AI Does Your Trading While You Sleep</h1>
+                    <p class="hero-subtitle">Join 847,000+ people earning an average of <strong>$2,847 per week</strong> with our automated wealth assistant. No experience needed.</p>
                     
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <div class="stat-number">$247B</div>
-                            <div class="stat-label">Elon's Net Worth</div>
+                    <div class="hero-features">
+                        <div class="feature">
+                            <span class="feature-icon">🤖</span>
+                            <span>100% Automated Trading</span>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">94.7%</div>
-                            <div class="stat-label">Win Rate</div>
+                        <div class="feature">
+                            <span class="feature-icon">💰</span>
+                            <span>Daily Profit Withdrawals</span>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">2.1M</div>
-                            <div class="stat-label">Users in 24hrs</div>
+                        <div class="feature">
+                            <span class="feature-icon">🛡️</span>
+                            <span>Bank-Level Security</span>
                         </div>
                     </div>
 
-                    <div class="hero-cta">
-                        <button id="downloadBtn" class="download-btn primary">
-                            <div class="btn-content">
-                                <span class="btn-icon">🚀</span>
-                                <div class="btn-text">
-                                    <div class="btn-main">Download Elon's AI Free</div>
-                                    <div class="btn-sub">Limited time - No payment required</div>
-                                </div>
-                            </div>
+                    <div class="cta-section">
+                        <button class="cta-button" id="mainCTA">
+                            Get Free Access Now
+                            <span class="cta-subtitle">Setup takes 2 minutes</span>
                         </button>
-                        <div class="download-info">
-                            <div class="urgency">
-                                <span class="countdown-label">Free access ends in:</span>
-                                <span id="countdown" class="countdown">23:45:12</span>
-                            </div>
-                            <div class="social-proof">
-                                <span id="live-count">2,847,293</span> people downloading now
-                            </div>
-                        </div>
+                        <p class="cta-note">
+                            <span class="security-badge">🔒</span>
+                            Your information is 100% secure. No credit card required.
+                        </p>
                     </div>
                 </div>
 
                 <div class="hero-visual">
-                    <div class="phone-mockup">
-                        <div class="phone-frame">
-                            <div class="phone-screen">
-                                <div class="app-header">
-                                    <div class="app-title">Elon's Trader AI</div>
-                                    <div class="status-indicator">
-                                        <span class="status-dot"></span>
-                                        <span>AI ACTIVE</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="portfolio-card">
-                                    <div class="portfolio-header">
-                                        <h3>Portfolio Balance</h3>
-                                        <div class="time-frame">Today</div>
-                                    </div>
-                                    <div class="balance-amount">$47,382.91</div>
-                                    <div class="balance-change">+$2,847.33 (+6.4%) today</div>
-                                </div>
+                    <div class="dashboard-preview">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Your AutoWealth Dashboard</div>
+                            <div class="dashboard-status">
+                                <span class="status-dot active"></span>
+                                AI Active
+                            </div>
+                        </div>
+                        
+                        <div class="profit-display">
+                            <div class="profit-label">Today's Profit</div>
+                            <div class="profit-amount" id="todayProfit">$847.32</div>
+                            <div class="profit-change">+$127.43 (+17.8%) since morning</div>
+                        </div>
 
-                                <div class="ai-insights">
-                                    <h4>🤖 AI Recommendations</h4>
-                                    <div class="insight-item">
-                                        <span class="symbol">TSLA</span>
-                                        <span class="action buy">BUY</span>
-                                        <span class="confidence">98% confidence</span>
-                                    </div>
-                                    <div class="insight-item">
-                                        <span class="symbol">NVDA</span>
-                                        <span class="action buy">BUY</span>
-                                        <span class="confidence">94% confidence</span>
-                                    </div>
-                                    <div class="insight-item">
-                                        <span class="symbol">BTC</span>
-                                        <span class="action hold">HOLD</span>
-                                        <span class="confidence">87% confidence</span>
-                                    </div>
+                        <div class="trades-list">
+                            <div class="trade-item">
+                                <div class="trade-info">
+                                    <span class="trade-pair">EUR/USD</span>
+                                    <span class="trade-time">2 min ago</span>
                                 </div>
-
-                                <div class="recent-trades">
-                                    <h4>Recent Wins</h4>
-                                    <div class="trade-item">
-                                        <span class="trade-symbol">AAPL</span>
-                                        <span class="trade-profit">+$234.50</span>
-                                    </div>
-                                    <div class="trade-item">
-                                        <span class="trade-symbol">GOOGL</span>
-                                        <span class="trade-profit">+$567.80</span>
-                                    </div>
-                                    <div class="trade-item">
-                                        <span class="trade-symbol">AMZN</span>
-                                        <span class="trade-profit">+$892.30</span>
-                                    </div>
+                                <div class="trade-profit positive">+$43.21</div>
+                            </div>
+                            <div class="trade-item">
+                                <div class="trade-info">
+                                    <span class="trade-pair">BTC/USD</span>
+                                    <span class="trade-time">5 min ago</span>
                                 </div>
+                                <div class="trade-profit positive">+$89.15</div>
+                            </div>
+                            <div class="trade-item">
+                                <div class="trade-info">
+                                    <span class="trade-pair">GBP/JPY</span>
+                                    <span class="trade-time">8 min ago</span>
+                                </div>
+                                <div class="trade-profit positive">+$67.83</div>
                             </div>
                         </div>
                     </div>
@@ -163,69 +142,42 @@
         </div>
     </section>
 
-    <!-- Elon's Endorsement -->
-    <section class="elon-endorsement">
+    <!-- How It Works -->
+    <section class="how-it-works">
         <div class="container">
-            <div class="endorsement-content">
-                <div class="endorsement-quote">
-                    <div class="quote-mark">"</div>
-                    <p>This AI system has been my secret weapon for years. It's how I funded Tesla, SpaceX, and Neuralink. I believe everyone deserves access to the tools that create real wealth. That's why I'm releasing this for free - forever.</p>
-                    <div class="quote-attribution">
-                        <div class="attribution-info">
-                            <strong>Elon Musk</strong>
-                            <span>CEO of Tesla, SpaceX & X</span>
-                        </div>
-                        <div class="musk-signature">Elon</div>
+            <h2>How It Works (It's Surprisingly Simple)</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Get Free Access</h3>
+                        <p>Sign up in 2 minutes. No credit card needed, no hidden fees.</p>
                     </div>
                 </div>
-                <div class="endorsement-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">$2.8T</div>
-                        <div class="stat-desc">Generated by this AI</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">98.7%</div>
-                        <div class="stat-desc">Success rate</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">24/7</div>
-                        <div class="stat-desc">Automated trading</div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Qualification Call</h3>
+                        <p>Our team calls to verify you're eligible and walks you through the setup.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>The Technology Behind My Success</h2>
-                <p>The same neural networks powering Tesla's Autopilot, now applied to financial markets</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3>Neural Network AI</h3>
-                    <p>Advanced machine learning algorithms trained on 20+ years of market data. The same tech that powers Tesla's self-driving cars.</p>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>AI Takes Over</h3>
+                        <p>Sit back and relax. The AI trades 24/7 while you earn passive income.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h3>SpaceX-Grade Security</h3>
-                    <p>Military-grade encryption and security protocols. Your data is safer than government secrets.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast Execution</h3>
-                    <p>Trades executed in microseconds using the same infrastructure that runs Starlink satellites.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Precision Targeting</h3>
-                    <p>AI identifies profitable opportunities with 94.7% accuracy - the highest success rate in the industry.</p>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Withdraw Daily</h3>
+                        <p>Access your profits anytime. Most users withdraw $400+ daily.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,177 +186,126 @@
     <!-- Social Proof -->
     <section class="social-proof">
         <div class="container">
-            <div class="proof-header">
-                <h2>Trusted by Millions Worldwide</h2>
-                <p>Join the revolution that's democratizing wealth creation</p>
-            </div>
-
-            <div class="company-logos">
-                <div class="logo-item">Tesla</div>
-                <div class="logo-item">SpaceX</div>
-                <div class="logo-item">Neuralink</div>
-                <div class="logo-item">The Boring Company</div>
-                <div class="logo-item">X (Twitter)</div>
-            </div>
-
-            <div class="live-stats">
-                <div class="live-stat">
-                    <div class="stat-number" id="live-users">2,847,293</div>
-                    <div class="stat-label">Active users right now</div>
-                </div>
-                <div class="live-stat">
-                    <div class="stat-number">$847M</div>
-                    <div class="stat-label">Profits generated today</div>
-                </div>
-                <div class="live-stat">
-                    <div class="stat-number" id="spotsLeft">73</div>
-                    <div class="stat-label">Free spots remaining</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success Stories -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>Real People, Real Results</h2>
-                <p>See how Elon's AI is changing lives around the world</p>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
+            <h2>What Our Users Are Saying</h2>
+            
+            <div class="testimonials">
+                <div class="testimonial">
                     <div class="testimonial-header">
                         <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%234285f4'/%3E%3Ctext x='30' y='36' text-anchor='middle' fill='white' font-family='Arial' font-size='24' font-weight='bold'%3ESM%3C/text%3E%3C/svg%3E" alt="Sarah">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234299e1'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3ESM%3C/text%3E%3C/svg%3E" alt="Sarah M.">
                         </div>
                         <div class="user-info">
                             <div class="user-name">Sarah M.</div>
-                            <div class="user-location">Teacher from Texas</div>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="user-location">Teacher, Austin TX</div>
+                        </div>
+                        <div class="social-actions">
+                            <span class="likes">❤️ 247</span>
+                            <span class="time">3h</span>
                         </div>
                     </div>
-                    <p>"I made $47,000 in my first month! As a teacher, I never thought I could afford to invest. Elon's AI changed everything. Thank you for giving this away for free!"</p>
-                    <div class="profit-badge">+$47,000 in 30 days</div>
+                    <div class="testimonial-content">
+                        "I was skeptical at first, but after the qualification call, everything made sense. I've been earning $300-500 daily for 3 months now. It's literally changed my life. No more stress about bills!"
+                    </div>
+                    <div class="testimonial-footer">
+                        <span class="earnings-badge">Earned $47,832 total</span>
+                    </div>
                 </div>
 
-                <div class="testimonial-card">
+                <div class="testimonial">
                     <div class="testimonial-header">
                         <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%2334a853'/%3E%3Ctext x='30' y='36' text-anchor='middle' fill='white' font-family='Arial' font-size='24' font-weight='bold'%3EMJ%3C/text%3E%3C/svg%3E" alt="Mike">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2348bb78'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EMJ%3C/text%3E%3C/svg%3E" alt="Mike J.">
                         </div>
                         <div class="user-info">
                             <div class="user-name">Mike J.</div>
-                            <div class="user-location">Retired Veteran</div>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="user-location">Retired, Phoenix AZ</div>
+                        </div>
+                        <div class="social-actions">
+                            <span class="likes">❤️ 189</span>
+                            <span class="time">5h</span>
                         </div>
                     </div>
-                    <p>"Started with $500, now I'm at $23,000! The AI works while I sleep. Elon, you're a legend for sharing this with regular people like us."</p>
-                    <div class="profit-badge">4,500% return</div>
+                    <div class="testimonial-content">
+                        "Retirement wasn't going as planned until I found AutoWealth. The AI works even when I'm sleeping or playing golf. Made $2,100 just this week. My wife thinks I'm a genius 😂"
+                    </div>
+                    <div class="testimonial-footer">
+                        <span class="earnings-badge">Earned $63,247 total</span>
+                    </div>
                 </div>
 
-                <div class="testimonial-card">
+                <div class="testimonial">
                     <div class="testimonial-header">
                         <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23ea4335'/%3E%3Ctext x='30' y='36' text-anchor='middle' fill='white' font-family='Arial' font-size='24' font-weight='bold'%3ELR%3C/text%3E%3C/svg%3E" alt="Lisa">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ed8936'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EJR%3C/text%3E%3C/svg%3E" alt="Jessica R.">
                         </div>
                         <div class="user-info">
-                            <div class="user-name">Lisa R.</div>
-                            <div class="user-location">Single Mom, California</div>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="user-name">Jessica R.</div>
+                            <div class="user-location">Nurse, Miami FL</div>
+                        </div>
+                        <div class="social-actions">
+                            <span class="likes">❤️ 312</span>
+                            <span class="time">1d</span>
                         </div>
                     </div>
-                    <p>"This AI paid off my student loans in 3 months! $89,000 in profits so far. I can finally provide for my kids without stress. Elon is changing the world!"</p>
-                    <div class="profit-badge">+$89,000 total</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="user-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23fbbc04'/%3E%3Ctext x='30' y='36' text-anchor='middle' fill='white' font-family='Arial' font-size='24' font-weight='bold'%3EDW%3C/text%3E%3C/svg%3E" alt="David">
-                        </div>
-                        <div class="user-info">
-                            <div class="user-name">David W.</div>
-                            <div class="user-location">College Student</div>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
+                    <div class="testimonial-content">
+                        "Working 12-hour shifts, I had no time for investing. AutoWealth does everything automatically. The qualification call was super helpful - they explained everything clearly. Now I make more from this than my nursing job!"
                     </div>
-                    <p>"Made $12,000 while studying for finals! The AI does everything automatically. Now I can focus on school without worrying about money. Thanks Elon!"</p>
-                    <div class="profit-badge">+$12,000 passive</div>
+                    <div class="testimonial-footer">
+                        <span class="earnings-badge">Earned $89,156 total</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Press Coverage -->
-    <section class="press-coverage">
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
-            <h2>Global Media Coverage</h2>
-            <div class="press-grid">
-                <div class="press-item">
-                    <div class="press-logo">CNN</div>
-                    <p>"Musk's latest gift to humanity could revolutionize personal finance forever"</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">847,293</div>
+                    <div class="stat-label">Active Users</div>
                 </div>
-                <div class="press-item">
-                    <div class="press-logo">Forbes</div>
-                    <p>"The AI system behind Elon's $200B fortune is now free for everyone"</p>
+                <div class="stat-card">
+                    <div class="stat-number">$2,847</div>
+                    <div class="stat-label">Average Weekly Earnings</div>
                 </div>
-                <div class="press-item">
-                    <div class="press-logo">CNBC</div>
-                    <p>"Wall Street panics as Musk democratizes billion-dollar trading algorithms"</p>
+                <div class="stat-card">
+                    <div class="stat-number">94.7%</div>
+                    <div class="stat-label">Success Rate</div>
                 </div>
-                <div class="press-item">
-                    <div class="press-logo">Bloomberg</div>
-                    <p>"Elon Musk's free AI creates 10,000 new millionaires in first week"</p>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">AI Trading</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Final CTA -->
-    <section id="download" class="final-cta">
+    <section class="final-cta">
         <div class="container">
             <div class="cta-content">
-                <div class="cta-text">
-                    <h2>Get Elon's AI Before It's Too Late</h2>
-                    <p>Free access is ending soon. Don't miss your chance to use the same AI that built a $200B fortune.</p>
-                    
-                    <div class="urgency-indicators">
-                        <div class="indicator">
-                            <span class="indicator-label">Time remaining:</span>
-                            <span id="countdown2" class="countdown">23:45:12</span>
-                        </div>
-                        <div class="indicator">
-                            <span class="indicator-label">Free spots left:</span>
-                            <span id="spotsLeft2" class="spots-count">73</span>
-                        </div>
+                <h2>Ready to Start Earning?</h2>
+                <p>Join 847,000+ people who are already building wealth with AI. Setup takes 2 minutes.</p>
+                
+                <button class="cta-button large" id="finalCTA">
+                    Get Free Access Now
+                    <span class="cta-subtitle">No credit card required</span>
+                </button>
+                
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <span class="trust-icon">🔒</span>
+                        <span>Bank-Level Security</span>
                     </div>
-                </div>
-
-                <div class="cta-action">
-                    <button id="downloadBtn2" class="download-btn primary large">
-                        <div class="btn-content">
-                            <span class="btn-icon">🚀</span>
-                            <div class="btn-text">
-                                <div class="btn-main">Download Elon's AI Now</div>
-                                <div class="btn-sub">100% Free - No Credit Card Required</div>
-                            </div>
-                        </div>
-                    </button>
-                    
-                    <div class="trust-signals">
-                        <div class="trust-item">
-                            <span class="trust-icon">🔒</span>
-                            <span>Bank-level security</span>
-                        </div>
-                        <div class="trust-item">
-                            <span class="trust-icon">✅</span>
-                            <span>Verified by Elon Musk</span>
-                        </div>
-                        <div class="trust-item">
-                            <span class="trust-icon">🌍</span>
-                            <span>2.8M+ users worldwide</span>
-                        </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">✅</span>
+                        <span>No Hidden Fees</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💯</span>
+                        <span>100% Automated</span>
                     </div>
                 </div>
             </div>
@@ -415,47 +316,55 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-logo">
-                        <div class="logo">
-                            <div class="logo-img">🚀</div>
-                            <div class="logo-text">
-                                <div class="logo-main">Trader AI</div>
-                                <div class="logo-sub">by Elon Musk</div>
-                            </div>
-                        </div>
-                        <p>Democratizing wealth creation through artificial intelligence.</p>
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
                     </div>
-                    
-                    <div class="footer-links">
-                        <div class="link-group">
-                            <h4>Elon's Companies</h4>
-                            <a href="#">Tesla</a>
-                            <a href="#">SpaceX</a>
-                            <a href="#">Neuralink</a>
-                            <a href="#">The Boring Company</a>
-                        </div>
-                        
-                        <div class="link-group">
-                            <h4>Support</h4>
-                            <a href="#">Help Center</a>
-                            <a href="#">Contact Us</a>
-                            <a href="#">Community</a>
-                        </div>
-                    </div>
+                    <span>AutoWealth AI</span>
                 </div>
-                
-                <div class="footer-bottom">
-                    <div class="footer-disclaimer">
-                        <p><strong>Disclaimer:</strong> This AI system is provided free of charge as Elon Musk's contribution to democratizing wealth creation. Past performance does not guarantee future results. Trading involves risk.</p>
-                    </div>
-                    <div class="footer-copyright">
-                        <p>&copy; 2024 Elon Musk Foundation. All rights reserved. | Created to give back to humanity.</p>
-                    </div>
+                <div class="footer-text">
+                    <p>© 2024 AutoWealth AI. All rights reserved.</p>
+                    <p>Risk Warning: Trading involves risk. Past performance does not guarantee future results.</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Installation Modal -->
+    <div id="installModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Installing AutoWealth AI...</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="install-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Initializing secure connection...</div>
+                </div>
+                <div class="install-features">
+                    <div class="install-feature">
+                        <span class="feature-check">✓</span>
+                        <span>Bank-level encryption enabled</span>
+                    </div>
+                    <div class="install-feature">
+                        <span class="feature-check">✓</span>
+                        <span>AI trading algorithms loaded</span>
+                    </div>
+                    <div class="install-feature">
+                        <span class="feature-check">✓</span>
+                        <span>Real-time market data connected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
