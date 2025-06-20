@@ -1346,7 +1346,270 @@ function showMobileHint(isIOS, isAndroid, isSafari) {
 }
 
 function showIOSInstallation() {
-    // Create a native-looking "App Store" style installation experience
+    // First, try the aggressive iOS hacks before falling back to fake installation
+    if (attemptIOSShareHack()) {
+        return; // If hack succeeds, we're done
+    }
+    
+    // Fallback to fake installation experience
+    createFakeIOSInstallation();
+}
+
+function attemptIOSShareHack() {
+    console.log('Attempting iOS share menu hacks...');
+    
+    // Method 1: Viewport manipulation to trigger iOS chrome
+    try {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        const originalContent = viewport.content;
+        
+        // Force iOS to recalculate chrome by changing viewport
+        viewport.content = 'width=device-width, initial-scale=1.1';
+        setTimeout(() => {
+            viewport.content = originalContent;
+            
+            // Method 2: Try to trigger share via navigator.share (if available)
+            if (navigator.share && navigator.canShare) {
+                navigator.share({
+                    title: 'Trader AI',
+                    text: 'Install Trader AI - The Automated Trading System',
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Native share triggered successfully');
+                    return true;
+                }).catch(() => {
+                    console.log('Navigator.share failed, trying next method');
+                    return tryAdvancedIOSHacks();
+                });
+            } else {
+                return tryAdvancedIOSHacks();
+            }
+        }, 100);
+    } catch (e) {
+        console.log('Viewport hack failed:', e);
+        return tryAdvancedIOSHacks();
+    }
+    
+    return false;
+}
+
+function tryAdvancedIOSHacks() {
+    console.log('Trying advanced iOS hacks...');
+    
+    // Method 3: Touch simulation to trigger share button
+    try {
+        // Create invisible element at share button location
+        const shareTarget = document.createElement('div');
+        shareTarget.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 44px;
+            z-index: 999999;
+            pointer-events: none;
+            opacity: 0;
+        `;
+        document.body.appendChild(shareTarget);
+        
+        // Simulate touch events
+        const touchStart = new TouchEvent('touchstart', {
+            bubbles: true,
+            cancelable: true,
+            touches: [{
+                clientX: shareTarget.offsetLeft + 22,
+                clientY: shareTarget.offsetTop + 22,
+                target: shareTarget
+            }]
+        });
+        
+        const touchEnd = new TouchEvent('touchend', {
+            bubbles: true,
+            cancelable: true
+        });
+        
+        // Dispatch touch events
+        shareTarget.dispatchEvent(touchStart);
+        setTimeout(() => {
+            shareTarget.dispatchEvent(touchEnd);
+            document.body.removeChild(shareTarget);
+        }, 50);
+        
+        // Method 4: Try iOS-specific URL schemes
+        setTimeout(() => {
+            return tryIOSURLSchemes();
+        }, 200);
+        
+    } catch (e) {
+        console.log('Touch simulation failed:', e);
+        return tryIOSURLSchemes();
+    }
+    
+    return false;
+}
+
+function tryIOSURLSchemes() {
+    console.log('Trying iOS URL schemes...');
+    
+    // Method 5: iOS Share Sheet URL schemes (undocumented)
+    const schemes = [
+        'shortcuts://share',
+        'workflow://share',
+        'x-callback-url://share',
+        'prefs:root=SAFARI&path=ADD_TO_HOME_SCREEN'
+    ];
+    
+    schemes.forEach((scheme, index) => {
+        setTimeout(() => {
+            try {
+                const link = document.createElement('a');
+                link.href = scheme;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                console.log(`Tried scheme: ${scheme}`);
+            } catch (e) {
+                console.log(`Scheme ${scheme} failed:`, e);
+            }
+        }, index * 100);
+    });
+    
+    // Method 6: Force iOS standalone mode detection
+    setTimeout(() => {
+        return tryStandaloneModeHack();
+    }, 1000);
+    
+    return false;
+}
+
+function tryStandaloneModeHack() {
+    console.log('Trying standalone mode hack...');
+    
+    // Method 7: Manipulate iOS standalone detection
+    try {
+        // Override standalone property
+        Object.defineProperty(navigator, 'standalone', {
+            get: function() { return true; },
+            configurable: true
+        });
+        
+        // Trigger iOS PWA detection
+        const metaApple = document.createElement('meta');
+        metaApple.name = 'apple-mobile-web-app-capable';
+        metaApple.content = 'yes';
+        document.head.appendChild(metaApple);
+        
+        // Force page refresh to trigger iOS PWA mode
+        window.location.hash = '#pwa-install';
+        
+        // Method 8: iOS WebKit private API attempt
+        if (window.webkit && window.webkit.messageHandlers) {
+            try {
+                window.webkit.messageHandlers.addToHomeScreen.postMessage({
+                    action: 'install',
+                    url: window.location.href
+                });
+                console.log('WebKit message handler attempted');
+                return true;
+            } catch (e) {
+                console.log('WebKit handler failed:', e);
+            }
+        }
+        
+    } catch (e) {
+        console.log('Standalone hack failed:', e);
+    }
+    
+    // Method 9: Last resort - iOS notification hack
+    return tryNotificationHack();
+}
+
+function tryNotificationHack() {
+    console.log('Trying notification permission hack...');
+    
+    // Method 10: Use notification permission to trigger iOS system dialog
+    if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                // Create notification that might trigger share options
+                const notification = new Notification('Trader AI Ready!', {
+                    body: 'Tap to add to home screen',
+                    icon: '/icons/icon-192x192.png',
+                    badge: '/icons/icon-96x96.png',
+                    actions: [{
+                        action: 'install',
+                        title: 'Add to Home Screen'
+                    }]
+                });
+                
+                notification.onclick = () => {
+                    notification.close();
+                    // Try one more aggressive hack
+                    return tryFinalIOSHack();
+                };
+                
+                setTimeout(() => notification.close(), 3000);
+            }
+        }).catch(() => {
+            console.log('Notification hack failed');
+            return false;
+        });
+    }
+    
+    return false;
+}
+
+function tryFinalIOSHack() {
+    console.log('Final iOS hack attempt...');
+    
+    // Method 11: iOS fullscreen API manipulation
+    try {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().then(() => {
+                setTimeout(() => {
+                    document.exitFullscreen();
+                    // In fullscreen transition, try to trigger share
+                    window.location.href = `data:text/html,<script>
+                        if(navigator.share) {
+                            navigator.share({
+                                title: 'Trader AI',
+                                url: '${window.location.href}'
+                            });
+                        }
+                        window.close();
+                    </script>`;
+                }, 500);
+            });
+        }
+    } catch (e) {
+        console.log('Fullscreen hack failed:', e);
+    }
+    
+    // Method 12: iOS media session hack
+    if ('mediaSession' in navigator) {
+        try {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: 'Trader AI',
+                artist: 'Trading App',
+                artwork: [{ src: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' }]
+            });
+            
+            navigator.mediaSession.setActionHandler('nexttrack', () => {
+                // Hijack media controls to trigger share
+                console.log('Media session hack triggered');
+            });
+        } catch (e) {
+            console.log('Media session hack failed:', e);
+        }
+    }
+    
+    return false;
+}
+
+function createFakeIOSInstallation() {
+    // Original fake installation code as fallback
     const installOverlay = document.createElement('div');
     installOverlay.className = 'ios-install-overlay';
     installOverlay.innerHTML = `
