@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRADER AI - Exclusive System Access</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+    <!-- Stage 1: Landing Screen -->
+    <div id="stage1" class="stage active">
+        <div class="matrix-bg"></div>
+        <div class="container">
+            <div class="exclusive-header">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span>SYSTEM ONLINE</span>
+                </div>
+                <div class="timestamp" id="timestamp"></div>
+            </div>
+            
+            <div class="main-content">
+                <div class="logo-section">
+                    <div class="ai-logo">
+                        <div class="logo-core"></div>
+                        <div class="logo-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                        </div>
+                    </div>
+                    <h1>TRADER AI</h1>
+                    <p class="subtitle">EXCLUSIVE ALGORITHM ACCESS</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="2847">0</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="94.7">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="1.2">0</div>
+                        <div class="stat-label">Million $ Processed</div>
+                    </div>
+                </div>
+
+                <div class="access-panel">
+                    <div class="panel-header">
+                        <h3>🔒 RESTRICTED ACCESS PORTAL</h3>
+                        <p>Only verified users from our advertising partners can access this system</p>
+                    </div>
+                    
+                    <div class="verification-status">
+                        <div class="verification-item">
+                            <span class="check-icon">✓</span>
+                            <span>Google Ads Verification</span>
+                            <span class="status-badge verified">VERIFIED</span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="check-icon">✓</span>
+                            <span>Geographic Location</span>
+                            <span class="status-badge verified">APPROVED</span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="check-icon">✓</span>
+                            <span>Device Compatibility</span>
+                            <span class="status-badge verified">COMPATIBLE</span>
+                        </div>
+                    </div>
+
+                    <button class="access-btn" onclick="startSystemAccess()">
+                        <span class="btn-text">INITIALIZE SYSTEM ACCESS</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stage 2: Authentication -->
+    <div id="stage2" class="stage">
+        <div class="container">
+            <div class="auth-panel">
+                <div class="auth-header">
+                    <h2>🛡️ SECURE AUTHENTICATION</h2>
+                    <p>Biometric and device verification in progress...</p>
+                </div>
+                
+                <div class="biometric-scanner">
+                    <div class="scanner-display">
+                        <div class="scan-line"></div>
+                        <div class="scan-grid"></div>
+                    </div>
+                    <div class="scan-status">
+                        <div class="status-text" id="scanStatus">Initializing biometric scan...</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="scanProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="device-info">
+                    <h4>Device Information</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span>Browser:</span>
+                            <span id="browserInfo">Chrome 91.0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>Location:</span>
+                            <span id="locationInfo">Authorized Region</span>
+                        </div>
+                        <div class="info-item">
+                            <span>Security:</span>
+                            <span class="status-verified">VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stage 3: Algorithm Calibration -->
+    <div id="stage3" class="stage">
+        <div class="container">
+            <div class="calibration-panel">
+                <div class="panel-header">
+                    <h2>⚙️ ALGORITHM CALIBRATION</h2>
+                    <p>Personalizing trading parameters for maximum profit potential</p>
+                </div>
+
+                <div class="calibration-controls">
+                    <div class="control-group">
+                        <label>Risk Tolerance</label>
+                        <div class="slider-container">
+                            <input type="range" class="calibration-slider" id="riskSlider" min="1" max="10" value="7">
+                            <div class="slider-labels">
+                                <span>Conservative</span>
+                                <span>Aggressive</span>
+                            </div>
+                            <div class="slider-value" id="riskValue">High</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Investment Amount</label>
+                        <div class="slider-container">
+                            <input type="range" class="calibration-slider" id="amountSlider" min="250" max="10000" value="1000" step="250">
+                            <div class="slider-labels">
+                                <span>$250</span>
+                                <span>$10,000+</span>
+                            </div>
+                            <div class="slider-value" id="amountValue">$1,000</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Trading Frequency</label>
+                        <div class="slider-container">
+                            <input type="range" class="calibration-slider" id="frequencySlider" min="1" max="5" value="3">
+                            <div class="slider-labels">
+                                <span>Low</span>
+                                <span>Maximum</span>
+                            </div>
+                            <div class="slider-value" id="frequencyValue">Optimal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profit-projection">
+                    <h3>📈 PROJECTED EARNINGS</h3>
+                    <div class="projection-display">
+                        <div class="projection-item">
+                            <span>Daily:</span>
+                            <span class="profit-amount" id="dailyProfit">$147</span>
+                        </div>
+                        <div class="projection-item">
+                            <span>Weekly:</span>
+                            <span class="profit-amount" id="weeklyProfit">$1,029</span>
+                        </div>
+                        <div class="projection-item">
+                            <span>Monthly:</span>
+                            <span class="profit-amount" id="monthlyProfit">$4,410</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calibration-btn" onclick="finalizeCalibration()">
+                    FINALIZE CALIBRATION
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stage 4: System Dashboard -->
+    <div id="stage4" class="stage">
+        <div class="container">
+            <div class="dashboard-panel">
+                <div class="dashboard-header">
+                    <h2>🚀 SYSTEM ACTIVATED</h2>
+                    <p>Your personalized trading algorithm is now ready</p>
+                </div>
+
+                <div class="live-data">
+                    <div class="data-card">
+                        <h4>Live Market Analysis</h4>
+                        <div class="market-display">
+                            <div class="market-item">
+                                <span>EUR/USD</span>
+                                <span class="price-up">1.0847 ↗</span>
+                            </div>
+                            <div class="market-item">
+                                <span>GBP/USD</span>
+                                <span class="price-down">1.2634 ↘</span>
+                            </div>
+                            <div class="market-item">
+                                <span>USD/JPY</span>
+                                <span class="price-up">149.23 ↗</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <h4>AI Signals</h4>
+                        <div class="signals-display">
+                            <div class="signal-item signal-buy">
+                                <span class="signal-dot"></span>
+                                <span>BUY Signal - EUR/USD</span>
+                                <span class="confidence">94%</span>
+                            </div>
+                            <div class="signal-item signal-sell">
+                                <span class="signal-dot"></span>
+                                <span>SELL Signal - GBP/JPY</span>
+                                <span class="confidence">87%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activation-panel">
+                    <div class="activation-status">
+                        <div class="status-indicator active">
+                            <span class="status-dot"></span>
+                            <span>SYSTEM READY FOR ACTIVATION</span>
+                        </div>
+                    </div>
+                    
+                    <div class="final-cta">
+                        <h3>🎯 ACTIVATE YOUR TRADING ACCOUNT</h3>
+                        <p>Complete your registration to start earning with our AI system</p>
+                        <button class="activate-btn" onclick="activateSystem()">
+                            <span>ACTIVATE ACCOUNT NOW</span>
+                            <span class="btn-pulse"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
