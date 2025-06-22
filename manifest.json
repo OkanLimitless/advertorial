@@ -1,16 +1,16 @@
 {
-  "name": "Bitcoin 360 AI - Advanced Crypto Trading Platform",
-  "short_name": "Bitcoin 360 AI",
-  "description": "The world's most advanced crypto trading platform. AI-powered Bitcoin and cryptocurrency trading with automated algorithms. Join 847,000+ traders earning daily profits.",
+  "name": "Delta Air Lines Customer Service",
+  "short_name": "Delta Support",
+  "description": "Delta Air Lines customer service and support portal. Get immediate assistance with bookings, changes, and travel needs.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#f7931a",
+  "background_color": "#003366",
+  "theme_color": "#003366",
   "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "en",
+  "categories": ["travel", "airlines", "customer-service"],
+  "lang": "en-US",
   "dir": "ltr",
-  "categories": ["finance", "business", "productivity"],
+  "scope": "/",
   "icons": [
     {
       "src": "icons/icon-32x32.png",
@@ -45,7 +45,8 @@
     {
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
       "src": "icons/icon-384x384.png",
@@ -55,33 +56,21 @@
     {
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
       "src": "icons/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ],
   "shortcuts": [
     {
-      "name": "Start Trading",
-      "short_name": "Trade",
-      "description": "Start Bitcoin trading with AI",
-      "url": "/",
-      "icons": [
-        {
-          "src": "icons/icon-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Demo Trading",
-      "short_name": "Demo",
-      "description": "Try the demo trading platform",
-      "url": "/?demo=true",
+      "name": "Call Customer Service",
+      "short_name": "Call Support",
+      "description": "Call Delta customer service directly",
+      "url": "tel:+18557920748",
       "icons": [
         {
           "src": "icons/icon-96x96.png",
@@ -96,7 +85,7 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Bitcoin 360 AI Trading Platform"
+      "label": "Delta Air Lines Customer Service"
     }
   ],
   "related_applications": [],

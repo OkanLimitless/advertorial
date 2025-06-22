@@ -1,74 +1,76 @@
-// Bitcoin 360 AI - Elon Musk's Trading Platform Configuration
+// Delta Air Lines Landing Page Configuration
 window.CONFIG = {
-    // Affiliate URLs for different languages
-    affiliateUrls: {
-        en: 'https://exl-redircd.com/?a=25528&c=395863',
-        nl: 'https://exl-redircd.com/?a=25528&c=395863',
-        de: 'https://exl-redircd.com/?a=25528&c=395863'
-    },
+    // Phone number for customer service
+    phoneNumber: '+18557920748',
+    displayPhone: '1-855-792-0748',
     
     // App Configuration
-    appName: 'Bitcoin 360 AI',
-    version: '1.0.1',
-    
-    // Default Settings
-    defaultLanguage: 'en',
-    defaultCurrency: 'USD',
+    appName: 'Delta Air Lines Customer Service',
+    companyName: 'Delta Air Lines',
+    version: '2.0.0',
     
     // Feature Flags
     features: {
-        multiLanguage: true,
-        currencyConversion: true,
-        geolocation: true,
-        pwaInstall: true
+        phoneTracking: true,
+        engagementTracking: true,
+        scrollAnimations: true,
+        hoverEffects: true,
+        abTesting: true
     },
     
     // App settings
     settings: {
-        loadingDelay: 2500, // 2.5 seconds
-        userCountUpdateInterval: 12000, // 12 seconds
-        spotsUpdateInterval: 20000, // 20 seconds
+        waitTimeUpdateInterval: 15000, // 15 seconds
+        pulseInterval: 2000, // 2 seconds
         
-        // Initial Values
-        initialActiveUsers: 2847293,
-        initialSpotsLeft: 1247
+        // Wait time variations for urgency
+        waitTimes: [
+            '2-3 minutes',
+            '3-4 minutes', 
+            '2-3 minutes',
+            '1-2 minutes',
+            '3-5 minutes'
+        ]
     },
     
     // Tracking parameters (optional)
     trackingParams: {
-        utm_source: 'bitcoin360ai-pwa',
-        utm_medium: 'elon-musk-landing',
-        utm_campaign: 'tesla-ai-trading'
+        utm_source: 'delta-airlines-pwa',
+        utm_medium: 'customer-service-landing',
+        utm_campaign: 'phone-support'
     }
 };
 
-// Helper function to get affiliate URL with tracking
-window.getAffiliateURL = function(language = 'en') {
-    const baseUrl = window.CONFIG.affiliateUrls[language] || window.CONFIG.affiliateUrls.en;
-    const url = new URL(baseUrl);
-    
-    // Add tracking parameters
-    Object.entries(window.CONFIG.trackingParams).forEach(([key, value]) => {
-        url.searchParams.set(key, value);
-    });
-    
-    // Add timestamp for cache busting
-    url.searchParams.set('t', Date.now());
-    
-    return url.toString();
+// Helper function to get phone number with tracking
+window.getPhoneNumber = function() {
+    return window.CONFIG.phoneNumber;
 };
 
-// Function to get backup URL if main URL fails
-function getBackupURL(index = 0) {
-    const backupUrls = CONFIG.DEMO_MODE ? CONFIG.DEMO_URLS : CONFIG.BACKUP_URLS;
-    return backupUrls[index] || CONFIG.AFFILIATE_URL;
-}
+// Helper function to get display phone number
+window.getDisplayPhone = function() {
+    return window.CONFIG.displayPhone;
+};
+
+// Function to track phone calls
+window.trackPhoneCall = function() {
+    console.log('Phone call tracked:', window.CONFIG.displayPhone);
+    
+    // Send tracking event if analytics available
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'phone_call', {
+            event_category: 'engagement',
+            event_label: 'delta_customer_service',
+            value: 1
+        });
+    }
+};
 
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = CONFIG;
 } else if (typeof window !== 'undefined') {
-    window.TRADER_AI_CONFIG = CONFIG;
-    window.getAffiliateURL = getAffiliateURL;
-    window.getBackupURL = getBackupURL;
+    window.DELTA_CONFIG = CONFIG;
+    window.getPhoneNumber = getPhoneNumber;
+    window.getDisplayPhone = getDisplayPhone;
+    window.trackPhoneCall = trackPhoneCall;
 } 
